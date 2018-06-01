@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import com.example.alpacamusclemaintenance.R
 
 /**
@@ -12,6 +14,15 @@ import com.example.alpacamusclemaintenance.R
  */
 class SecondFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater!!.inflate(R.layout.fragment_second, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_second, container, false)
+        val button = rootView.findViewById<Button>(R.id.button)
+        val textView = rootView.findViewById<TextView>(R.id.textView)
+
+        var count = 0
+        button.setOnClickListener {
+            textView.text = "${++count}"
+        }
+
+        return rootView
     }
 }
