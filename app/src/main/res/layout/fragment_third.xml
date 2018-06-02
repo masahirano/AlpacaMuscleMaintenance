@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ThirdFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello blank fragment third" />
-
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/chart"
         android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
 
 
 /**
@@ -22,7 +23,6 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 class ThirdFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_third, container, false)
-
         setupChart(rootView)
 
         return rootView
@@ -30,17 +30,18 @@ class ThirdFragment : Fragment() {
 
     private fun setupChart(rootView: View) {
         val entries = ArrayList<BarEntry>().apply {
-            add(BarEntry(1f, 6f))
-            add(BarEntry(2f, 8f))
-            add(BarEntry(3f, 7f))
-            add(BarEntry(4f, 11f))
-            add(BarEntry(5f, 9f))
-            add(BarEntry(6f, 11f))
-            add(BarEntry(7f, 8f))
+            add(BarEntry(1f, floatArrayOf(8f, 5f, 3f)))
+            add(BarEntry(2f, floatArrayOf(7f, 3f, 5f)))
+            add(BarEntry(3f, floatArrayOf(6f, 6f, 8f)))
+            add(BarEntry(4f, floatArrayOf(8f, 5f, 3f)))
+            add(BarEntry(5f, floatArrayOf(10f, 4f, 8f)))
+            add(BarEntry(6f, floatArrayOf(5f, 6f, 3f)))
+            add(BarEntry(7f, floatArrayOf(8f, 4f, 7f)))
         }
 
         val dataSet = BarDataSet(entries, "foo").apply {
             valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
+            colors = ColorTemplate.MATERIAL_COLORS.slice(0..(stackSize - 1))
         }
 
         val chart= rootView.findViewById<BarChart>(R.id.chart).apply {
@@ -49,11 +50,11 @@ class ThirdFragment : Fragment() {
             setScaleEnabled(false)
             animateY(1200, Easing.EasingOption.Linear)
         }
-        chart.axisRight.apply {
+        chart.axisRight.run {
             setDrawGridLines(false)
             setDrawLabels(false)
         }
-        chart.xAxis.apply {
+        chart.xAxis.run {
             position = XAxis.XAxisPosition.BOTTOM
             valueFormatter = IndexAxisValueFormatter(arrayOf("", "5/25", "5/26", "5/27", "5/28", "5/29", "5/30", "6/1"))
             setDrawGridLines(false)
