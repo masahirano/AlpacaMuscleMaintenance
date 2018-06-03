@@ -41,7 +41,7 @@ class ThirdFragment : Fragment() {
 
         val dataSet = BarDataSet(entries, "foo").apply {
             valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
-            colors = ColorTemplate.MATERIAL_COLORS.slice(0..(stackSize - 1))
+            colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
         }
 
         val chart = rootView.findViewById<BarChart>(R.id.chart).apply {
