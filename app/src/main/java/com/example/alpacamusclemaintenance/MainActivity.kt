@@ -17,5 +17,10 @@ class MainActivity : AppCompatActivity() {
         pager.adapter = fragmentAdapter
 
         tab.setupWithViewPager(pager)
+
+        tab.getTabAt(0)!!.setIcon(R.drawable.ic_home_white_24dp)
+        tab.getTabAt(1)!!.setIcon(R.drawable.ic_directions_run_white_24dp)
+        tab.getTabAt(2)!!.setIcon(R.drawable.ic_graphic_eq_white_24dp)
+        tab.getTabAt(3)!!.setIcon(R.drawable.ic_bug_report_white_24dp)
     }
 }
