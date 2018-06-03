@@ -18,14 +18,9 @@ import com.example.alpacamusclemaintenance.R
  *
  */
 class WebViewFragment : Fragment() {
-    private var mWebView: WebView? = null
-    private var mIsWebViewAvailable: Boolean = false
-
-    /**
-     * Gets the WebView.
-     */
-    val webView: WebView?
-        get() = if (mIsWebViewAvailable) mWebView else null
+    private var webView: WebView? = null
+        get() = if (isWebViewAvailable) field else null
+    private var isWebViewAvailable: Boolean = false
 
     /**
      * Called to instantiate the view. Creates and returns the WebView.
@@ -33,11 +28,11 @@ class WebViewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_web_view, container, false)
 
-        mWebView = rootView.findViewById(R.id.webView)
-        mIsWebViewAvailable = true
+        webView = rootView.findViewById(R.id.webView)
+        isWebViewAvailable = true
 
         val progressBar: ProgressBar = rootView.findViewById(R.id.progressBar)
-        mWebView!!.webViewClient = object : WebViewClient() {
+        webView!!.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 progressBar.visibility = View.VISIBLE
@@ -49,8 +44,9 @@ class WebViewFragment : Fragment() {
             }
         }
 
-        mWebView!!.loadUrl("https://github.com/alpaca0984/AlpacaMuscleMaintenance")
+        webView!!.loadUrl("https://github.com/alpaca0984/AlpacaMuscleMaintenance")
 
         return rootView
+
     }
 }

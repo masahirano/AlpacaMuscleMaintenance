@@ -20,17 +20,7 @@ class PageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
     }
 
     override fun getCount(): Int {
-        // Show 3 total pages.
+        // Show 4 total pages.
         return 4
     }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-            0 -> "First Tab"
-            1 -> "Second Tab"
-            2 -> "Third Tab"
-            else -> "Repo Tab"
-        }
-    }
-
 }

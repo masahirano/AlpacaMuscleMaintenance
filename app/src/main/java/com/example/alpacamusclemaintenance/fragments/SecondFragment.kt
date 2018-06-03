@@ -20,7 +20,7 @@ class SecondFragment : Fragment() {
 
         var count = 0
         button.setOnClickListener {
-            textView.text = "${++count}"
+            textView.text = (++count).toString()
         }
 
         return rootView

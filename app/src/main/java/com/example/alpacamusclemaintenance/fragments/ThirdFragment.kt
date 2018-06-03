@@ -44,7 +44,7 @@ class ThirdFragment : Fragment() {
             colors = ColorTemplate.MATERIAL_COLORS.slice(0..(stackSize - 1))
         }
 
-        val chart= rootView.findViewById<BarChart>(R.id.chart).apply {
+        val chart = rootView.findViewById<BarChart>(R.id.chart).apply {
             data = BarData(dataSet)
             legend.isEnabled = false
             setScaleEnabled(false)
