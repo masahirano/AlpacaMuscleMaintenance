@@ -4,8 +4,9 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
+import com.example.alpacamusclemaintenance.fragments.ExerciseFragment
 import com.example.alpacamusclemaintenance.fragments.FirstFragment
-import com.example.alpacamusclemaintenance.fragments.SecondFragment
 import com.example.alpacamusclemaintenance.fragments.ThirdFragment
 import com.example.alpacamusclemaintenance.fragments.WebViewFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_exercise -> {
-                loadFragment(SecondFragment())
+                loadFragment(ExerciseFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_record -> {
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar)
 
 //        tab.setupWithViewPager(pager)
 //
@@ -52,11 +53,16 @@ class MainActivity : AppCompatActivity() {
 //        tab.getTabAt(1)!!.setIcon(R.drawable.ic_directions_run_white_24dp)
 //        tab.getTabAt(2)!!.setIcon(R.drawable.ic_graphic_eq_white_24dp)
 //        tab.getTabAt(3)!!.setIcon(R.drawable.ic_bug_report_white_24dp)
-//        val fragmentAdapter = PageAdapter(supportFragmentManager)
+//        val fragmentAdapter = ExercisePageAdapter(supportFragmentManager)
 //        pager.adapter = fragmentAdapter
 //
 //        tab.setupWithViewPager(pager)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         loadFragment(FirstFragment())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }

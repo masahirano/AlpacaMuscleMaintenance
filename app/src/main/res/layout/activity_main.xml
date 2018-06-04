@@ -12,9 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:title="@string/app_name"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextColor="@android:color/white"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        app:menu="@menu/toolbar" />
 
     <FrameLayout
         android:id="@+id/content"
