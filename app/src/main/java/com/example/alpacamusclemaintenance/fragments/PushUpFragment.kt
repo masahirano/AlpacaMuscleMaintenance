@@ -12,9 +12,9 @@ import com.example.alpacamusclemaintenance.R
 /**
  * A simple [Fragment] subclass.
  */
-class SecondFragment : Fragment() {
+class PushUpFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_second, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_push_up, container, false)
         val button = rootView.findViewById<Button>(R.id.button)
         val textView = rootView.findViewById<TextView>(R.id.textView)
 
