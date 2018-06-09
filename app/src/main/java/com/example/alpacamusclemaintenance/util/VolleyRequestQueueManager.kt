@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.utilities
+package com.example.alpacamusclemaintenance.util
 
 import android.content.Context
 import android.graphics.Bitmap
