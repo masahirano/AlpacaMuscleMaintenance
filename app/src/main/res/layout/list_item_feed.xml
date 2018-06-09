@@ -44,7 +44,7 @@
             android:id="@+id/likes_count"
             android:layout_width="31dp"
             android:layout_height="30dp"
-            android:text="@{feed.likesCount}"
+            android:text="-1"
             tools:layout_editor_absoluteX="468dp"
             tools:layout_editor_absoluteY="65dp" />
 

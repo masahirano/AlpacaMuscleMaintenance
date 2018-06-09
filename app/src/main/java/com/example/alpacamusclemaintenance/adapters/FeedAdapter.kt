@@ -18,13 +18,15 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
-        val binding: ListItemFeedBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.list_item_feed, parent, false)
+        val binding: ListItemFeedBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context), R.layout.list_item_feed, parent, false
+        )
 
         return FeedViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-//        holder.binding.setProject(feedList!![position])
+        holder.binding.feed = feedList!![position]
         holder.binding.executePendingBindings()
     }
 

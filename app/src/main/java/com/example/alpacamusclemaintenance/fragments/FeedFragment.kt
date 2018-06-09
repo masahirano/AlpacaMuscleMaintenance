@@ -23,30 +23,14 @@ import com.example.alpacamusclemaintenance.vo.Feed
  */
 class FeedFragment : Fragment() {
     private val feedAdapter: FeedAdapter = FeedAdapter()
+    private lateinit var binding: FragmentFeedBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-//        val rootView = inflater.inflate(R.layout.fragment_feed, container, false)
-//FragmentFeedBinding
-        val binding: FragmentFeedBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false);
+        binding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_feed, container, false
+        )
         binding.feed.adapter = feedAdapter
-//        binding.isLoading = false
-
-//        val feeds = FeedRepository.getInstance().getFeedsByTag("筋トレ")
-//        adapter.setFeedList(feeds)
-//        val url = "https://qiita.com/api/v2/items?query=tag:筋トレ"
-//        val jsonArrayRequest = JsonArrayRequest(Request.Method.GET, url, null,
-//                Response.Listener { response ->
-//                    System.out.println("successssssssssssss")
-//                },
-//                Response.ErrorListener { error ->
-//                    System.out.println("errorrrrrrrrrrrrrrr")
-//                }
-//        )
-//
-//        // Access the RequestQueue through your singleton class.
-//        VolleyRequestQueueManager.getInstance(context!!).addToRequestQueue(jsonArrayRequest)
 
         return binding.root
     }
