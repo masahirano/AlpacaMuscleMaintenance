@@ -1,17 +1,17 @@
 package com.example.alpacamusclemaintenance.vo
 
-import com.google.gson.annotations.SerializedName
+import java.util.*
+
+data class User(
+        var id: String
+)
 
 data class Feed(
-        @field:SerializedName("body")
+        var user: User,
         var body: String,
-        @field:SerializedName("created_at")
-        var createdAt: String,
-        @field:SerializedName("likes_count")
+        var createdAt: Date,
         var likesCount: Int,
-        @field:SerializedName("title")
         var title: String,
-        @field:SerializedName("url")
         var url: String
 )
 
