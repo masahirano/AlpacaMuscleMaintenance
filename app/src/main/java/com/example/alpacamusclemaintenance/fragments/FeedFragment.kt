@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.Nullable
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,15 +23,19 @@ import com.example.alpacamusclemaintenance.vo.Feed
  *
  */
 class FeedFragment : Fragment() {
+
     private val feedAdapter: FeedAdapter = FeedAdapter()
     private lateinit var binding: FragmentFeedBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(
-                inflater, R.layout.fragment_feed, container, false
-        )
-        binding.feed.adapter = feedAdapter
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
+
+        binding.feed.run {
+            adapter = feedAdapter
+            val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            addItemDecoration(dividerItemDecoration)
+        }
 
         return binding.root
     }
@@ -44,8 +49,8 @@ class FeedFragment : Fragment() {
 
     private fun observeViewModel(viewModel: FeedViewModel) {
         // Update the list when the data changes
-        viewModel.feedObservable.observe(this, Observer<List<Feed>> {
-            feeds -> feedAdapter.setFeedList(feeds!!)
+        viewModel.feedObservable.observe(this, Observer<List<Feed>> { feeds ->
+            feeds?.let { feedAdapter.setFeedList(it) }
         })
     }
 }
