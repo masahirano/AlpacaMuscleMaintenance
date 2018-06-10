@@ -17,6 +17,11 @@
         android:title="@string/title_record" />
 
     <item
+        android:id="@+id/navigation_feed"
+        android:icon="@drawable/ic_library_books_white_24dp"
+        android:title="@string/title_feed" />
+
+    <item
         android:id="@+id/navigation_bug_report"
         android:icon="@drawable/ic_bug_report_white_24dp"
         android:title="@string/title_bug_report" />
