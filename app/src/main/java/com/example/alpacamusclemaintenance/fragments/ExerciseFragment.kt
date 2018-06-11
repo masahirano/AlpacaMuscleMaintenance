@@ -13,11 +13,9 @@ class ExerciseFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_exercise, container, false)
 
-        val pager = rootView.pager.apply {
-            adapter = ExercisePageAdapter(fragmentManager!!)
-        }
-        rootView.tab.run {
-            setupWithViewPager(pager)
+        rootView.run {
+            pager.adapter = ExercisePageAdapter(fragmentManager!!)
+            tab.setupWithViewPager(pager)
         }
 
         // Inflate the layout for this fragment
