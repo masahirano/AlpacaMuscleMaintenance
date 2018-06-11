@@ -14,15 +14,15 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import kotlinx.android.synthetic.main.fragment_third.view.*
+import kotlinx.android.synthetic.main.fragment_record.view.*
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class ThirdFragment : Fragment() {
+class RecordFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_third, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_record, container, false)
         setupChart(rootView)
 
         return rootView

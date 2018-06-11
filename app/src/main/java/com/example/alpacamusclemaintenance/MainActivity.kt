@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                loadFragment(FirstFragment())
+                loadFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_exercise -> {
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_record -> {
-                loadFragment(ThirdFragment())
+                loadFragment(RecordFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_feed -> {
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        loadFragment(FirstFragment())
+        loadFragment(HomeFragment())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
