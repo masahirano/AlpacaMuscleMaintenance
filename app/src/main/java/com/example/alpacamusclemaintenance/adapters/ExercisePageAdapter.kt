@@ -2,11 +2,11 @@ package com.example.alpacamusclemaintenance.adapters
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import com.example.alpacamusclemaintenance.fragments.PushUpFragment
 import com.example.alpacamusclemaintenance.fragments.SquatFragment
 
-class ExercisePageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class ExercisePageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment {
         return when (position) {

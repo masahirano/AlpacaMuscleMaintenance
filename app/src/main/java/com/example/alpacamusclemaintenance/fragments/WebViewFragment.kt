@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.ProgressBar
 import com.example.alpacamusclemaintenance.R
+import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 /**
  * A simple [Fragment] subclass.
@@ -28,19 +28,18 @@ class WebViewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_web_view, container, false)
 
-        webView = rootView.findViewById(R.id.webView)
+        webView = rootView.webView
         isWebViewAvailable = true
 
-        val progressBar: ProgressBar = rootView.findViewById(R.id.progressBar)
         webView!!.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                progressBar.visibility = View.VISIBLE
+                rootView.progressBar.visibility = View.VISIBLE
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
-                progressBar.visibility = View.GONE
+                rootView.progressBar.visibility = View.GONE
             }
         }
 

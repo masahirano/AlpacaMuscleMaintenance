@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.alpacamusclemaintenance.R
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -15,6 +14,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.android.synthetic.main.fragment_third.view.*
 
 
 /**
@@ -44,7 +44,7 @@ class ThirdFragment : Fragment() {
             colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
         }
 
-        val chart = rootView.findViewById<BarChart>(R.id.chart).apply {
+        val chart = rootView.chart.apply {
             data = BarData(dataSet)
             legend.isEnabled = false
             setScaleEnabled(false)
