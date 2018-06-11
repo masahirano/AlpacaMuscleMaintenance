@@ -3,7 +3,8 @@ package com.example.alpacamusclemaintenance.vo
 import java.util.*
 
 data class User(
-        var id: String
+        var id: String,
+        var profileImageUrl: String
 )
 
 data class Feed(

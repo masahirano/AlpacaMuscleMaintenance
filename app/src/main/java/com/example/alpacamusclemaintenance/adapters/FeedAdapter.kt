@@ -1,14 +1,17 @@
 package com.example.alpacamusclemaintenance.adapters
 
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.ListItemFeedBinding
 import com.example.alpacamusclemaintenance.vo.Feed
 
-class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+class FeedAdapter(val context: Context) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     private var feedList: List<Feed>? = null
 
@@ -26,8 +29,15 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-        holder.binding.feed = feedList!![position]
-        holder.binding.executePendingBindings()
+        val feed = feedList!![position]
+        holder.apply {
+            Glide.with(context)
+                    .load(feed.user.profileImageUrl)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(binding.profileImage)
+            binding.feed = feed
+            binding.executePendingBindings()
+        }
     }
 
     override fun getItemCount(): Int {

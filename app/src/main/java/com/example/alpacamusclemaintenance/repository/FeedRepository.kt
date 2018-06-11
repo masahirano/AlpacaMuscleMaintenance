@@ -47,7 +47,7 @@ class FeedRepository private constructor() {
 
             override fun onFailure(call: Call<List<Feed>>, t: Throwable) {
                 // TODO: handle error
-                throw t
+                error(t)
             }
         })
 

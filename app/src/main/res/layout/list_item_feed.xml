@@ -21,21 +21,22 @@
                 android:layout_width="326dp"
                 android:layout_height="19dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="@{feed.title}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/meta"
-                app:layout_constraintTop_toBottomOf="@+id/likes_count"
+                app:layout_constraintTop_toBottomOf="@+id/meta"
                 app:layout_constraintVertical_bias="0.6" />
 
             <ImageView
-                android:id="@+id/thumbnail"
+                android:id="@+id/likes_icon"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/meta"
                 app:layout_constraintEnd_toStartOf="@+id/likes_count"
                 app:layout_constraintTop_toTopOf="@+id/likes_count"
-                app:srcCompat="@android:drawable/ic_menu_report_image" />
+                app:srcCompat="@drawable/ic_thumb_up_gray_24dp" />
 
             <TextView
                 android:id="@+id/likes_count"
@@ -43,32 +44,32 @@
                 android:layout_height="18dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:text="-1"
+                android:text="@{String.format(`%d`, feed.likesCount)}"
+                app:layout_constraintBottom_toBottomOf="@+id/meta"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/meta"
-                android:layout_width="213dp"
+                android:layout_width="283dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@{feed.user.id + `が` + DateFormatUtils.format(feed.createdAt, `yyyy/MM/dd HH:mm`) + `に投稿`}"
-                android:textSize="10sp"
-                app:layout_constraintStart_toEndOf="@+id/likesIcon"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/likesIcon"
-                android:layout_width="37dp"
-                android:layout_height="37dp"
+                android:id="@+id/profile_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/meta"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/meta"
-                app:srcCompat="@android:drawable/ic_menu_report_image" />
+                app:layout_constraintTop_toTopOf="@+id/meta" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

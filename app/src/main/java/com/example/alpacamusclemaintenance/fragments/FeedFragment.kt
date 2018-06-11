@@ -24,13 +24,14 @@ import com.example.alpacamusclemaintenance.vo.Feed
  */
 class FeedFragment : Fragment() {
 
-    private val feedAdapter: FeedAdapter = FeedAdapter()
+    private lateinit var feedAdapter: FeedAdapter
     private lateinit var binding: FragmentFeedBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
+        feedAdapter = FeedAdapter(context!!)
 
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
         binding.feed.run {
             adapter = feedAdapter
             val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
