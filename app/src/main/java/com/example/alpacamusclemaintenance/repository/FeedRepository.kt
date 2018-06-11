@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class FeedRepository private constructor() {
 
-    private var qiitaService: QiitaService? = null
+    private var qiitaService: QiitaService
 
     init {
         val gson = GsonBuilder()
@@ -40,7 +40,7 @@ class FeedRepository private constructor() {
     fun getFeedsByTag(tag: String): LiveData<List<Feed>> {
         val data = MutableLiveData<List<Feed>>()
 
-        qiitaService!!.getFeeds("tag:$tag").enqueue(object : Callback<List<Feed>> {
+        qiitaService.getFeeds("tag:$tag").enqueue(object : Callback<List<Feed>> {
             override fun onResponse(call: Call<List<Feed>>, @Nullable response: Response<List<Feed>>) {
                 data.value = response.body()
             }
