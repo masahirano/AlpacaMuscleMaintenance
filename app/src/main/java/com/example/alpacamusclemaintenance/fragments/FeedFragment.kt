@@ -29,13 +29,14 @@ class FeedFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        feedAdapter = FeedAdapter(context!!)
+        feedAdapter = FeedAdapter()
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
-        binding.feed.run {
-            adapter = feedAdapter
+        binding.feed.let { feedView ->
+            feedView.adapter = feedAdapter
+
             val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-            addItemDecoration(dividerItemDecoration)
+            feedView.addItemDecoration(dividerItemDecoration)
         }
 
         return binding.root

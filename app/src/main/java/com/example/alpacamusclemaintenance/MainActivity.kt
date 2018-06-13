@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_bug_report -> {
-                loadFragment(WebViewFragment())
+                loadFragment(WebViewFragment.newInstance("https://github.com/alpaca0984/AlpacaMuscleMaintenance"))
                 return@OnNavigationItemSelectedListener true
             }
         }
