@@ -7,12 +7,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.example.alpacamusclemaintenance.MainActivity
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.ListItemFeedBinding
+import com.example.alpacamusclemaintenance.fragments.WebViewFragment
 import com.example.alpacamusclemaintenance.vo.Feed
 
-class FeedAdapter(val context: Context) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
+    private lateinit var context: Context
     private var feedList: List<Feed>? = null
 
     fun setFeedList(feedList: List<Feed>) {
@@ -21,8 +24,9 @@ class FeedAdapter(val context: Context) : RecyclerView.Adapter<FeedAdapter.FeedV
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
+        context = parent.context
         val binding: ListItemFeedBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context), R.layout.list_item_feed, parent, false
+                LayoutInflater.from(context), R.layout.list_item_feed, parent, false
         )
 
         return FeedViewHolder(binding)
@@ -30,13 +34,23 @@ class FeedAdapter(val context: Context) : RecyclerView.Adapter<FeedAdapter.FeedV
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
         val feed = feedList!![position]
-        holder.apply {
-            Glide.with(context)
-                    .load(feed.user.profileImageUrl)
-                    .transition(DrawableTransitionOptions.withCrossFade())
-                    .into(binding.profileImage)
-            binding.feed = feed
-            binding.executePendingBindings()
+
+        Glide.with(context)
+                .load(feed.user.profileImageUrl)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(holder.binding.profileImage)
+
+        holder.binding.run {
+            this.feed = feed
+            executePendingBindings()
+        }
+
+        holder.itemView.setOnClickListener {
+            (context as MainActivity).supportFragmentManager.beginTransaction().run {
+                replace(R.id.content, WebViewFragment.newInstance(feed.url))
+                addToBackStack(null)
+                commit()
+            }
         }
     }
 

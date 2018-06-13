@@ -11,6 +11,8 @@ import android.webkit.WebViewClient
 import com.example.alpacamusclemaintenance.R
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
+private const val ARG_URL = "url"
+
 /**
  * A simple [Fragment] subclass.
  * Use the [WebViewFragment.newInstance] factory method to
@@ -18,9 +20,17 @@ import kotlinx.android.synthetic.main.fragment_web_view.view.*
  *
  */
 class WebViewFragment : Fragment() {
+    private lateinit var url: String
     private var webView: WebView? = null
         get() = if (isWebViewAvailable) field else null
     private var isWebViewAvailable: Boolean = false
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            url = it.getString(ARG_URL)
+        }
+    }
 
     /**
      * Called to instantiate the view. Creates and returns the WebView.
@@ -43,9 +53,18 @@ class WebViewFragment : Fragment() {
             }
         }
 
-        webView!!.loadUrl("https://github.com/alpaca0984/AlpacaMuscleMaintenance")
+        webView!!.loadUrl(url)
 
         return rootView
+    }
 
+    companion object {
+        @JvmStatic
+        fun newInstance(url: String) =
+                WebViewFragment().apply {
+                    arguments = Bundle().apply {
+                        putString(ARG_URL, url)
+                    }
+                }
     }
 }
