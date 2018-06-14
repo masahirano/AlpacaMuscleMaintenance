@@ -52,7 +52,10 @@ class FeedFragment : Fragment() {
     private fun observeViewModel(viewModel: FeedViewModel) {
         // Update the list when the data changes
         viewModel.feedObservable.observe(this, Observer<List<Feed>> { feeds ->
-            feeds?.let { feedAdapter.setFeedList(it) }
+            feeds?.let {
+                binding.progressBar.visibility = View.GONE
+                feedAdapter.setFeedList(it)
+            }
         })
     }
 }
