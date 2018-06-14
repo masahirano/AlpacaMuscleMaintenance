@@ -44,6 +44,16 @@ dependencies {
 
     implementation 'com.android.support:design:27.1.1'
 
+    // https://developer.android.com/topic/libraries/architecture/adding-components#lifecycle
+    def lifecycle_version = "1.1.1"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
+
+    // https://developer.android.com/topic/libraries/architecture/adding-components#room
+    def room_version = "1.1.0"
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
     // https://github.com/PhilJay/MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
@@ -55,13 +65,6 @@ dependencies {
 
     // https://github.com/google/gson
     implementation 'com.google.code.gson:gson:2.8.5'
-
-    // https://developer.android.com/topic/libraries/architecture/adding-components
-    def lifecycle_version = "1.1.1"
-    //  ViewModel and LiveData
-    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-    //  optional - ReactiveStreams support for LiveData
-    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
 
     // https://commons.apache.org/proper/commons-lang/
     implementation 'org.apache.commons:commons-lang3:3.7'
