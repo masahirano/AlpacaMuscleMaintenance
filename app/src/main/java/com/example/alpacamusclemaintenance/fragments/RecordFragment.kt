@@ -38,18 +38,17 @@ class RecordFragment : Fragment() {
             add(BarEntry(6f, floatArrayOf(5f, 6f, 3f)))
             add(BarEntry(7f, floatArrayOf(8f, 4f, 7f)))
         }
-
         val dataSet = BarDataSet(entries, "foo").apply {
             valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
             colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
         }
-
         val chart = rootView.chart.apply {
             data = BarData(dataSet)
             legend.isEnabled = false
             setScaleEnabled(false)
             animateY(1200, Easing.EasingOption.Linear)
         }
+
         chart.axisRight.run {
             setDrawGridLines(false)
             setDrawLabels(false)
