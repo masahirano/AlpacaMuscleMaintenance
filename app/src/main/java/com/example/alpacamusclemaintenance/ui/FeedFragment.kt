@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.fragments
+package com.example.alpacamusclemaintenance.ui
 
 
 import android.arch.lifecycle.Observer
@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.alpacamusclemaintenance.R
-import com.example.alpacamusclemaintenance.adapters.FeedAdapter
+import com.example.alpacamusclemaintenance.adapter.FeedAdapter
 import com.example.alpacamusclemaintenance.databinding.FragmentFeedBinding
 import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
 import com.example.alpacamusclemaintenance.vo.Feed

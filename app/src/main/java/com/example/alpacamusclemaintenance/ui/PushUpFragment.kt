@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.fragments
+package com.example.alpacamusclemaintenance.ui
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle

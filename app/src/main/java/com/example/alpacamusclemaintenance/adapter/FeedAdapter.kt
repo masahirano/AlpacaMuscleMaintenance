@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.adapters
+package com.example.alpacamusclemaintenance.adapter
 
 import android.content.Context
 import android.databinding.DataBindingUtil
@@ -10,7 +10,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.alpacamusclemaintenance.MainActivity
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.ListItemFeedBinding
-import com.example.alpacamusclemaintenance.fragments.WebViewFragment
+import com.example.alpacamusclemaintenance.ui.WebViewFragment
 import com.example.alpacamusclemaintenance.vo.Feed
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
