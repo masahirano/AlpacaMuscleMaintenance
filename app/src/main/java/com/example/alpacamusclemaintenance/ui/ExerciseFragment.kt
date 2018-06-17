@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.fragments
+package com.example.alpacamusclemaintenance.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.alpacamusclemaintenance.R
-import com.example.alpacamusclemaintenance.adapters.ExercisePageAdapter
+import com.example.alpacamusclemaintenance.adapter.ExercisePageAdapter
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
 
 class ExerciseFragment : Fragment() {

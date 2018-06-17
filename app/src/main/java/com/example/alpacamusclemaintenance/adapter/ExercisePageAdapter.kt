@@ -1,10 +1,10 @@
-package com.example.alpacamusclemaintenance.adapters
+package com.example.alpacamusclemaintenance.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.example.alpacamusclemaintenance.fragments.PushUpFragment
-import com.example.alpacamusclemaintenance.fragments.SquatFragment
+import com.example.alpacamusclemaintenance.ui.PushUpFragment
+import com.example.alpacamusclemaintenance.ui.SquatFragment
 
 class ExercisePageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
