@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.fragments
+package com.example.alpacamusclemaintenance.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

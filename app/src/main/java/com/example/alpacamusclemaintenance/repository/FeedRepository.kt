@@ -55,10 +55,13 @@ class FeedRepository private constructor() {
     }
 
     companion object {
-        private var INSTANCE: FeedRepository? = null
+
+        // For Singleton instantiation
+        @Volatile private var instance: FeedRepository? = null
+
         fun getInstance() =
-                INSTANCE ?: synchronized(this) {
-                    INSTANCE ?: FeedRepository()
+                instance ?: synchronized(this) {
+                    instance ?: FeedRepository().also { instance = it }
                 }
     }
 }
