@@ -1,11 +1,15 @@
 package com.example.alpacamusclemaintenance.ui
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.alpacamusclemaintenance.R
+import com.example.alpacamusclemaintenance.db.AppDatabase
+import com.example.alpacamusclemaintenance.repository.PushUpRepository
+import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
@@ -21,11 +25,24 @@ import kotlinx.android.synthetic.main.fragment_record.view.*
  * A simple [Fragment] subclass.
  */
 class RecordFragment : Fragment() {
+
+    private lateinit var viewModel: PushUpViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_record, container, false)
-        setupChart(rootView)
+
+//        viewModel = ViewModelProviders.of(this).get(PushUpViewModel::class.java)
+        val repository = PushUpRepository.getInstance(AppDatabase.getInstance(context!!).pushUpDao())
+        viewModel = PushUpViewModel(repository)
+        subscribeUi(rootView)
 
         return rootView
+    }
+
+    private fun subscribeUi(rootView: View) {
+        viewModel.getPushUps().observe(this, Observer { pushUps ->
+            setupChart(rootView)
+        })
     }
 
     private fun setupChart(rootView: View) {
