@@ -69,6 +69,7 @@ class RecordFragment : Fragment() {
         }
         chart.xAxis.run {
             position = XAxis.XAxisPosition.BOTTOM
+            labelCount = pushUps.size
             valueFormatter = IndexAxisValueFormatter(pushUps.map { DateFormatUtils.format(it.doneAt, "MM/dd") })
             setDrawGridLines(false)
         }
