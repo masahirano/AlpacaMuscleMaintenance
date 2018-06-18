@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.db.AppDatabase
+import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.repository.PushUpRepository
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 import com.github.mikephil.charting.animation.Easing
@@ -19,6 +20,7 @@ import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_record.view.*
+import org.apache.commons.lang3.time.DateFormatUtils
 
 
 /**
@@ -31,6 +33,7 @@ class RecordFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_record, container, false)
 
+        // TODO: Use ViewModelFactory to instantiate ViewModel
 //        viewModel = ViewModelProviders.of(this).get(PushUpViewModel::class.java)
         val repository = PushUpRepository.getInstance(AppDatabase.getInstance(context!!).pushUpDao())
         viewModel = PushUpViewModel(repository)
@@ -41,21 +44,15 @@ class RecordFragment : Fragment() {
 
     private fun subscribeUi(rootView: View) {
         viewModel.getPushUps().observe(this, Observer { pushUps ->
-            setupChart(rootView)
+            pushUps?.let {
+                setupChart(rootView, it)
+            }
         })
     }
 
-    private fun setupChart(rootView: View) {
-        val entries = ArrayList<BarEntry>().apply {
-            add(BarEntry(1f, floatArrayOf(8f, 5f, 3f)))
-            add(BarEntry(2f, floatArrayOf(7f, 3f, 5f)))
-            add(BarEntry(3f, floatArrayOf(6f, 6f, 8f)))
-            add(BarEntry(4f, floatArrayOf(8f, 5f, 3f)))
-            add(BarEntry(5f, floatArrayOf(10f, 4f, 8f)))
-            add(BarEntry(6f, floatArrayOf(5f, 6f, 3f)))
-            add(BarEntry(7f, floatArrayOf(8f, 4f, 7f)))
-        }
-        val dataSet = BarDataSet(entries, "foo").apply {
+    private fun setupChart(rootView: View, pushUps: List<PushUp>) {
+        val entries = pushUps.mapIndexed { index, pushUp -> BarEntry(index.toFloat(), pushUp.count.toFloat()) }
+        val dataSet = BarDataSet(entries, "push_ups").apply {
             valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
             colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
         }
@@ -72,7 +69,8 @@ class RecordFragment : Fragment() {
         }
         chart.xAxis.run {
             position = XAxis.XAxisPosition.BOTTOM
-            valueFormatter = IndexAxisValueFormatter(arrayOf("", "5/25", "5/26", "5/27", "5/28", "5/29", "5/30", "6/1"))
+            labelCount = pushUps.size
+            valueFormatter = IndexAxisValueFormatter(pushUps.map { DateFormatUtils.format(it.doneAt, "MM/dd") })
             setDrawGridLines(false)
         }
     }
