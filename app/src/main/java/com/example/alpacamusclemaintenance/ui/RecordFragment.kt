@@ -20,6 +20,7 @@ import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_record.view.*
+import org.apache.commons.lang3.time.DateFormatUtils
 
 
 /**
@@ -50,9 +51,7 @@ class RecordFragment : Fragment() {
     }
 
     private fun setupChart(rootView: View, pushUps: List<PushUp>) {
-        val entries = pushUps.mapIndexed { index, pushUp ->
-            BarEntry(index.toFloat(), pushUp.count.toFloat())
-        }
+        val entries = pushUps.mapIndexed { index, pushUp -> BarEntry(index.toFloat(), pushUp.count.toFloat()) }
         val dataSet = BarDataSet(entries, "push_ups").apply {
             valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
             colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
@@ -70,7 +69,7 @@ class RecordFragment : Fragment() {
         }
         chart.xAxis.run {
             position = XAxis.XAxisPosition.BOTTOM
-            valueFormatter = IndexAxisValueFormatter(arrayOf("", "5/25", "5/26", "5/27", "5/28", "5/29", "5/30", "6/1"))
+            valueFormatter = IndexAxisValueFormatter(pushUps.map { DateFormatUtils.format(it.doneAt, "MM/dd") })
             setDrawGridLines(false)
         }
     }
