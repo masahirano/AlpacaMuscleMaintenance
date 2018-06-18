@@ -1,17 +1,17 @@
 package com.example.alpacamusclemaintenance.db
 
 import android.arch.persistence.room.TypeConverter
-import org.apache.commons.lang3.time.DateUtils
+import org.apache.commons.lang3.time.DateFormatUtils
 import java.util.*
 
 class Converters {
     @TypeConverter
     fun dateToString(date: Date): String {
-      return date.toString()
+        return DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.format(date)
     }
 
     @TypeConverter
-    fun stringToDate(value: String): Date {
-        return DateUtils.parseDate(value, "yyyy/MM/dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss")
+    fun stringToDate(string: String): Date {
+        return DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT.parse(string)
     }
 }
