@@ -20,11 +20,11 @@ data class PushUp(
 
         @NonNull
         @ColumnInfo(name = "done_at")
-        val doneAt: Date,
+        val doneAt: Date = Date(),
 
         @ColumnInfo(name = "created_at")
-        val createdAt: Date,
+        val createdAt: Date = Date(),
 
         @ColumnInfo(name = "updated_at")
-        val updatedAt: Date
+        val updatedAt: Date = Date()
 )
