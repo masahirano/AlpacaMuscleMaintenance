@@ -51,7 +51,9 @@ class RecordFragment : Fragment() {
     }
 
     private fun setupChart(rootView: View, pushUps: List<PushUp>) {
-        val entries = pushUps.mapIndexed { index, pushUp -> BarEntry(index.toFloat(), pushUp.count.toFloat()) }
+        val dataList = pushUps.groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
+                .fold(0) { total, pushUp -> total + pushUp.count }
+        val entries = dataList.values.mapIndexed { index, totalCount -> BarEntry(index.toFloat(), totalCount.toFloat()) }
         val dataSet = BarDataSet(entries, "push_ups").apply {
             valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
             colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
@@ -70,7 +72,7 @@ class RecordFragment : Fragment() {
         chart.xAxis.run {
             position = XAxis.XAxisPosition.BOTTOM
             labelCount = pushUps.size
-            valueFormatter = IndexAxisValueFormatter(pushUps.map { DateFormatUtils.format(it.doneAt, "MM/dd") })
+            valueFormatter = IndexAxisValueFormatter(dataList.keys)
             setDrawGridLines(false)
         }
     }
