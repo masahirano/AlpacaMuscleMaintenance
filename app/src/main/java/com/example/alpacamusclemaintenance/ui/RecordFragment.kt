@@ -51,7 +51,7 @@ class RecordFragment : Fragment() {
     }
 
     private fun setupChart(rootView: View, pushUps: List<PushUp>) {
-        val dataList = pushUps.groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
+        val dataList = pushUps.reversed().groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
                 .fold(0) { total, pushUp -> total + pushUp.count }
         val entries = dataList.values.mapIndexed { index, totalCount -> BarEntry(index.toFloat(), totalCount.toFloat()) }
         val dataSet = BarDataSet(entries, "push_ups").apply {
