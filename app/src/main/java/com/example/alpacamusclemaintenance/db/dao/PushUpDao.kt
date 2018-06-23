@@ -15,7 +15,7 @@ interface PushUpDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(pushUps: List<PushUp>)
 
-    @Query("SELECT * from push_ups ORDER BY id ASC")
+    @Query("SELECT * from push_ups ORDER BY done_at DESC LIMIT 10")
     fun getPushUps(): LiveData<List<PushUp>>
 
     @Query("DELETE FROM push_ups")
