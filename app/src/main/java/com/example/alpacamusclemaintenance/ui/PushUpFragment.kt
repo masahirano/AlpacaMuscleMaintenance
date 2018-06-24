@@ -22,10 +22,12 @@ class PushUpFragment : Fragment() {
 
         binding.button.setOnClickListener { ++binding.count }
         binding.finishButton.setOnClickListener {
-            launch {
-                val database = AppDatabase.getInstance(context!!)
-                database.pushUpDao().insert(PushUp(0, binding.count))
-                binding.count = 0
+            if (binding.count > 0) {
+                launch {
+                    val database = AppDatabase.getInstance(context!!)
+                    database.pushUpDao().insert(PushUp(0, binding.count))
+                    binding.count = 0
+                }
             }
         }
 
