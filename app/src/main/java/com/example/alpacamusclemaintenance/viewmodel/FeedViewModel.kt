@@ -6,9 +6,6 @@ import com.example.alpacamusclemaintenance.repository.FeedRepository
 import com.example.alpacamusclemaintenance.vo.Feed
 
 
-class FeedViewModel internal constructor(
-        private val feedRepository: FeedRepository
-): ViewModel() {
-
-    var feedObservable: LiveData<List<Feed>> = feedRepository.getFeedsByTag("筋トレ")
+class FeedViewModel : ViewModel() {
+    var feedObservable: LiveData<List<Feed>> = FeedRepository.getInstance().getFeedsByTag("筋トレ")
 }
