@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.example.alpacamusclemaintenance.repository.PushUpRepository
 
-class PushUpViewModelFactory (
+class PushUpViewModelFactory(
         private val repository: PushUpRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
