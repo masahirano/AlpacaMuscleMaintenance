@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.adapter.FeedAdapter
 import com.example.alpacamusclemaintenance.databinding.FragmentFeedBinding
+import com.example.alpacamusclemaintenance.util.InjectorUtils
 import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
 import com.example.alpacamusclemaintenance.vo.Feed
 
@@ -44,7 +45,8 @@ class FeedFragment : Fragment() {
 
     override fun onActivityCreated(@Nullable savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val viewModel = ViewModelProviders.of(this).get(FeedViewModel::class.java)
+        val factory = InjectorUtils.provideFeedViewModelFactory()
+        val viewModel = ViewModelProviders.of(this, factory).get(FeedViewModel::class.java)
 
         observeViewModel(viewModel)
     }
