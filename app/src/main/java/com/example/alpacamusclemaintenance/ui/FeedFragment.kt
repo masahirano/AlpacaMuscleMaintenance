@@ -45,6 +45,7 @@ class FeedFragment : Fragment() {
 
     override fun onActivityCreated(@Nullable savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         val factory = InjectorUtils.provideFeedViewModelFactory()
         val viewModel = ViewModelProviders.of(this, factory).get(FeedViewModel::class.java)
 
