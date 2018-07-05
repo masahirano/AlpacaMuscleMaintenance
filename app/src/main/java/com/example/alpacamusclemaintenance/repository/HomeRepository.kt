@@ -8,12 +8,11 @@ class HomeRepository private constructor() {
 
     fun getHome(): LiveData<Home> {
         val data = MutableLiveData<Home>()
-        val words = arrayOf(
-                hashMapOf("word" to "私の場合、セットが終わるのは、何レップスしたからと言うのではなく、私の筋肉がそのセットの終了を告げる時である。しかし、私の心はトレーニングを止めない。", "author" to "R.ロビンソン"),
-                hashMapOf("word" to "共に鍛え、共に喜び、共に笑い、共に泣く、いついかなる時も決して裏切ることのない唯一無二の親友、それが筋肉さ。", "author" to "D.ブレーカー")
+        val words = arrayListOf(
+                Home("私の場合、セットが終わるのは、何レップスしたからと言うのではなく、私の筋肉がそのセットの終了を告げる時である。しかし、私の心はトレーニングを止めない。", "R.ロビンソン"),
+                Home("共に鍛え、共に喜び、共に笑い、共に泣く、いついかなる時も決して裏切ることのない唯一無二の親友、それが筋肉さ。", "D.ブレーカー")
         )
-        val word = words.toList().shuffled()[0]
-        data.value = Home(word["word"]!!, word["author"]!!)
+        data.value = words.shuffled()[0]
 
         return data
     }
