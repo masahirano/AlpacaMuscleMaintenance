@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.HomeFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/word_of_wisdom"
             android:layout_width="361dp"
