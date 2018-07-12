@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.FragmentHomeBinding
 import com.example.alpacamusclemaintenance.util.InjectorUtils
@@ -23,6 +24,12 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+
+        AnimationUtils.loadAnimation(context, android.R.anim.fade_in).also {
+            it.duration = 2_000
+            binding.wordOfWisdom.animation = it
+            binding.author.animation = it
+        }
 
         return binding.root
     }
