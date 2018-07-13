@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.HomeFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <TextView
             android:id="@+id/word_of_wisdom"
             android:layout_width="361dp"
@@ -29,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/speaker"
+            android:id="@+id/author"
             android:layout_width="240dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
@@ -37,8 +36,7 @@
             android:textAlignment="textEnd"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/word_of_wisdom"
-            app:layout_constraintTop_toBottomOf="@+id/word_of_wisdom"
-            tools:text=" " />
+            app:layout_constraintTop_toBottomOf="@+id/word_of_wisdom" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
