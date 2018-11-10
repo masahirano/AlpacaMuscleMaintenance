@@ -1,11 +1,13 @@
 package com.example.alpacamusclemaintenance
 
 import android.content.Context
-import android.support.design.internal.BottomNavigationItemView
-import android.support.design.internal.BottomNavigationMenuView
-import android.support.design.widget.BottomNavigationView
+//import android.support.design.internal.BottomNavigationItemView
+//import android.support.design.internal.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.util.AttributeSet
 import android.util.Log
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 
 // @see http://rozkey.hatenablog.com/entry/2018/02/13/070000
 class CustomBottomNavigationView : BottomNavigationView {
@@ -29,8 +31,8 @@ class CustomBottomNavigationView : BottomNavigationView {
             }
             for (i in 0 until menuView.childCount) {
                 val item = menuView.getChildAt(i) as BottomNavigationItemView
-                item.setShiftingMode(false)
-                item.setChecked(item.itemData.isChecked)
+//                item.setShiftingMode(false)
+//                item.setChecked(item.itemData.isChecked)
             }
         } catch (e: NoSuchFieldException) {
             Log.e("BNVHelper", "Unable to get shift mode field", e)

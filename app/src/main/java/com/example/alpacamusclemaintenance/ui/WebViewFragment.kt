@@ -2,7 +2,7 @@ package com.example.alpacamusclemaintenance.ui
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ private const val ARG_URL = "url"
  * create an instance of this fragment.
  *
  */
-class WebViewFragment : Fragment() {
+class WebViewFragment : androidx.fragment.app.Fragment() {
     private lateinit var url: String
     private var webView: WebView? = null
         get() = if (isWebViewAvailable) field else null

@@ -1,13 +1,13 @@
 package com.example.alpacamusclemaintenance.ui
 
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
-import android.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.annotation.Nullable
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
+import androidx.annotation.Nullable
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +23,7 @@ import com.example.alpacamusclemaintenance.vo.Feed
  * A simple [Fragment] subclass.
  *
  */
-class FeedFragment : Fragment() {
+class FeedFragment : androidx.fragment.app.Fragment() {
 
     private lateinit var feedAdapter: FeedAdapter
     private lateinit var binding: FragmentFeedBinding
@@ -36,7 +36,7 @@ class FeedFragment : Fragment() {
         binding.feed.let { feedView ->
             feedView.adapter = feedAdapter
 
-            val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+            val dividerItemDecoration = androidx.recyclerview.widget.DividerItemDecoration(context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL)
             feedView.addItemDecoration(dividerItemDecoration)
         }
 
