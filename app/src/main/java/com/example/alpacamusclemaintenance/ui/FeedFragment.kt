@@ -36,7 +36,7 @@ class FeedFragment : androidx.fragment.app.Fragment() {
         binding.feed.let { feedView ->
             feedView.adapter = feedAdapter
 
-            val dividerItemDecoration = androidx.recyclerview.widget.DividerItemDecoration(context, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL)
+            val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             feedView.addItemDecoration(dividerItemDecoration)
         }
 

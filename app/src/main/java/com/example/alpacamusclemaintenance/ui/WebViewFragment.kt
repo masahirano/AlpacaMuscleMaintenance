@@ -19,7 +19,7 @@ private const val ARG_URL = "url"
  * create an instance of this fragment.
  *
  */
-class WebViewFragment : androidx.fragment.app.Fragment() {
+class WebViewFragment : Fragment() {
     private lateinit var url: String
     private var webView: WebView? = null
         get() = if (isWebViewAvailable) field else null

@@ -6,9 +6,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.alpacamusclemaintenance.ui.PushUpFragment
 import com.example.alpacamusclemaintenance.ui.SquatFragment
 
-class ExercisePageAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentStatePagerAdapter(fm) {
+class ExercisePageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    override fun getItem(position: Int): androidx.fragment.app.Fragment {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> PushUpFragment()
             else -> SquatFragment()

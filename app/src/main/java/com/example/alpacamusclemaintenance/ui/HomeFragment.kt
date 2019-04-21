@@ -18,7 +18,7 @@ import com.example.alpacamusclemaintenance.vo.Home
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : androidx.fragment.app.Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 

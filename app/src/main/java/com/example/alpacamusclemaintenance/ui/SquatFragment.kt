@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.alpacamusclemaintenance.R
 
-class SquatFragment : androidx.fragment.app.Fragment() {
+class SquatFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_squat, container, false)
 

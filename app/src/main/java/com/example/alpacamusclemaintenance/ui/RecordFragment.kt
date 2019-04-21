@@ -48,7 +48,7 @@ class RecordFragment : Fragment(), OnChartValueSelectedListener {
         subscribeUi(binding.root)
 
         val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
-        binding.date = formatter.format(currentDate)
+        binding.date.text = formatter.format(currentDate)
 //        binding.textView2
 
 //        binding.finishButton.setOnClickListener {

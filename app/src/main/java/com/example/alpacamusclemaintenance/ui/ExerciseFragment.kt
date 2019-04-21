@@ -9,7 +9,7 @@ import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.adapter.ExercisePageAdapter
 import kotlinx.android.synthetic.main.fragment_exercise.view.*
 
-class ExerciseFragment : androidx.fragment.app.Fragment() {
+class ExerciseFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_exercise, container, false)
 

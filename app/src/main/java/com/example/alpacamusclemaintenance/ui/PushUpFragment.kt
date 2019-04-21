@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 /**
  * A simple [Fragment] subclass.
  */
-class PushUpFragment : androidx.fragment.app.Fragment() {
+class PushUpFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding: FragmentPushUpBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_push_up, container, false)

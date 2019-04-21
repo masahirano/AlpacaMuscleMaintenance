@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-    private fun loadFragment(fragment: androidx.fragment.app.Fragment) {
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.content, fragment)
         transaction.addToBackStack(null)
