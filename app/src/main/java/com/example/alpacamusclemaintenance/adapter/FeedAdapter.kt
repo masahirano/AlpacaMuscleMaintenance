@@ -13,7 +13,7 @@ import com.example.alpacamusclemaintenance.databinding.ListItemFeedBinding
 import com.example.alpacamusclemaintenance.ui.WebViewFragment
 import com.example.alpacamusclemaintenance.vo.Feed
 
-class FeedAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
     private lateinit var context: Context
     private var feedList: List<Feed>? = null
@@ -58,5 +58,5 @@ class FeedAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<FeedAdapte
         return if (feedList == null) 0 else feedList!!.size
     }
 
-    class FeedViewHolder(val binding: ListItemFeedBinding) : androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root)
+    class FeedViewHolder(val binding: ListItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
 }
