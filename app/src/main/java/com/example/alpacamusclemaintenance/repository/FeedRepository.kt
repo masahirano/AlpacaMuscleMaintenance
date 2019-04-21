@@ -1,8 +1,8 @@
 package com.example.alpacamusclemaintenance.repository
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.support.annotation.Nullable
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.annotation.Nullable
 import com.example.alpacamusclemaintenance.api.QiitaService
 import com.example.alpacamusclemaintenance.vo.Feed
 import com.google.gson.FieldNamingPolicy

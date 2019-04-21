@@ -1,6 +1,6 @@
 package com.example.alpacamusclemaintenance.db
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import org.apache.commons.lang3.time.DateFormatUtils
 import java.util.*
 

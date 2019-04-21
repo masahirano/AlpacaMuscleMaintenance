@@ -11,4 +11,11 @@
     <string name="title_bug_report">BugReport</string>
     <string name="action_favorite">favorite</string>
     <string name="action_settings">settings</string>
+
+
+
+
+    <string name="dialog_edit_record">Edit Record?</string>
+    <string name="save">SAVE</string>
+    <string name="cancel">CANCEL</string>
 </resources>

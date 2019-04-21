@@ -7,7 +7,7 @@
         <variable name="home" type="com.example.alpacamusclemaintenance.vo.Home"/>
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,5 +38,5 @@
             app:layout_constraintEnd_toEndOf="@+id/word_of_wisdom"
             app:layout_constraintTop_toBottomOf="@+id/word_of_wisdom" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
