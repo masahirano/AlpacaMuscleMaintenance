@@ -14,7 +14,6 @@ class EditRecordDialogFragment : DialogFragment() {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-//            val view = layoutInflater.inflate(R.layout.dialog_edit_record, null)
             builder.setView(R.layout.dialog_edit_record)
                     .setTitle(R.string.dialog_edit_record)
                     .setPositiveButton(R.string.save) { dialog, id ->
