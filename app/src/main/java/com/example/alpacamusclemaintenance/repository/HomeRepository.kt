@@ -9,10 +9,12 @@ class HomeRepository private constructor() {
     fun getHome(): LiveData<Home> {
         val data = MutableLiveData<Home>()
         val words = arrayListOf(
-                Home("私の場合、セットが終わるのは、何レップスしたからと言うのではなく、私の筋肉がそのセットの終了を告げる時である。しかし、私の心はトレーニングを止めない。", "R.ロビンソン"),
-                Home("共に鍛え、共に喜び、共に笑い、共に泣く、いついかなる時も決して裏切ることのない唯一無二の親友、それが筋肉さ。", "D.ブレーカー")
+                Home("Strength does not come from the physical capacity. It comes from an indomitable will.", "Ghandi"),
+                Home("The best way to predict the future is to create it.", "Abraham Lincoln"),
+                Home("Work hard in silence. Let success be your noise.", "Frank Ocean"),
+                Home("The difference between try and triumph is a little umph.", "Marvin Phillips")
         )
-        data.value = words.shuffled()[0]
+        data.value = words.shuffled().first()
 
         return data
     }
