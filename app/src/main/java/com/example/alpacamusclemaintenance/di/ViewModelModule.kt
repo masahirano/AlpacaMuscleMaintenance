@@ -1,14 +1,11 @@
+// From: https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/di/ViewModelModule.kt
+
 package com.example.alpacamusclemaintenance.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-//import com.android.example.github.ui.repo.RepoViewModel
-//import com.android.example.github.ui.search.SearchViewModel
-//import com.android.example.github.ui.user.UserViewModel
-
 import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
-import com.example.alpacamusclemaintenance.di.ViewModelKey
 import com.example.alpacamusclemaintenance.viewmodel.AlpacaMuscleMaintenanceViewModelFactory
 
 import dagger.Binds
@@ -22,16 +19,6 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
-
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(SearchViewModel::class)
-//    abstract fun bindSearchViewModel(searchViewModel: SearchViewModel): ViewModel
-//
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(RepoViewModel::class)
-//    abstract fun bindRepoViewModel(repoViewModel: RepoViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: AlpacaMuscleMaintenanceViewModelFactory): ViewModelProvider.Factory

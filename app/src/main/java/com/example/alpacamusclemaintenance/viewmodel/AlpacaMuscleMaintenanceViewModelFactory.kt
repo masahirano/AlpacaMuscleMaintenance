@@ -1,3 +1,5 @@
+// From: https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/viewmodel/GithubViewModelFactory.kt
+
 package com.example.alpacamusclemaintenance.viewmodel
 
 import androidx.lifecycle.ViewModel

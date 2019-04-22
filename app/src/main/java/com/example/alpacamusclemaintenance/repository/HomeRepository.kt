@@ -3,8 +3,9 @@ package com.example.alpacamusclemaintenance.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.alpacamusclemaintenance.vo.Home
+import javax.inject.Inject
 
-class HomeRepository private constructor() {
+class HomeRepository @Inject constructor() {
 
     fun getHome(): LiveData<Home> {
         val data = MutableLiveData<Home>()
@@ -18,16 +19,4 @@ class HomeRepository private constructor() {
 
         return data
     }
-
-    companion object {
-
-        // For Singleton instantiation
-        @Volatile private var instance: HomeRepository? = null
-
-        fun getInstance() =
-                instance ?: synchronized(this) {
-                    instance ?: HomeRepository().also { instance = it }
-                }
-    }
-
 }

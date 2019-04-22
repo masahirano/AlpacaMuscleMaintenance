@@ -1,3 +1,5 @@
+// From: https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/GithubApp.kt
+
 package com.example.alpacamusclemaintenance
 
 import android.app.Activity
@@ -15,9 +17,9 @@ class AlpacaMuscleMaintenanceApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
 //            Timber.plant(Timber.DebugTree())
-        }
+//        }
         AppInjector.init(this)
     }
 
