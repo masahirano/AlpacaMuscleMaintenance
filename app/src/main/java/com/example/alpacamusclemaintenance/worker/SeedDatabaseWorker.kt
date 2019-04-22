@@ -25,10 +25,10 @@ class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Wor
             val pushUpList: List<PushUp> = gson.fromJson(jsonReader, pushUpType)
             val database = AppDatabase.getInstance(applicationContext)
             database.pushUpDao().insertAll(pushUpList)
-            Result.SUCCESS
+            Result.success()
         } catch (ex: Exception) {
             Log.e(TAG, "Error seeding database", ex)
-            Result.FAILURE
+            Result.failure()
         } finally {
             jsonReader?.close()
         }
