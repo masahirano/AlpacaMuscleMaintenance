@@ -9,16 +9,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.lifecycle.ViewModelProvider
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.FragmentHomeBinding
-import com.example.alpacamusclemaintenance.util.InjectorUtils
+import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
 import com.example.alpacamusclemaintenance.vo.Home
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), Injectable {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    lateinit var homeViewModel: HomeViewModel
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -37,14 +44,8 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val factory = InjectorUtils.provideHomeViewModelFactory()
-        val viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
-
-        observeViewModel(viewModel)
-    }
-
-    private fun observeViewModel(viewModel: HomeViewModel) {
-        viewModel.homeObservable.observe(this, Observer<Home> { home ->
+        homeViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
+        homeViewModel.homeObservable.observe(this, Observer<Home> { home ->
             home?.let {
                 binding.home = home
             }

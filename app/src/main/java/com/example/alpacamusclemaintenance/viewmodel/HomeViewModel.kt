@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.alpacamusclemaintenance.repository.HomeRepository
 import com.example.alpacamusclemaintenance.vo.Home
+import javax.inject.Inject
 
-class HomeViewModel internal constructor(
+class HomeViewModel @Inject constructor(
         private val repository: HomeRepository
 ): ViewModel() {
 
