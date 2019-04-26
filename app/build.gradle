@@ -55,8 +55,8 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.1.0-alpha06'
     kapt 'androidx.room:room-compiler:2.1.0-alpha06'
 
-    // https://developer.android.com/topic/libraries/architecture/adding-components#workmanager
-    implementation "android.arch.work:work-runtime:1.0.1" // use -ktx for Kotlin
+    // https://developer.android.com/jetpack/androidx/releases/work
+    implementation "androidx.work:work-runtime-ktx:2.0.1"
 
     // https://github.com/PhilJay/MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
