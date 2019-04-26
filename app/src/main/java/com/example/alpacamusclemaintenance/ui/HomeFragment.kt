@@ -32,7 +32,7 @@ class HomeFragment : Fragment(), Injectable {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        AnimationUtils.loadAnimation(context, android.R.anim.fade_in).also {
+        AnimationUtils.loadAnimation(context, android.R.anim.fade_in).let {
             it.duration = 2_000
             binding.wordOfWisdom.animation = it
             binding.author.animation = it
@@ -44,11 +44,12 @@ class HomeFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        homeViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java)
-        homeViewModel.homeObservable.observe(this, Observer<Home> { home ->
-            home?.let {
-                binding.home = home
-            }
-        })
+        homeViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java).also {
+            it.homeObservable.observe(this, Observer<Home> { home ->
+                home?.let {
+                    binding.home = home
+                }
+            })
+        }
     }
 }
