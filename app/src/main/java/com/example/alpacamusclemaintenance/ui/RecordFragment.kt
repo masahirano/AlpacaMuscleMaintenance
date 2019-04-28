@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.alpacamusclemaintenance.R
+import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.util.InjectorUtils
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
@@ -21,6 +23,8 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.android.synthetic.main.fragment_record.view.*
 import org.apache.commons.lang3.time.DateFormatUtils
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 /**
@@ -31,13 +35,18 @@ class RecordFragment : Fragment() {
     private lateinit var viewModel: PushUpViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment_record, container, false)
+        val binding: FragmentRecordBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_record, container, false)
 
+        // Set current date
+        val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
+        binding.currentDate = LocalDateTime.now().format(formatter)
+
+        // Set chart
         val pushUpViewModelFactory = InjectorUtils.providePushUpViewModelFactory(context!!)
         viewModel = ViewModelProviders.of(this, pushUpViewModelFactory).get(PushUpViewModel::class.java)
-        subscribeUi(rootView)
+        subscribeUi(binding.root)
 
-        return rootView
+        return binding.root
     }
 
     private fun subscribeUi(rootView: View) {
