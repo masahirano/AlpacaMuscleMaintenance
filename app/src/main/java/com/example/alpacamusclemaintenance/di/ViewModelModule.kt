@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
 import com.example.alpacamusclemaintenance.viewmodel.AlpacaMuscleMaintenanceViewModelFactory
+import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 
 import dagger.Binds
 import dagger.Module
@@ -19,6 +20,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PushUpViewModel::class)
+    abstract fun bindPushUpViewModel(pushUpViewModel: PushUpViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: AlpacaMuscleMaintenanceViewModelFactory): ViewModelProvider.Factory

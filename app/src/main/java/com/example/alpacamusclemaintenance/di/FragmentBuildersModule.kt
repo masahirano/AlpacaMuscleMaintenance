@@ -3,6 +3,7 @@
 package com.example.alpacamusclemaintenance.di
 
 import com.example.alpacamusclemaintenance.ui.HomeFragment
+import com.example.alpacamusclemaintenance.ui.RecordFragment
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -12,4 +13,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentBuildersModule {
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeRecordFragment(): RecordFragment
 }

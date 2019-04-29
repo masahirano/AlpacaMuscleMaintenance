@@ -9,18 +9,18 @@ import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModelFactory
 
 object InjectorUtils {
 
-    private fun getPushUpRepository(context: Context): PushUpRepository {
-        return PushUpRepository.getInstance(AppDatabase.getInstance(context).pushUpDao())
-    }
+//    private fun getPushUpRepository(context: Context): PushUpRepository {
+//        return PushUpRepository.getInstance(AppDatabase.getInstance(context).pushUpDao())
+//    }
 
     private fun getFeedRepository(): FeedRepository {
         return FeedRepository.getInstance()
     }
 
-    fun providePushUpViewModelFactory(context: Context): PushUpViewModelFactory {
-        val repository = getPushUpRepository(context)
-        return PushUpViewModelFactory(repository)
-    }
+//    fun providePushUpViewModelFactory(context: Context): PushUpViewModelFactory {
+//        val repository = getPushUpRepository(context)
+//        return PushUpViewModelFactory(repository)
+//    }
 
     fun provideFeedViewModelFactory() : FeedViewModelFactory {
         val repository = getFeedRepository()
