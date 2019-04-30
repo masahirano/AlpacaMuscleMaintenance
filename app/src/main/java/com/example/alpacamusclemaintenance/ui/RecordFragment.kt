@@ -13,7 +13,6 @@ import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.di.Injectable
-import com.example.alpacamusclemaintenance.util.InjectorUtils
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.XAxis

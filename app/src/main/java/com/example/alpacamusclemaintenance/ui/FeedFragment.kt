@@ -16,7 +16,6 @@ import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.adapter.FeedAdapter
 import com.example.alpacamusclemaintenance.databinding.FragmentFeedBinding
 import com.example.alpacamusclemaintenance.di.Injectable
-import com.example.alpacamusclemaintenance.util.InjectorUtils
 import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
 import com.example.alpacamusclemaintenance.vo.Feed
 import javax.inject.Inject
@@ -61,20 +60,5 @@ class FeedFragment : Fragment(), Injectable {
                 feedAdapter.setFeedList(it)
             }
         })
-
-//        val factory = InjectorUtils.provideFeedViewModelFactory()
-//        val viewModel = ViewModelProviders.of(this, factory).get(FeedViewModel::class.java)
-
-//        observeViewModel(viewModel)
     }
-
-//    private fun observeViewModel(viewModel: FeedViewModel) {
-//        // Update the list when the data changes
-//        viewModel.feedObservable.observe(this, Observer<List<Feed>> { feeds ->
-//            feeds?.let {
-//                binding.progressBar.visibility = View.GONE
-//                feedAdapter.setFeedList(it)
-//            }
-//        })
-//    }
 }
