@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 
 /**
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Repo - value object name
  * Repository - type of this class.
  */
-class FeedRepository private constructor() {
+class FeedRepository @Inject constructor() {
 
     private var qiitaService: QiitaService
 
