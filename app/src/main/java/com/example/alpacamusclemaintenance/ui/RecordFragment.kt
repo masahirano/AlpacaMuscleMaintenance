@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
+import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.util.InjectorUtils
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 import com.github.mikephil.charting.animation.Easing
@@ -25,12 +27,16 @@ import kotlinx.android.synthetic.main.fragment_record.view.*
 import org.apache.commons.lang3.time.DateFormatUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class RecordFragment : Fragment() {
+class RecordFragment : Fragment(), Injectable {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var viewModel: PushUpViewModel
 
@@ -42,8 +48,7 @@ class RecordFragment : Fragment() {
         binding.currentDate = LocalDateTime.now().format(formatter)
 
         // Set chart
-        val pushUpViewModelFactory = InjectorUtils.providePushUpViewModelFactory(context!!)
-        viewModel = ViewModelProviders.of(this, pushUpViewModelFactory).get(PushUpViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PushUpViewModel::class.java)
         subscribeUi(binding.root)
 
         return binding.root
