@@ -2,6 +2,7 @@
 
 package com.example.alpacamusclemaintenance.di
 
+import com.example.alpacamusclemaintenance.ui.FeedFragment
 import com.example.alpacamusclemaintenance.ui.HomeFragment
 import com.example.alpacamusclemaintenance.ui.RecordFragment
 
@@ -16,4 +17,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeRecordFragment(): RecordFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeFeedFragment(): FeedFragment
 }

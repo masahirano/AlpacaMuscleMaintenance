@@ -28,7 +28,7 @@ class WebViewFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            url = it.getString(ARG_URL)
+            url = it.getString(ARG_URL)!!
         }
     }
 
