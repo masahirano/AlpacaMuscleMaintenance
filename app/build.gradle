@@ -41,7 +41,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // https://material.io/develop/android/docs/getting-started/
@@ -52,8 +52,8 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
 
     // https://developer.android.com/topic/libraries/architecture/adding-components#room
-    implementation 'androidx.room:room-runtime:2.1.0-alpha06'
-    kapt 'androidx.room:room-compiler:2.1.0-alpha06'
+    implementation 'androidx.room:room-runtime:2.1.0-alpha07'
+    kapt 'androidx.room:room-compiler:2.1.0-alpha07'
 
     // https://developer.android.com/jetpack/androidx/releases/work
     implementation "androidx.work:work-runtime-ktx:2.0.1"
@@ -72,7 +72,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.7'
 
     // https://github.com/bumptech/glide
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     // https://github.com/android/android-ktx
