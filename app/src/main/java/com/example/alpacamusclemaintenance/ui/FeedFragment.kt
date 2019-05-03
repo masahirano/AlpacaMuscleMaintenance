@@ -35,14 +35,16 @@ class FeedFragment : Fragment(), Injectable {
     private lateinit var feedAdapter: FeedAdapter
     private lateinit var binding: FragmentFeedBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         feedAdapter = FeedAdapter()
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feed, container, false)
         binding.feed.let { feedView ->
             feedView.adapter = feedAdapter
-
             val dividerItemDecoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
             feedView.addItemDecoration(dividerItemDecoration)
         }
