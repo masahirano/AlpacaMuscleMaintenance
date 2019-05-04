@@ -27,8 +27,7 @@ class ExerciseFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val pager = binding.pager
-        pager.adapter = ExercisePageAdapter(fragmentManager!!)
-        pager.setCurrentItem(0, false)
+        binding.pager.adapter = ExercisePageAdapter(childFragmentManager)
+        binding.pager.setCurrentItem(0, false)
     }
 }
