@@ -1,12 +1,11 @@
 package com.example.alpacamusclemaintenance.ui
 
-// @see: https://github.com/guardian/android-supportlibrary-extensions/blob/master/library/src/main/java/android/support/v4/view/LockableViewPager.java
-
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent
 import androidx.viewpager.widget.ViewPager
 
+// @see: https://github.com/guardian/android-supportlibrary-extensions/blob/master/library/src/main/java/android/support/v4/view/LockableViewPager.java
 class LockableViewPager : ViewPager {
 
     private var isPagingEnabled = true
