@@ -45,7 +45,7 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
         holder.itemView.setOnClickListener {
             (context as MainActivity).supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.content, WebViewFragment.newInstance(feed.url))
+                    .replace(R.id.feed_container, WebViewFragment.newInstance(feed.url))
                     .addToBackStack(null)
                     .commit()
         }
