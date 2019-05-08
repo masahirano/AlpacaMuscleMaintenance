@@ -1,6 +1,5 @@
 package com.example.alpacamusclemaintenance.adapter
 
-import android.content.Context
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -15,8 +14,8 @@ import com.example.alpacamusclemaintenance.vo.Feed
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
-    private lateinit var context: Context
-    private var feedList: List<Feed>? = null
+    private lateinit var binding: ListItemFeedBinding
+    private var feedList: List<Feed> = emptyList()
 
     fun setFeedList(feedList: List<Feed>) {
         this.feedList = feedList
@@ -24,16 +23,14 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedViewHolder {
-        context = parent.context
-        val binding: ListItemFeedBinding = DataBindingUtil.inflate(
-                LayoutInflater.from(context), R.layout.list_item_feed, parent, false
-        )
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.list_item_feed, parent, false)
 
         return FeedViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FeedViewHolder, position: Int) {
-        val feed = feedList!![position]
+        val context = binding.root.context
+        val feed = feedList[position]
 
         Glide.with(context)
                 .load(feed.user.profileImageUrl)
@@ -48,15 +45,13 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
         holder.itemView.setOnClickListener {
             (context as MainActivity).supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.content, WebViewFragment.newInstance(feed.url))
+                    .replace(R.id.feed_container, WebViewFragment.newInstance(feed.url))
                     .addToBackStack(null)
                     .commit()
         }
     }
 
-    override fun getItemCount(): Int {
-        return if (feedList == null) 0 else feedList!!.size
-    }
+    override fun getItemCount(): Int = feedList.size
 
     class FeedViewHolder(val binding: ListItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
 }

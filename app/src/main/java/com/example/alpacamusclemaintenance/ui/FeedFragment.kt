@@ -30,7 +30,7 @@ class FeedFragment : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var feedViewModel: FeedViewModel
+    private lateinit var feedViewModel: FeedViewModel
 
     private lateinit var feedAdapter: FeedAdapter
     private lateinit var binding: FragmentFeedBinding
