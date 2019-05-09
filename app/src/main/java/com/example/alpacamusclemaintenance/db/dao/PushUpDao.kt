@@ -9,6 +9,7 @@ import com.example.alpacamusclemaintenance.db.entity.PushUp
 
 @Dao
 interface PushUpDao {
+
     @Insert
     fun insert(pushUp: PushUp)
 

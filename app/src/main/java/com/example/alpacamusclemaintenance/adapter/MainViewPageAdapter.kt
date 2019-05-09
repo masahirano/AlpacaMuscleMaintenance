@@ -19,10 +19,8 @@ class MainViewPageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         }
     }
 
-    override fun getCount(): Int {
-        // Show 5 total pages.
-        return 5
-    }
+    // Show 5 total pages.
+    override fun getCount(): Int = 5
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {

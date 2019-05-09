@@ -14,12 +14,13 @@ import com.example.alpacamusclemaintenance.util.DATABASE_NAME
 import com.example.alpacamusclemaintenance.worker.SeedDatabaseWorker
 
 @Database(
-        entities = [
-            PushUp::class],
+        entities = [PushUp::class],
         version = 2,
         exportSchema = false
 )
+
 @TypeConverters(Converters::class)
+
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun pushUpDao(): PushUpDao
@@ -27,7 +28,8 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
 
         // For Singleton instantiation
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
 
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
