@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface QiitaService {
+
     @GET("api/v2/items")
     fun getFeeds(@Query("query") query: String): Call<List<Feed>>
 

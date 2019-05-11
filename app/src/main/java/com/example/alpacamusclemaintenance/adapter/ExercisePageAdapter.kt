@@ -15,10 +15,8 @@ class ExercisePageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         }
     }
 
-    override fun getCount(): Int {
-        // Show 2 total pages.
-        return 2
-    }
+    // Show 2 total pages.
+    override fun getCount(): Int = 2
 
     override fun getPageTitle(position: Int): CharSequence {
         return when (position) {
