@@ -2,18 +2,17 @@
 
 package com.example.alpacamusclemaintenance
 
-import android.app.Activity
 import android.app.Application
 import com.example.alpacamusclemaintenance.di.AppInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import timber.log.Timber
 import javax.inject.Inject
 
 
-class AlpacaMuscleMaintenanceApp : Application(), HasActivityInjector {
+class AlpacaMuscleMaintenanceApp : Application(), HasAndroidInjector {
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
     override fun onCreate() {
         super.onCreate()
@@ -23,5 +22,5 @@ class AlpacaMuscleMaintenanceApp : Application(), HasActivityInjector {
         AppInjector.init(this)
     }
 
-    override fun activityInjector() = dispatchingAndroidInjector
+    override fun androidInjector() = androidInjector
 }

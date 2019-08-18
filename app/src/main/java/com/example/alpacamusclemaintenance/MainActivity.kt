@@ -2,24 +2,22 @@ package com.example.alpacamusclemaintenance
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import androidx.databinding.DataBindingUtil
 import com.example.alpacamusclemaintenance.adapter.MainViewPageAdapter
 import com.example.alpacamusclemaintenance.databinding.ActivityMainBinding
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
-    // From: https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/MainActivity.kt
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    override fun supportFragmentInjector() = dispatchingAndroidInjector
+    override fun androidInjector() = androidInjector
 
     private lateinit var binding: ActivityMainBinding
 
