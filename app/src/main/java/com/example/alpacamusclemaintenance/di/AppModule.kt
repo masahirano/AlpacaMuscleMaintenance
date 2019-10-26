@@ -12,14 +12,12 @@ import javax.inject.Singleton
 @Module(includes = [ViewModelModule::class])
 class AppModule {
 
-  @Singleton
-  @Provides
+  @[Singleton Provides]
   fun provideDb(app: Application): AppDatabase {
     return AppDatabase.getInstance(app.applicationContext)
   }
 
-  @Singleton
-  @Provides
+  @[Singleton Provides]
   fun providePushUpDao(db: AppDatabase): PushUpDao {
     return db.pushUpDao()
   }

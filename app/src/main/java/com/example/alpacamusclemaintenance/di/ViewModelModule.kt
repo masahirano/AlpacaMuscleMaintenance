@@ -15,19 +15,13 @@ import dagger.multibindings.IntoMap
 @Suppress("unused")
 @Module
 abstract class ViewModelModule {
-  @Binds
-  @IntoMap
-  @ViewModelKey(HomeViewModel::class)
+  @[Binds IntoMap ViewModelKey(HomeViewModel::class)]
   abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 
-  @Binds
-  @IntoMap
-  @ViewModelKey(PushUpViewModel::class)
+  @[Binds IntoMap ViewModelKey(PushUpViewModel::class)]
   abstract fun bindPushUpViewModel(pushUpViewModel: PushUpViewModel): ViewModel
 
-  @Binds
-  @IntoMap
-  @ViewModelKey(FeedViewModel::class)
+  @[Binds IntoMap ViewModelKey(FeedViewModel::class)]
   abstract fun bindFeedViewModel(feedViewModel: FeedViewModel): ViewModel
 
   @Binds
