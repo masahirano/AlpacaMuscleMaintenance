@@ -12,12 +12,12 @@ import dagger.android.ContributesAndroidInjector
 @Suppress("unused")
 @Module
 abstract class FragmentBuildersModule {
-    @ContributesAndroidInjector
-    abstract fun contributeHomeFragment(): HomeFragment
+  @ContributesAndroidInjector
+  abstract fun contributeHomeFragment(): HomeFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeRecordFragment(): RecordFragment
+  @ContributesAndroidInjector
+  abstract fun contributeRecordFragment(): RecordFragment
 
-    @ContributesAndroidInjector
-    abstract fun contributeFeedFragment(): FeedFragment
+  @ContributesAndroidInjector
+  abstract fun contributeFeedFragment(): FeedFragment
 }

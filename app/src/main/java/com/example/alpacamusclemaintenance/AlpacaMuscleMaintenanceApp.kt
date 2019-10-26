@@ -11,16 +11,16 @@ import javax.inject.Inject
 
 
 class AlpacaMuscleMaintenanceApp : Application(), HasAndroidInjector {
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+  @Inject
+  lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-    override fun onCreate() {
-        super.onCreate()
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
-        AppInjector.init(this)
+  override fun onCreate() {
+    super.onCreate()
+    if (BuildConfig.DEBUG) {
+      Timber.plant(Timber.DebugTree())
     }
+    AppInjector.init(this)
+  }
 
-    override fun androidInjector() = androidInjector
+  override fun androidInjector() = androidInjector
 }

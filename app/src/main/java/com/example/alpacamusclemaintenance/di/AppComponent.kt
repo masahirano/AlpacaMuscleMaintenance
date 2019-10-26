@@ -12,19 +12,20 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [
-        AndroidInjectionModule::class,
-        AppModule::class,
-        MainActivityModule::class
-    ]
+  modules = [
+    AndroidInjectionModule::class,
+    AppModule::class,
+    MainActivityModule::class
+  ]
 )
 interface AppComponent : AndroidInjector<AlpacaMuscleMaintenanceApp> {
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        fun application(application: Application): Builder
-        fun build(): AppComponent
-    }
+  @Component.Builder
+  interface Builder {
+    @BindsInstance
+    fun application(application: Application): Builder
 
-    override fun inject(instance: AlpacaMuscleMaintenanceApp)
+    fun build(): AppComponent
+  }
+
+  override fun inject(instance: AlpacaMuscleMaintenanceApp)
 }

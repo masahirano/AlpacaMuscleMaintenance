@@ -10,15 +10,15 @@ import com.example.alpacamusclemaintenance.db.entity.PushUp
 @Dao
 interface PushUpDao {
 
-    @Insert
-    fun insert(pushUp: PushUp)
+  @Insert
+  fun insert(pushUp: PushUp)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(pushUps: List<PushUp>)
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  fun insertAll(pushUps: List<PushUp>)
 
-    @Query("SELECT * from push_ups ORDER BY done_at DESC LIMIT 10")
-    fun getPushUps(): LiveData<List<PushUp>>
+  @Query("SELECT * from push_ups ORDER BY done_at DESC LIMIT 10")
+  fun getPushUps(): LiveData<List<PushUp>>
 
-    @Query("DELETE FROM push_ups")
-    fun deleteAll()
+  @Query("DELETE FROM push_ups")
+  fun deleteAll()
 }

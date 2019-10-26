@@ -1,15 +1,15 @@
 package com.example.alpacamusclemaintenance.ui
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.FragmentHomeBinding
 import com.example.alpacamusclemaintenance.di.Injectable
@@ -22,34 +22,34 @@ import javax.inject.Inject
  */
 class HomeFragment : Fragment(), Injectable {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    lateinit var homeViewModel: HomeViewModel
+  lateinit var homeViewModel: HomeViewModel
 
-    private lateinit var binding: FragmentHomeBinding
+  private lateinit var binding: FragmentHomeBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        AnimationUtils.loadAnimation(context, android.R.anim.fade_in).let {
-            it.duration = 2_000
-            binding.wordOfWisdom.animation = it
-            binding.author.animation = it
-        }
-
-        return binding.root
+    AnimationUtils.loadAnimation(context, android.R.anim.fade_in).let {
+      it.duration = 2_000
+      binding.wordOfWisdom.animation = it
+      binding.author.animation = it
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    return binding.root
+  }
 
-        homeViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java).also {
-            it.homeObservable.observe(this, Observer<Home> { home ->
-                home?.let {
-                    binding.home = home
-                }
-            })
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+
+    homeViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java).also {
+      it.homeObservable.observe(this, Observer<Home> { home ->
+        home?.let {
+          binding.home = home
         }
+      })
     }
+  }
 }

@@ -8,20 +8,20 @@ import com.example.alpacamusclemaintenance.ui.SquatFragment
 
 class ExercisePageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment {
-        return when (position) {
-            0 -> PushUpFragment()
-            else -> SquatFragment()
-        }
+  override fun getItem(position: Int): Fragment {
+    return when (position) {
+      0 -> PushUpFragment()
+      else -> SquatFragment()
     }
+  }
 
-    // Show 2 total pages.
-    override fun getCount(): Int = 2
+  // Show 2 total pages.
+  override fun getCount(): Int = 2
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return when (position) {
-            0 -> "pushUp"
-            else -> "squat"
-        }
+  override fun getPageTitle(position: Int): CharSequence {
+    return when (position) {
+      0 -> "pushUp"
+      else -> "squat"
     }
+  }
 }

@@ -4,8 +4,8 @@ import com.example.alpacamusclemaintenance.db.dao.PushUpDao
 import javax.inject.Inject
 
 class PushUpRepository @Inject constructor(
-        private val pushUpDao: PushUpDao
+  private val pushUpDao: PushUpDao
 ) {
 
-    fun getPushUps() = pushUpDao.getPushUps()
+  fun getPushUps() = pushUpDao.getPushUps()
 }
