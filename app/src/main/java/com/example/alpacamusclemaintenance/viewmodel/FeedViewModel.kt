@@ -8,9 +8,9 @@ import javax.inject.Inject
 
 
 class FeedViewModel @Inject constructor(
-        private val repository: FeedRepository
-): ViewModel() {
+  private val repository: FeedRepository
+) : ViewModel() {
 
-    var feedObservable: LiveData<List<Feed>> = repository.getFeedsByTag("筋トレ")
+  var feedObservable: LiveData<List<Feed>> = repository.getFeedsByTag("筋トレ")
 
 }

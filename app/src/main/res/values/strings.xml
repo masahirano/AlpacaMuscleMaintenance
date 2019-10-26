@@ -1,21 +1,21 @@
 <resources>
-    <string name="app_name">AlpacaMuscleMaintenance</string>
+  <string name="app_name">AlpacaMuscleMaintenance</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_exercise">Exercise</string>
-    <string name="title_record">Record</string>
-    <string name="title_feed">Feed</string>
-    <string name="title_bug_report">BugReport</string>
-    <string name="action_favorite">favorite</string>
-    <string name="action_settings">settings</string>
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="title_activity_main">MainActivity</string>
+  <string name="title_home">Home</string>
+  <string name="title_exercise">Exercise</string>
+  <string name="title_record">Record</string>
+  <string name="title_feed">Feed</string>
+  <string name="title_bug_report">BugReport</string>
+  <string name="action_favorite">favorite</string>
+  <string name="action_settings">settings</string>
 
-    <!-- fragment_push_up.xml -->
-    <string name="push_up_initial_text">Go!!</string>
+  <!-- fragment_push_up.xml -->
+  <string name="push_up_initial_text">Go!!</string>
 
-    <string name="dialog_edit_record">Edit Record?</string>
-    <string name="save">SAVE</string>
-    <string name="cancel">CANCEL</string>
+  <string name="dialog_edit_record">Edit Record?</string>
+  <string name="save">SAVE</string>
+  <string name="cancel">CANCEL</string>
 </resources>

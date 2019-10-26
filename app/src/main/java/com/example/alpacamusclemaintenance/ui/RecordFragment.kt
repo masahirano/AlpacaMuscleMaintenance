@@ -1,14 +1,14 @@
 package com.example.alpacamusclemaintenance.ui
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
@@ -34,58 +34,58 @@ import javax.inject.Inject
  */
 class RecordFragment : Fragment(), Injectable {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+  @Inject
+  lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private lateinit var viewModel: PushUpViewModel
+  private lateinit var viewModel: PushUpViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: FragmentRecordBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_record, container, false)
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    val binding: FragmentRecordBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_record, container, false)
 
-        // Set current date
-        val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
-        binding.currentDate = LocalDateTime.now().format(formatter)
+    // Set current date
+    val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
+    binding.currentDate = LocalDateTime.now().format(formatter)
 
-        // Set chart
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(PushUpViewModel::class.java)
-        subscribeUi(binding.root)
+    // Set chart
+    viewModel = ViewModelProviders.of(this, viewModelFactory).get(PushUpViewModel::class.java)
+    subscribeUi(binding.root)
 
-        return binding.root
+    return binding.root
+  }
+
+  private fun subscribeUi(rootView: View) {
+    viewModel.getPushUps().observe(this, Observer { pushUps ->
+      pushUps?.let {
+        setupChart(rootView, it)
+      }
+    })
+  }
+
+  private fun setupChart(rootView: View, pushUps: List<PushUp>) {
+    val dataList = pushUps.reversed().groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
+      .fold(0) { total, pushUp -> total + pushUp.count }
+    val entries = dataList.values.mapIndexed { index, totalCount -> BarEntry(index.toFloat(), totalCount.toFloat()) }
+    val dataSet = BarDataSet(entries, "push_ups").apply {
+      valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
+      colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
+    }
+    val chart = rootView.chart.apply {
+      data = BarData(dataSet)
+      legend.isEnabled = false
+      setScaleEnabled(false)
+      animateY(1200, Easing.EasingOption.Linear)
     }
 
-    private fun subscribeUi(rootView: View) {
-        viewModel.getPushUps().observe(this, Observer { pushUps ->
-            pushUps?.let {
-                setupChart(rootView, it)
-            }
-        })
+    chart.axisRight.run {
+      setDrawGridLines(false)
+      setDrawLabels(false)
     }
-
-    private fun setupChart(rootView: View, pushUps: List<PushUp>) {
-        val dataList = pushUps.reversed().groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
-                .fold(0) { total, pushUp -> total + pushUp.count }
-        val entries = dataList.values.mapIndexed { index, totalCount -> BarEntry(index.toFloat(), totalCount.toFloat()) }
-        val dataSet = BarDataSet(entries, "push_ups").apply {
-            valueFormatter = IValueFormatter { value, entry, dataSetIndex, viewPortHandler -> value.toInt().toString() }
-            colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
-        }
-        val chart = rootView.chart.apply {
-            data = BarData(dataSet)
-            legend.isEnabled = false
-            setScaleEnabled(false)
-            animateY(1200, Easing.EasingOption.Linear)
-        }
-
-        chart.axisRight.run {
-            setDrawGridLines(false)
-            setDrawLabels(false)
-        }
-        chart.xAxis.run {
-            position = XAxis.XAxisPosition.BOTTOM
-            labelCount = pushUps.size
-            valueFormatter = IndexAxisValueFormatter(dataList.keys)
-            setDrawGridLines(false)
-        }
+    chart.xAxis.run {
+      position = XAxis.XAxisPosition.BOTTOM
+      labelCount = pushUps.size
+      valueFormatter = IndexAxisValueFormatter(dataList.keys)
+      setDrawGridLines(false)
     }
+  }
 }
 
