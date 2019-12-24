@@ -11,11 +11,16 @@
     <variable
       name="feed"
       type="com.example.alpacamusclemaintenance.vo.Feed" />
+
+    <variable
+      name="onClicked"
+      type="android.view.View.OnClickListener" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:onClick="@{onClicked}"
     android:padding="8dp">
 
     <ImageView
