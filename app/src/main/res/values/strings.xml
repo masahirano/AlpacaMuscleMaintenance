@@ -14,8 +14,4 @@
 
   <!-- fragment_push_up.xml -->
   <string name="push_up_initial_text">Go!!</string>
-
-  <string name="dialog_edit_record">Edit Record?</string>
-  <string name="save">SAVE</string>
-  <string name="cancel">CANCEL</string>
 </resources>

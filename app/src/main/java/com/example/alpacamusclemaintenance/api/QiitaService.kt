@@ -11,6 +11,6 @@ interface QiitaService {
   fun getFeeds(@Query("query") query: String): Call<List<Feed>>
 
   companion object {
-    const val HTTPS_API_QIITA_URL = "https://qiita.com/"
+    const val HTTPS_API_QIITA_URL = "https://qiita.com"
   }
 }

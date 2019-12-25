@@ -30,7 +30,8 @@ class FeedRepository @Inject constructor() {
     val gson = GsonBuilder()
       .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
       .create()
-    val retrofit = Retrofit.Builder()
+    val retrofit = Retrofit
+      .Builder()
       .baseUrl(QiitaService.HTTPS_API_QIITA_URL)
       .addConverterFactory(GsonConverterFactory.create(gson))
       .build()
