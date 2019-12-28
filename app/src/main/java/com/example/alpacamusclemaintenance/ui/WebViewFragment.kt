@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import com.example.alpacamusclemaintenance.R
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
-private const val ARG_URL = "url"
-
 /**
  * A simple [Fragment] subclass.
  * Use the [WebViewFragment.newInstance] factory method to
@@ -59,6 +57,9 @@ class WebViewFragment : Fragment() {
   }
 
   companion object {
+
+    const val ARG_URL = "url"
+
     @JvmStatic
     fun newInstance(url: String) =
       WebViewFragment().apply {
