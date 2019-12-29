@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.Nullable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,19 +16,13 @@ import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
 import com.example.alpacamusclemaintenance.vo.Feed
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- *
- */
 class FeedFragment : Fragment(), Injectable {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-
   private lateinit var feedViewModel: FeedViewModel
-
-  private lateinit var feedAdapter: FeedAdapter
   private lateinit var binding: FragmentFeedBinding
+  private lateinit var feedAdapter: FeedAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -41,30 +34,34 @@ class FeedFragment : Fragment(), Injectable {
       container,
       false
     )
-
     return binding.root
   }
 
-  override fun onActivityCreated(@Nullable savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
+  override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?
+  ) {
+    super.onViewCreated(view, savedInstanceState)
 
     feedAdapter = FeedAdapter()
-    binding
-      .feed
-      .apply {
-        adapter = feedAdapter
-        addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-      }
-
+    binding.feed.apply {
+      adapter = feedAdapter
+      addItemDecoration(
+        DividerItemDecoration(
+          context,
+          DividerItemDecoration.VERTICAL
+        )
+      )
+    }
     feedViewModel =
       ViewModelProviders
         .of(this, viewModelFactory)
         .get(FeedViewModel::class.java)
-    feedViewModel
-      .feedObservable
-      .observe(this, Observer<List<Feed>> { feeds ->
-        binding.progressBar.visibility = View.GONE
-        feedAdapter.setFeedList(feeds)
-      })
+        .apply {
+          feedObservable.observe(this@FeedFragment, Observer<List<Feed>> { feeds ->
+            binding.progressBar.visibility = View.GONE
+            feedAdapter.setFeedList(feeds)
+          })
+        }
   }
 }
