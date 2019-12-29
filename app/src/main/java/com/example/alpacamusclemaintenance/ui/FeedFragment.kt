@@ -43,7 +43,7 @@ class FeedFragment : Fragment(), Injectable {
   ) {
     super.onViewCreated(view, savedInstanceState)
 
-    feedAdapter = FeedAdapter(this)
+    feedAdapter = FeedAdapter()
     binding.feed.apply {
       adapter = feedAdapter
       addItemDecoration(

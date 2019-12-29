@@ -4,20 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.example.alpacamusclemaintenance.MainActivity
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.ListItemFeedBinding
-import com.example.alpacamusclemaintenance.ui.FeedFragment
 import com.example.alpacamusclemaintenance.ui.WebViewFragment
 import com.example.alpacamusclemaintenance.vo.Feed
 
-class FeedAdapter(
-  private val host: FeedFragment
-) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
   private lateinit var binding: ListItemFeedBinding
   private var feedList: List<Feed> = emptyList()
@@ -60,7 +56,8 @@ class FeedAdapter(
           val args = bundleOf(
             WebViewFragment.ARG_URL to selectedFeed.url
           )
-          host
+          holder
+            .itemView
             .findNavController()
             .navigate(R.id.action_feedFragment_to_webViewFragment, args)
         }
