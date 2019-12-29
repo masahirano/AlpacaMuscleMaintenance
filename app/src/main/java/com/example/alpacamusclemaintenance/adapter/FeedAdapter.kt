@@ -13,7 +13,6 @@ import com.example.alpacamusclemaintenance.vo.Feed
 
 class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
-  private lateinit var binding: ListItemFeedBinding
   private var feedList: List<Feed> = emptyList()
 
   fun setFeedList(feedList: List<Feed>) {
@@ -24,37 +23,37 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  ): FeedViewHolder {
-    binding = ListItemFeedBinding.inflate(
-      LayoutInflater.from(parent.context),
-      parent,
-      false
-    )
-    return FeedViewHolder(binding)
-  }
+  ): FeedViewHolder =
+    ListItemFeedBinding
+      .inflate(
+        LayoutInflater.from(parent.context),
+        parent,
+        false
+      )
+      .let { FeedViewHolder(it) }
 
   override fun onBindViewHolder(
     holder: FeedViewHolder,
     position: Int
   ) {
-    val context = binding.root.context
+    val binding = holder.binding
     val selectedFeed = feedList[position]
     Glide
-      .with(context)
+      .with(binding.root.context)
       .load(selectedFeed.user.profileImageUrl)
       .transition(DrawableTransitionOptions.withCrossFade())
-      .into(holder.binding.profileImage)
-    holder
-      .binding
+      .into(binding.profileImage)
+    val navController = binding.root.findNavController()
+    binding
       .apply {
         feed = selectedFeed
         onClicked = View.OnClickListener {
-          holder
-            .itemView
-            .findNavController()
+          navController
             .navigate(
               FeedFragmentDirections
-                .actionFeedFragmentToWebViewFragment(url = selectedFeed.url)
+                .actionFeedFragmentToWebViewFragment(
+                  url = selectedFeed.url
+                )
             )
         }
         executePendingBindings()
