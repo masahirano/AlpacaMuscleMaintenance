@@ -11,7 +11,7 @@ import io.reactivex.Observable
 interface PushUpDao {
 
   @Insert
-  fun insert(pushUp: PushUp)
+  suspend fun insert(pushUp: PushUp)
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)
   fun insertAll(pushUps: List<PushUp>)

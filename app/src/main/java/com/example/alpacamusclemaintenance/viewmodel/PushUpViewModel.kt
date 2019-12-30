@@ -1,12 +1,10 @@
 package com.example.alpacamusclemaintenance.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import io.reactivex.subjects.BehaviorSubject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,8 +22,7 @@ class PushUpViewModel @Inject constructor(
 
   fun save() {
     val value = count.value ?: return
-    val job = Job()
-    CoroutineScope(Dispatchers.IO + job).launch {
+    viewModelScope.launch {
       database
         .pushUpDao()
         .insert(

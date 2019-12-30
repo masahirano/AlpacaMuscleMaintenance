@@ -88,7 +88,7 @@ class RecordFragment : Fragment(), Injectable {
   ) {
     val dataList: Map<String, Int> =
       pushUps
-        .reversed()
+        .sortedBy { it.doneAt }
         .groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
         .fold(0) { total, pushUp -> total + pushUp.count }
     val entries: List<BarEntry> =
