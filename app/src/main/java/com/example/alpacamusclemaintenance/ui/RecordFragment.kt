@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.di.Injectable
-import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
+import com.example.alpacamusclemaintenance.viewmodel.RecordViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -35,7 +35,7 @@ class RecordFragment : Fragment(), Injectable {
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private lateinit var binding: FragmentRecordBinding
-  private lateinit var viewModel: PushUpViewModel
+  private lateinit var viewModel: RecordViewModel
   private val disposable = CompositeDisposable()
 
   override fun onCreateView(
@@ -60,7 +60,7 @@ class RecordFragment : Fragment(), Injectable {
     viewModel =
       ViewModelProviders
         .of(this, viewModelFactory)
-        .get(PushUpViewModel::class.java)
+        .get(RecordViewModel::class.java)
 
     // Set current date
     val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")

@@ -13,7 +13,7 @@ import javax.inject.Singleton
 class AppModule {
 
   @[Singleton Provides]
-  fun provideDb(app: Application): AppDatabase {
+  fun provideAppDatabase(app: Application): AppDatabase {
     return AppDatabase.getInstance(app.applicationContext)
   }
 

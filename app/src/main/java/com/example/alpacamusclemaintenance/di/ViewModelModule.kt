@@ -4,10 +4,7 @@ package com.example.alpacamusclemaintenance.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.alpacamusclemaintenance.viewmodel.AlpacaMuscleMaintenanceViewModelFactory
-import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
-import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
-import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
+import com.example.alpacamusclemaintenance.viewmodel.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -15,15 +12,21 @@ import dagger.multibindings.IntoMap
 @Suppress("unused")
 @Module
 abstract class ViewModelModule {
+
   @[Binds IntoMap ViewModelKey(HomeViewModel::class)]
   abstract fun bindHomeViewModel(homeViewModel: HomeViewModel): ViewModel
 
   @[Binds IntoMap ViewModelKey(PushUpViewModel::class)]
   abstract fun bindPushUpViewModel(pushUpViewModel: PushUpViewModel): ViewModel
 
+  @[Binds IntoMap ViewModelKey(RecordViewModel::class)]
+  abstract fun bindRecordViewModel(recordViewModel: RecordViewModel): ViewModel
+
   @[Binds IntoMap ViewModelKey(FeedViewModel::class)]
   abstract fun bindFeedViewModel(feedViewModel: FeedViewModel): ViewModel
 
   @Binds
-  abstract fun bindViewModelFactory(factory: AlpacaMuscleMaintenanceViewModelFactory): ViewModelProvider.Factory
+  abstract fun bindViewModelFactory(
+    factory: AlpacaMuscleMaintenanceViewModelFactory
+  ): ViewModelProvider.Factory
 }
