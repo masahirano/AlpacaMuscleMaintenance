@@ -15,11 +15,6 @@ class FeedAdapter(
 
   private var feedList: List<Feed> = emptyList()
 
-  fun setFeedList(feedList: List<Feed>) {
-    this.feedList = feedList
-    notifyItemRangeInserted(0, feedList.size)
-  }
-
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
@@ -53,8 +48,12 @@ class FeedAdapter(
 
   override fun getItemCount(): Int = feedList.size
 
+  fun setFeedList(feedList: List<Feed>) {
+    this.feedList = feedList
+    notifyItemRangeInserted(0, feedList.size)
+  }
+
   class FeedViewHolder(val binding: ListItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
 }
 
 typealias FeedOpenNavigation = (url: String) -> Unit
-
