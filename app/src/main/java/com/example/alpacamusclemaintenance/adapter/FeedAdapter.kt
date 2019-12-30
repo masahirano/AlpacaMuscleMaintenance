@@ -3,15 +3,15 @@ package com.example.alpacamusclemaintenance.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.alpacamusclemaintenance.databinding.ListItemFeedBinding
-import com.example.alpacamusclemaintenance.ui.FeedFragmentDirections
 import com.example.alpacamusclemaintenance.vo.Feed
 
-class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+class FeedAdapter(
+  private val openFeed: FeedOpenNavigation
+) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
   private var feedList: List<Feed> = emptyList()
 
@@ -43,19 +43,10 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
       .load(selectedFeed.user.profileImageUrl)
       .transition(DrawableTransitionOptions.withCrossFade())
       .into(binding.profileImage)
-    val navController = binding.root.findNavController()
     binding
       .apply {
         feed = selectedFeed
-        onClicked = View.OnClickListener {
-          navController
-            .navigate(
-              FeedFragmentDirections
-                .actionFeedFragmentToWebViewFragment(
-                  url = selectedFeed.url
-                )
-            )
-        }
+        onClicked = View.OnClickListener { openFeed(selectedFeed.url) }
         executePendingBindings()
       }
   }
@@ -64,3 +55,6 @@ class FeedAdapter : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
 
   class FeedViewHolder(val binding: ListItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
 }
+
+typealias FeedOpenNavigation = (url: String) -> Unit
+
