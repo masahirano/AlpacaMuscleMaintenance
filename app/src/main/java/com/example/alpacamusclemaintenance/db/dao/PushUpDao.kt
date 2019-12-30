@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.alpacamusclemaintenance.db.entity.PushUp
+import io.reactivex.Observable
 
 @Dao
 interface PushUpDao {
@@ -17,7 +18,7 @@ interface PushUpDao {
   fun insertAll(pushUps: List<PushUp>)
 
   @Query("SELECT * from push_ups ORDER BY done_at DESC LIMIT 10")
-  fun getPushUps(): LiveData<List<PushUp>>
+  fun getPushUps(): Observable<List<PushUp>>
 
   @Query("DELETE FROM push_ups")
   fun deleteAll()
