@@ -117,7 +117,7 @@ class RecordFragment : Fragment(), Injectable {
     }
     chart.xAxis.apply {
       position = XAxis.XAxisPosition.BOTTOM
-      labelCount = pushUps.size
+      labelCount = dataList.size
       valueFormatter = IndexAxisValueFormatter(dataList.keys)
       setDrawGridLines(false)
     }

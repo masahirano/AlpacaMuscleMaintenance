@@ -17,8 +17,9 @@ class PushUpViewModel @Inject constructor(
   val count: BehaviorSubject<Int> = BehaviorSubject.createDefault(DEFAULT_VALUE)
 
   fun add(addValue: Int) {
-    val currentValue = count.value ?: DEFAULT_VALUE
-    count.onNext(currentValue + addValue)
+    count
+      .value
+      ?.also { count.onNext(it + addValue) }
   }
 
   fun save() {
