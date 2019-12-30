@@ -69,8 +69,8 @@ class RecordFragment : Fragment(), Injectable {
     // Set chart
     viewModel
       .pushUpsObservable
-      .observeOn(AndroidSchedulers.mainThread())
       .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
       .subscribe { pushUps ->
         setupChart(binding.root, pushUps)
       }

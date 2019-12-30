@@ -58,8 +58,8 @@ class HomeFragment : Fragment(), Injectable {
         .get(HomeViewModel::class.java)
     homeViewModel
       .homeObservable
-      .observeOn(AndroidSchedulers.mainThread())
       .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
       .subscribe { home ->
         binding.home = home
       }

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,11 @@ import com.example.alpacamusclemaintenance.adapter.FeedAdapter
 import com.example.alpacamusclemaintenance.databinding.FragmentFeedBinding
 import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
-import com.example.alpacamusclemaintenance.vo.Feed
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class FeedFragment : Fragment(), Injectable {
@@ -23,6 +26,7 @@ class FeedFragment : Fragment(), Injectable {
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private lateinit var feedViewModel: FeedViewModel
   private lateinit var binding: FragmentFeedBinding
+  private val disposable = CompositeDisposable()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -48,12 +52,11 @@ class FeedFragment : Fragment(), Injectable {
         findNavController()
           .navigate(
             FeedFragmentDirections
-              .actionFeedFragmentToWebViewFragment(
-                url = url
-              )
+              .actionFeedFragmentToWebViewFragment(url = url)
           )
       }
     )
+
     binding.feed.apply {
       adapter = feedAdapter
       addItemDecoration(
@@ -63,15 +66,30 @@ class FeedFragment : Fragment(), Injectable {
         )
       )
     }
+
     feedViewModel =
       ViewModelProviders
         .of(this, viewModelFactory)
         .get(FeedViewModel::class.java)
-        .apply {
-          feedObservable.observe(this@FeedFragment, Observer<List<Feed>> { feeds ->
-            binding.progressBar.visibility = View.GONE
-            feedAdapter.setFeedList(feeds)
-          })
+    feedViewModel
+      .feedObservable
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeBy(
+        onError = { e ->
+          // TODO: handle error
+          error(e)
+        },
+        onSuccess = { feeds ->
+          binding.progressBar.visibility = View.GONE
+          feedAdapter.setFeedList(feeds)
         }
+      )
+      .addTo(disposable)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    disposable.clear()
   }
 }
