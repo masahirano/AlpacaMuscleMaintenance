@@ -5,51 +5,69 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.databinding.FragmentHomeBinding
 import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
-import com.example.alpacamusclemaintenance.vo.Home
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-/**
- * A simple [Fragment] subclass.
- */
 class HomeFragment : Fragment(), Injectable {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
-
-  lateinit var homeViewModel: HomeViewModel
-
+  private lateinit var homeViewModel: HomeViewModel
   private lateinit var binding: FragmentHomeBinding
+  private val disposable = CompositeDisposable()
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
-    AnimationUtils.loadAnimation(context, android.R.anim.fade_in).let {
-      it.duration = 2_000
-      binding.wordOfWisdom.animation = it
-      binding.author.animation = it
-    }
-
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    binding = FragmentHomeBinding.inflate(
+      inflater,
+      container,
+      false
+    )
     return binding.root
   }
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
+  override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?
+  ) {
+    super.onViewCreated(view, savedInstanceState)
 
-    homeViewModel = ViewModelProviders.of(this, viewModelFactory).get(HomeViewModel::class.java).also {
-      it.homeObservable.observe(this, Observer<Home> { home ->
-        home?.let {
-          binding.home = home
-        }
-      })
-    }
+    AnimationUtils
+      .loadAnimation(context, android.R.anim.fade_in)
+      .apply { duration = 2_000 }
+      .also {
+        binding.wordOfWisdom.animation = it
+        binding.author.animation = it
+      }
+
+    homeViewModel =
+      ViewModelProviders
+        .of(this, viewModelFactory)
+        .get(HomeViewModel::class.java)
+    homeViewModel
+      .homeObservable
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeOn(Schedulers.io())
+      .subscribe { home ->
+        binding.home = home
+      }
+      .addTo(disposable)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    disposable.clear()
   }
 }
