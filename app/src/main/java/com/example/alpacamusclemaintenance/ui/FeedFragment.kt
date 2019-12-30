@@ -23,7 +23,6 @@ class FeedFragment : Fragment(), Injectable {
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private lateinit var feedViewModel: FeedViewModel
   private lateinit var binding: FragmentFeedBinding
-  private lateinit var feedAdapter: FeedAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -44,7 +43,7 @@ class FeedFragment : Fragment(), Injectable {
   ) {
     super.onViewCreated(view, savedInstanceState)
 
-    feedAdapter = FeedAdapter(
+    val feedAdapter = FeedAdapter(
       openFeed = { url: String ->
         findNavController()
           .navigate(

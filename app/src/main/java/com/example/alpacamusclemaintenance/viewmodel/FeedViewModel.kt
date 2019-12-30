@@ -6,11 +6,10 @@ import com.example.alpacamusclemaintenance.repository.FeedRepository
 import com.example.alpacamusclemaintenance.vo.Feed
 import javax.inject.Inject
 
-
 class FeedViewModel @Inject constructor(
   private val repository: FeedRepository
 ) : ViewModel() {
 
-  var feedObservable: LiveData<List<Feed>> = repository.getFeedsByTag("筋トレ")
-
+  val feedObservable: LiveData<List<Feed>>
+    get() = repository.getFeedsByTag("筋トレ")
 }
