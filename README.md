@@ -8,7 +8,7 @@ And show posts calling [Qiita API](https://qiita.com/api/v2/docs). It's a web si
 For entire design, this app tries to follow clean architecture. And for technology stack, it uses:
 - [Data Binding Library](https://developer.android.com/topic/libraries/data-binding)
 - [Navigation component](https://developer.android.com/guide/navigation)
-- [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
+- [RxJava](https://github.com/ReactiveX/RxJava) w/ [RxAndroid](https://github.com/ReactiveX/RxAndroid), [RxKotlin](https://github.com/ReactiveX/RxKotlin)
 - [Dagger 2](https://github.com/google/dagger)
 
 ## Views
