@@ -7,10 +7,9 @@ import com.example.alpacamusclemaintenance.repository.PushUpRepository
 import javax.inject.Inject
 
 class PushUpViewModel @Inject constructor(
-  private val pushUpRepository: PushUpRepository
+  private val repository: PushUpRepository
 ) : ViewModel() {
 
-  fun getPushUps(): LiveData<List<PushUp>> {
-    return pushUpRepository.getPushUps()
-  }
+  val pushUpsObservable: LiveData<List<PushUp>>
+    get() = repository.getPushUps()
 }

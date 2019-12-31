@@ -10,6 +10,6 @@ class HomeViewModel @Inject constructor(
   private val repository: HomeRepository
 ) : ViewModel() {
 
-  var homeObservable: LiveData<Home> = repository.getHome()
-
+  val homeObservable: LiveData<Home>
+    get() = repository.getHome()
 }
