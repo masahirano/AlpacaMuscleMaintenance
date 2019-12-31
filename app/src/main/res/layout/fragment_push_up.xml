@@ -6,6 +6,14 @@
     <variable
       name="count"
       type="int" />
+
+    <variable
+      name="onAddClicked"
+      type="android.view.View.OnClickListener" />
+
+    <variable
+      name="onSaveClicked"
+      type="android.view.View.OnClickListener" />
   </data>
 
   <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +44,7 @@
       android:layout_gravity="bottom|end"
       android:layout_marginTop="24dp"
       android:background="@drawable/circle"
+      android:onClick="@{onAddClicked}"
       android:text="@string/push_up_initial_text"
       android:textSize="30sp"
       app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +58,7 @@
       android:layout_marginTop="16dp"
       android:layout_marginEnd="24dp"
       android:clickable="true"
+      android:onClick="@{onSaveClicked}"
       android:tint="@android:color/white"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/button"

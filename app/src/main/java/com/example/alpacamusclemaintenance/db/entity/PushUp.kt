@@ -11,6 +11,7 @@ import java.util.*
 @Entity(tableName = "push_ups")
 @TypeConverters(Converters::class)
 data class PushUp(
+
   @PrimaryKey(autoGenerate = true)
   @NonNull
   val id: Int,

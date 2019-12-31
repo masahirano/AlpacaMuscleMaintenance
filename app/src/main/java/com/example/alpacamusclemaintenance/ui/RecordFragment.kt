@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.di.Injectable
-import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
+import com.example.alpacamusclemaintenance.viewmodel.RecordViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -21,6 +20,10 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_record.view.*
 import org.apache.commons.lang3.time.DateFormatUtils
 import java.time.LocalDateTime
@@ -32,7 +35,8 @@ class RecordFragment : Fragment(), Injectable {
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
   private lateinit var binding: FragmentRecordBinding
-  private lateinit var viewModel: PushUpViewModel
+  private lateinit var viewModel: RecordViewModel
+  private val disposable = CompositeDisposable()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -44,29 +48,38 @@ class RecordFragment : Fragment(), Injectable {
       container,
       false
     )
+    return binding.root
+  }
+
+  override fun onViewCreated(
+    view: View,
+    savedInstanceState: Bundle?
+  ) {
+    super.onViewCreated(view, savedInstanceState)
+
+    viewModel =
+      ViewModelProviders
+        .of(this, viewModelFactory)
+        .get(RecordViewModel::class.java)
 
     // Set current date
     val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
     binding.currentDate = LocalDateTime.now().format(formatter)
 
     // Set chart
-    viewModel =
-      ViewModelProviders
-        .of(this, viewModelFactory)
-        .get(PushUpViewModel::class.java)
-    subscribeUi(binding.root)
-
-    return binding.root
-  }
-
-  private fun subscribeUi(rootView: View) {
     viewModel
       .pushUpsObservable
-      .observe(this, Observer { pushUps ->
-        pushUps?.let {
-          setupChart(rootView, it)
-        }
-      })
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe { pushUps ->
+        setupChart(binding.root, pushUps)
+      }
+      .addTo(disposable)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    disposable.clear()
   }
 
   private fun setupChart(
@@ -75,7 +88,7 @@ class RecordFragment : Fragment(), Injectable {
   ) {
     val dataList: Map<String, Int> =
       pushUps
-        .reversed()
+        .sortedBy { it.doneAt }
         .groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
         .fold(0) { total, pushUp -> total + pushUp.count }
     val entries: List<BarEntry> =
@@ -104,7 +117,7 @@ class RecordFragment : Fragment(), Injectable {
     }
     chart.xAxis.apply {
       position = XAxis.XAxisPosition.BOTTOM
-      labelCount = pushUps.size
+      labelCount = dataList.size
       valueFormatter = IndexAxisValueFormatter(dataList.keys)
       setDrawGridLines(false)
     }
