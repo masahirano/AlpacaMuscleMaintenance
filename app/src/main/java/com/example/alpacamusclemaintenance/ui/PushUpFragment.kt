@@ -8,16 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.databinding.FragmentPushUpBinding
-import com.example.alpacamusclemaintenance.db.AppDatabase
-import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class PushUpFragment : Fragment(), Injectable {
