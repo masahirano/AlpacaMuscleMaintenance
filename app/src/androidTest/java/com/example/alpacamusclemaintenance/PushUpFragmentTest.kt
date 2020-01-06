@@ -16,25 +16,49 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 
+private val mockDatabase: AppDatabase = mock(AppDatabase::class.java)
+
 @RunWith(AndroidJUnit4::class)
 class PushUpFragmentTest {
 
-  private val mockDatabase: AppDatabase = mock(AppDatabase::class.java)
-
   @Test
   fun givenNoArgs_whenTappedCounterOnce_thenCountOneShouldBeDisplayed() {
-    val pushUpFragment = PushUpFragment().apply {
-      viewModelFactory = createViewModelProviderFactory { PushUpViewModel(mockDatabase) }
+    withPushUpRobot {
+      tapCounter()
+    } verifyThat {
+      countIsDisplayedAs("1")
     }
+  }
+}
 
-    launchFragmentInContainer(
-      themeResId = R.style.Theme_MaterialComponents_Light,
-      instantiate = { pushUpFragment }
-    )
+fun withPushUpRobot(action: PushUpRobot.() -> Unit): PushUpRobot {
+  launchFragmentInContainer(
+    themeResId = R.style.Theme_MaterialComponents_Light,
+    instantiate = {
+      PushUpFragment().apply {
+        viewModelFactory = createViewModelProviderFactory { PushUpViewModel(mockDatabase) }
+      }
+    }
+  )
+
+  return PushUpRobot().apply(action)
+}
+
+class PushUpRobot {
+
+  fun tapCounter() {
     onView(withText(R.string.push_up_initial_text))
       .perform(click())
+  }
 
-    val expectedCount = "1"
+  infix fun verifyThat(verification: PushUpResultRobot.() -> Unit) {
+    verification(PushUpResultRobot())
+  }
+}
+
+class PushUpResultRobot {
+
+  fun countIsDisplayedAs(expectedCount: String) {
     onView(withId(R.id.textView))
       .check(matches(withText(expectedCount)))
   }
