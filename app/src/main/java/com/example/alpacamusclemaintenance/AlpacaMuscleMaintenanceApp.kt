@@ -15,13 +15,16 @@ import dagger.android.HasAndroidInjector
 import timber.log.Timber
 import javax.inject.Inject
 
-
 class AlpacaMuscleMaintenanceApp : Application(), HasAndroidInjector {
+
   @Inject
   lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
+  override fun androidInjector() = androidInjector
+
   override fun onCreate() {
     super.onCreate()
+
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
     }
@@ -37,6 +40,4 @@ class AlpacaMuscleMaintenanceApp : Application(), HasAndroidInjector {
 
     AppInjector.init(this)
   }
-
-  override fun androidInjector() = androidInjector
 }

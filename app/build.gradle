@@ -15,7 +15,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.alpacamusclemaintenance.AlpacaMuscleMaintenanceTestRunner"
     }
     buildTypes {
         release {
@@ -26,6 +26,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     dataBinding {
         enabled = true
@@ -38,10 +41,26 @@ dependencies {
 
     // unit tests - https://developer.android.com/training/testing/unit-testing/local-unit-tests
     testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:3.2.4'
+    implementation 'junit:junit:4.12'
 
-    // AndroidX Test - https://developer.android.com/training/testing/set-up-project
+    // AndroidX core library - https://developer.android.com/training/testing/set-up-project
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation 'org.mockito:mockito-android:3.2.4'
+
+    // AndroidJUnitRunner and JUnit Rules
     androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+
+    // Assertions
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.1'
+
+    // Espresso dependencies
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Fragment testing - https://developer.android.com/training/basics/fragments/testing#configure
+    debugImplementation 'androidx.fragment:fragment-testing:1.2.0-rc04'
 
     // Support Library Packages - https://developer.android.com/topic/libraries/support-library/packages
     implementation 'androidx.appcompat:appcompat:1.1.0'
