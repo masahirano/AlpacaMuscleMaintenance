@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), Injectable {
         .of(this, viewModelFactory)
         .get(HomeViewModel::class.java)
     homeViewModel
-      .homeObservable
+      .data
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe { home ->
