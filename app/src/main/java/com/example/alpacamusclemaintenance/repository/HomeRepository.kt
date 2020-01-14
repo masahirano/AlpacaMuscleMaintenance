@@ -1,12 +1,15 @@
 package com.example.alpacamusclemaintenance.repository
 
 import com.example.alpacamusclemaintenance.vo.Home
+import io.reactivex.Maybe
 import io.reactivex.Observable
+import io.reactivex.rxkotlin.flatMapIterable
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor() {
 
-  fun getHome(): Observable<Home> =
+  fun getHome(): Maybe<Home> =
+    // TODO: They should be stored DB and queried with Room
     Observable
       .just(
         listOf(
@@ -16,5 +19,7 @@ class HomeRepository @Inject constructor() {
           Home("The difference between try and triumph is a little umph.", "Marvin Phillips")
         )
       )
-      .map { it.shuffled().first() }
+      .map { it.shuffled() }
+      .flatMapIterable()
+      .firstElement()
 }
