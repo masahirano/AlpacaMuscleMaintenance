@@ -23,7 +23,6 @@ import com.github.mikephil.charting.utils.ColorTemplate
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_record.view.*
 import org.apache.commons.lang3.time.DateFormatUtils
 import java.time.LocalDateTime
@@ -69,7 +68,6 @@ class RecordFragment : Fragment(), Injectable {
     // Set chart
     viewModel
       .pushUpsObservable
-      .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe { pushUps ->
         setupChart(binding.root, pushUps)

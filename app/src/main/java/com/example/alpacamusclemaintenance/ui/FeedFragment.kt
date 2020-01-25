@@ -17,7 +17,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class FeedFragment : Fragment(), Injectable {
@@ -73,7 +72,6 @@ class FeedFragment : Fragment(), Injectable {
         .get(FeedViewModel::class.java)
     feedViewModel
       .feedObservable
-      .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeBy(
         onError = { e ->
