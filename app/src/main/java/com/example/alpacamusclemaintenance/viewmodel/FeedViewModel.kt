@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import com.example.alpacamusclemaintenance.repository.FeedRepository
 import com.example.alpacamusclemaintenance.vo.Feed
 import io.reactivex.Single
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class FeedViewModel @Inject constructor(
@@ -12,7 +11,5 @@ class FeedViewModel @Inject constructor(
 ) : ViewModel() {
 
   val feedObservable: Single<List<Feed>>
-    get() = repository
-      .getFeedsByTag("筋トレ")
-      .subscribeOn(Schedulers.io())
+    get() = repository.getMuscleMaintenanceFeeds()
 }

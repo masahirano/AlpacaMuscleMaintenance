@@ -6,6 +6,7 @@ import android.app.Application
 import com.example.alpacamusclemaintenance.api.QiitaService
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
+import com.example.alpacamusclemaintenance.repository.FeedRepository
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -25,6 +26,16 @@ class AppModule {
   @[Provides Singleton]
   fun providePushUpDao(db: AppDatabase): PushUpDao =
     db.pushUpDao()
+
+  @[Provides Singleton]
+  fun provideFeedRepository(
+    qiitaService: QiitaService,
+    app: Application
+  ): FeedRepository =
+    FeedRepository(
+      qiitaService = qiitaService,
+      context = app.applicationContext
+    )
 
   @[Provides Singleton]
   fun provideQiitaService(): QiitaService {
