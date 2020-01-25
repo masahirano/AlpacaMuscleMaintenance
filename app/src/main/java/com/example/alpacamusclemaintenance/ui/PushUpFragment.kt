@@ -13,7 +13,6 @@ import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class PushUpFragment : Fragment(), Injectable {
@@ -49,7 +48,6 @@ class PushUpFragment : Fragment(), Injectable {
         .get(PushUpViewModel::class.java)
     viewModel
       .count
-      .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe { count ->
         binding.count = count

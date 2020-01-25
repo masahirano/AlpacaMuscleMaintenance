@@ -11,5 +11,5 @@ class FeedViewModel @Inject constructor(
 ) : ViewModel() {
 
   val feedObservable: Single<List<Feed>>
-    get() = repository.getFeedsByTag("筋トレ")
+    get() = repository.getMuscleMaintenanceFeeds()
 }

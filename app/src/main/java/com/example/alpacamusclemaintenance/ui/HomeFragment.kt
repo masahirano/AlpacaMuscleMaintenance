@@ -14,7 +14,6 @@ import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class HomeFragment : Fragment(), Injectable {
@@ -58,7 +57,6 @@ class HomeFragment : Fragment(), Injectable {
         .get(HomeViewModel::class.java)
     homeViewModel
       .data
-      .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
       .subscribe { home ->
         binding.home = home
