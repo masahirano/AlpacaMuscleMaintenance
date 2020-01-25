@@ -19,11 +19,16 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
     setContentView(R.layout.activity_main)
     setSupportActionBar(toolbar)
-    findNavController(R.id.nav_host_fragment).also {
-      bottomNavigation.setupWithNavController(it)
+  }
+
+  override fun onPostCreate(savedInstanceState: Bundle?) {
+    super.onPostCreate(savedInstanceState)
+    // findNavController() fails in onCreate when NavHostFragment is inflated with
+    // FragmentContainerView. https://issuetracker.google.com/issues/142847973
+    findNavController(R.id.nav_host_fragment).also { navController ->
+      bottomNavigation.setupWithNavController(navController)
     }
   }
 

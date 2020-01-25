@@ -6,7 +6,12 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.alpacamusclemaintenance.ui.PushUpFragment
 import com.example.alpacamusclemaintenance.ui.SquatFragment
 
-class ExercisePageAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class ExercisePageAdapter(
+  fragmentManager: FragmentManager
+) : FragmentStatePagerAdapter(
+  fragmentManager,
+  BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+) {
 
   override fun getItem(position: Int): Fragment {
     return when (position) {
