@@ -18,9 +18,7 @@ import com.example.alpacamusclemaintenance.worker.SeedDatabaseWorker
   version = 2,
   exportSchema = false
 )
-
 @TypeConverters(Converters::class)
-
 abstract class AppDatabase : RoomDatabase() {
 
   abstract fun pushUpDao(): PushUpDao
@@ -39,14 +37,16 @@ abstract class AppDatabase : RoomDatabase() {
     // Create and pre-populate the database. See this article for more details:
     // https://medium.com/google-developers/7-pro-tips-for-room-fbadea4bfbd1#4785
     private fun buildDatabase(context: Context): AppDatabase =
-      Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+      Room
+        .databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
         .addCallback(object : RoomDatabase.Callback() {
           override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            val request: OneTimeWorkRequest = OneTimeWorkRequest
-              .Builder(SeedDatabaseWorker::class.java)
-              .build()
-            WorkManager.getInstance().enqueue(request)
+            val request: OneTimeWorkRequest =
+              OneTimeWorkRequest
+                .Builder(SeedDatabaseWorker::class.java)
+                .build()
+            WorkManager.getInstance(context).enqueue(request)
           }
         })
         .fallbackToDestructiveMigration()
