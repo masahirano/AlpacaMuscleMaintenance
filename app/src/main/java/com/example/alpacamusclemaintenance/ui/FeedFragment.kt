@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.alpacamusclemaintenance.adapter.FeedAdapter
@@ -67,8 +66,7 @@ class FeedFragment : Fragment(), Injectable {
     }
 
     feedViewModel =
-      ViewModelProviders
-        .of(this, viewModelFactory)
+      ViewModelProvider(viewModelStore, viewModelFactory)
         .get(FeedViewModel::class.java)
     feedViewModel
       .feedObservable

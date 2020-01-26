@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.di.Injectable
@@ -57,8 +56,7 @@ class RecordFragment : Fragment(), Injectable {
     super.onViewCreated(view, savedInstanceState)
 
     viewModel =
-      ViewModelProviders
-        .of(this, viewModelFactory)
+      ViewModelProvider(viewModelStore, viewModelFactory)
         .get(RecordViewModel::class.java)
 
     // Set current date

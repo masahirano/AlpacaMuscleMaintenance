@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.databinding.FragmentPushUpBinding
 import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
@@ -43,8 +42,7 @@ class PushUpFragment : Fragment(), Injectable {
     super.onViewCreated(view, savedInstanceState)
 
     viewModel =
-      ViewModelProviders
-        .of(this, viewModelFactory)
+      ViewModelProvider(viewModelStore, viewModelFactory)
         .get(PushUpViewModel::class.java)
     viewModel
       .count

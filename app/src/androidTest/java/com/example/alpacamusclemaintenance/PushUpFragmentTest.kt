@@ -40,7 +40,6 @@ fun withPushUpRobot(action: PushUpRobot.() -> Unit): PushUpRobot {
       }
     }
   )
-
   return PushUpRobot().apply(action)
 }
 
@@ -64,6 +63,7 @@ class PushUpResultRobot {
   }
 }
 
+@Suppress("UNCHECKED_CAST")
 fun createViewModelProviderFactory(
   viewModelCreator: () -> ViewModel
 ): ViewModelProvider.Factory =

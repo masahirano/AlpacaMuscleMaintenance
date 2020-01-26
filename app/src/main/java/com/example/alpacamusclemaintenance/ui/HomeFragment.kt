@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.example.alpacamusclemaintenance.databinding.FragmentHomeBinding
 import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
@@ -52,8 +51,7 @@ class HomeFragment : Fragment(), Injectable {
       }
 
     homeViewModel =
-      ViewModelProviders
-        .of(this, viewModelFactory)
+      ViewModelProvider(viewModelStore, viewModelFactory)
         .get(HomeViewModel::class.java)
     homeViewModel
       .data
