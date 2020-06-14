@@ -7,9 +7,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.alpacamusclemaintenance.viewmodel.*
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import dagger.multibindings.IntoMap
 
 @Suppress("unused")
+@InstallIn(ApplicationComponent::class)
 @Module
 abstract class ViewModelModule {
 

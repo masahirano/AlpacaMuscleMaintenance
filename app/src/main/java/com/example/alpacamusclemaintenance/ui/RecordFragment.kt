@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
-import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.RecordViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
@@ -19,6 +18,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -28,7 +28,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-class RecordFragment : Fragment(), Injectable {
+@AndroidEntryPoint
+class RecordFragment : Fragment() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory

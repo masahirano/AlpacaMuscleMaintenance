@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.alpacamusclemaintenance.databinding.FragmentPushUpBinding
-import com.example.alpacamusclemaintenance.di.Injectable
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
-class PushUpFragment : Fragment(), Injectable {
+@AndroidEntryPoint
+class PushUpFragment : Fragment() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
