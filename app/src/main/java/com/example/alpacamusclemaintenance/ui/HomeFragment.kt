@@ -6,21 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.databinding.FragmentHomeBinding
 import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
-  private lateinit var homeViewModel: HomeViewModel
+  private val homeViewModel: HomeViewModel by activityViewModels()
   private lateinit var binding: FragmentHomeBinding
   private val disposable = CompositeDisposable()
 
@@ -51,9 +48,6 @@ class HomeFragment : Fragment() {
         binding.author.animation = it
       }
 
-    homeViewModel =
-      ViewModelProvider(viewModelStore, viewModelFactory)
-        .get(HomeViewModel::class.java)
     homeViewModel
       .data
       .observeOn(AndroidSchedulers.mainThread())
