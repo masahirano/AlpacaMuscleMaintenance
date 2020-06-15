@@ -3,24 +3,17 @@
 package com.example.alpacamusclemaintenance
 
 import android.app.Application
-import com.example.alpacamusclemaintenance.di.AppInjector
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.android.utils.FlipperUtils
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.soloader.SoLoader
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
-import javax.inject.Inject
 
-class AlpacaMuscleMaintenanceApp : Application(), HasAndroidInjector {
-
-  @Inject
-  lateinit var androidInjector: DispatchingAndroidInjector<Any>
-
-  override fun androidInjector() = androidInjector
+@HiltAndroidApp
+class AlpacaMuscleMaintenanceApp : Application() {
 
   override fun onCreate() {
     super.onCreate()
@@ -37,7 +30,5 @@ class AlpacaMuscleMaintenanceApp : Application(), HasAndroidInjector {
       client.addPlugin(DatabasesFlipperPlugin(this))
       client.start()
     }
-
-    AppInjector.init(this)
   }
 }

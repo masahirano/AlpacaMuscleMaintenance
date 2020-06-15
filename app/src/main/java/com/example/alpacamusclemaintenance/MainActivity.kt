@@ -5,17 +5,11 @@ import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasAndroidInjector {
-
-  @Inject
-  lateinit var androidInjector: DispatchingAndroidInjector<Any>
-
-  override fun androidInjector() = androidInjector
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

@@ -1,25 +1,24 @@
 package com.example.alpacamusclemaintenance
 
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.alpacamusclemaintenance.db.AppDatabase
+import com.example.alpacamusclemaintenance.di.AppModule
 import com.example.alpacamusclemaintenance.ui.PushUpFragment
-import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
+import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mockito.mock
 
-private val mockDatabase: AppDatabase = mock(AppDatabase::class.java)
-
-@RunWith(AndroidJUnit4::class)
+@UninstallModules(AppModule::class)
+@HiltAndroidTest
 class PushUpFragmentTest {
+
+  @get:Rule
+  val hiltRule = HiltAndroidRule(this)
 
   @Test
   fun givenNoArgs_whenTappedCounterOnce_thenCountOneShouldBeDisplayed() {
@@ -32,14 +31,7 @@ class PushUpFragmentTest {
 }
 
 fun withPushUpRobot(action: PushUpRobot.() -> Unit): PushUpRobot {
-  launchFragmentInContainer(
-    themeResId = R.style.Theme_MaterialComponents_Light,
-    instantiate = {
-      PushUpFragment().apply {
-        viewModelFactory = createViewModelProviderFactory { PushUpViewModel(mockDatabase) }
-      }
-    }
-  )
+  launchFragmentInHiltContainer<PushUpFragment>()
   return PushUpRobot().apply(action)
 }
 
@@ -62,12 +54,3 @@ class PushUpResultRobot {
       .check(matches(withText(expectedCount)))
   }
 }
-
-@Suppress("UNCHECKED_CAST")
-fun createViewModelProviderFactory(
-  viewModelCreator: () -> ViewModel
-): ViewModelProvider.Factory =
-  object : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-      viewModelCreator() as T
-  }
