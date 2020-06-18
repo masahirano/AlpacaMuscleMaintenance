@@ -1,12 +1,12 @@
 package com.example.alpacamusclemaintenance.viewmodel
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.repository.PushUpRepository
 import io.reactivex.Observable
-import javax.inject.Inject
 
-class RecordViewModel @Inject constructor(
+class RecordViewModel @ViewModelInject constructor(
   private val repository: PushUpRepository
 ) : ViewModel() {
 

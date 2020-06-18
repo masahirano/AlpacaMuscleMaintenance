@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.viewmodel.RecordViewModel
@@ -26,15 +26,12 @@ import kotlinx.android.synthetic.main.fragment_record.view.*
 import org.apache.commons.lang3.time.DateFormatUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecordFragment : Fragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
   private lateinit var binding: FragmentRecordBinding
-  private lateinit var viewModel: RecordViewModel
+  private val viewModel: RecordViewModel by activityViewModels()
   private val disposable = CompositeDisposable()
 
   override fun onCreateView(
@@ -55,10 +52,6 @@ class RecordFragment : Fragment() {
     savedInstanceState: Bundle?
   ) {
     super.onViewCreated(view, savedInstanceState)
-
-    viewModel =
-      ViewModelProvider(viewModelStore, viewModelFactory)
-        .get(RecordViewModel::class.java)
 
     // Set current date
     val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
@@ -120,4 +113,3 @@ class RecordFragment : Fragment() {
     }
   }
 }
-

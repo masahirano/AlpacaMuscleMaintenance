@@ -5,22 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.databinding.FragmentPushUpBinding
 import com.example.alpacamusclemaintenance.viewmodel.PushUpViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class PushUpFragment : Fragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
   private lateinit var binding: FragmentPushUpBinding
-  private lateinit var viewModel: PushUpViewModel
+  private val viewModel: PushUpViewModel by activityViewModels()
   private val disposable = CompositeDisposable()
 
   override fun onCreateView(
@@ -42,9 +39,6 @@ class PushUpFragment : Fragment() {
   ) {
     super.onViewCreated(view, savedInstanceState)
 
-    viewModel =
-      ViewModelProvider(viewModelStore, viewModelFactory)
-        .get(PushUpViewModel::class.java)
     viewModel
       .count
       .observeOn(AndroidSchedulers.mainThread())

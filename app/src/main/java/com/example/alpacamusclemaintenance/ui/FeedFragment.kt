@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.alpacamusclemaintenance.adapter.FeedAdapter
@@ -16,14 +16,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
 
-  @Inject
-  lateinit var viewModelFactory: ViewModelProvider.Factory
-  private lateinit var feedViewModel: FeedViewModel
+  private val feedViewModel: FeedViewModel by activityViewModels()
   private lateinit var binding: FragmentFeedBinding
   private val disposable = CompositeDisposable()
 
@@ -66,9 +63,6 @@ class FeedFragment : Fragment() {
       )
     }
 
-    feedViewModel =
-      ViewModelProvider(viewModelStore, viewModelFactory)
-        .get(FeedViewModel::class.java)
     feedViewModel
       .feedObservable
       .observeOn(AndroidSchedulers.mainThread())
