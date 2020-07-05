@@ -3,6 +3,8 @@ package com.example.alpacamusclemaintenance.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -11,9 +13,7 @@ import com.example.alpacamusclemaintenance.vo.Feed
 
 class FeedAdapter(
   private val openFeed: FeedOpenNavigation
-) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
-
-  private var feedList: List<Feed> = emptyList()
+) : PagingDataAdapter<Feed, FeedViewHolder>(REPO_COMPARATOR) {
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
@@ -32,7 +32,7 @@ class FeedAdapter(
     position: Int
   ) {
     val binding = holder.binding
-    val selectedFeed = feedList[position]
+    val selectedFeed = getItem(position) as Feed
     Glide
       .with(binding.root.context)
       .load(selectedFeed.user.profileImageUrl)
@@ -46,14 +46,17 @@ class FeedAdapter(
       }
   }
 
-  override fun getItemCount(): Int = feedList.size
+  companion object {
+    private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<Feed>() {
+      override fun areItemsTheSame(oldItem: Feed, newItem: Feed): Boolean =
+        oldItem.url == newItem.url
 
-  fun setFeedList(feedList: List<Feed>) {
-    this.feedList = feedList
-    notifyItemRangeInserted(0, feedList.size)
+      override fun areContentsTheSame(oldItem: Feed, newItem: Feed): Boolean =
+        oldItem == newItem
+    }
   }
-
-  class FeedViewHolder(val binding: ListItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
 }
+
+class FeedViewHolder(val binding: ListItemFeedBinding) : RecyclerView.ViewHolder(binding.root)
 
 typealias FeedOpenNavigation = (url: String) -> Unit

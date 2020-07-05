@@ -32,11 +32,11 @@ class AppModule {
 
   @[Provides Singleton]
   fun provideFeedRepository(
-    qiitaService: QiitaService,
+    service: QiitaService,
     app: Application
   ): FeedRepository =
     FeedRepository(
-      qiitaService = qiitaService,
+      service = service,
       context = app.applicationContext
     )
 
