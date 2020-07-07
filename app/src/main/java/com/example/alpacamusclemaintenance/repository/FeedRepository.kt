@@ -28,6 +28,7 @@ class FeedRepository @Inject constructor(
   }
 
   companion object {
-    private const val NETWORK_PAGE_SIZE = 20
+    // Set small value to check if pagination works well
+    private const val NETWORK_PAGE_SIZE = 10
   }
 }

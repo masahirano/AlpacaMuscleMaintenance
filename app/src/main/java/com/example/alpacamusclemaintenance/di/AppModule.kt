@@ -13,6 +13,9 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -45,9 +48,15 @@ class AppModule {
     val gson = GsonBuilder()
       .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
       .create()
-    val retrofit = Retrofit
-      .Builder()
+    val logger = HttpLoggingInterceptor().apply {
+      level = Level.BASIC
+    }
+    val client = OkHttpClient.Builder()
+      .addInterceptor(logger)
+      .build()
+    val retrofit = Retrofit.Builder()
       .baseUrl(QiitaService.HTTPS_API_QIITA_URL)
+      .client(client)
       .addConverterFactory(GsonConverterFactory.create(gson))
       .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
       .build()
