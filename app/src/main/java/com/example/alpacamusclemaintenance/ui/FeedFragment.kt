@@ -13,6 +13,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.alpacamusclemaintenance.adapter.FeedAdapter
+import com.example.alpacamusclemaintenance.adapter.FeedsLoadStateAdapter
 import com.example.alpacamusclemaintenance.databinding.FragmentFeedBinding
 import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
 import com.example.alpacamusclemaintenance.vo.Feed
@@ -65,7 +66,7 @@ class FeedFragment : Fragment() {
   }
 
   private fun initAdapter() {
-    binding.feed.adapter = adapter
+    binding.feed.adapter = adapter.withLoadStateFooter(FeedsLoadStateAdapter())
     adapter.addLoadStateListener { loadState ->
       // Show loading spinner during initial load or refresh.
       binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
