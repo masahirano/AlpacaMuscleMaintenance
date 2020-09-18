@@ -21,6 +21,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildFeatures {
+        dataBinding true
+    }
     compileOptions {
         // @see https://developer.android.com/studio/write/java8-support#library-desugaring
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,9 +32,6 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
-    }
-    dataBinding {
-        enabled = true
     }
 }
 
@@ -44,32 +44,35 @@ dependencies {
     implementation 'junit:junit:4.13'
 
     // AndroidX core library - https://developer.android.com/training/testing/set-up-project
-    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation 'androidx.test:core:1.3.0'
     androidTestImplementation 'org.mockito:mockito-android:3.3.3'
 
     // AndroidJUnitRunner and JUnit Rules
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
 
     // Assertions
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.ext:junit-ktx:1.1.2'
 
     // Espresso dependencies
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // Fragment testing - https://developer.android.com/training/basics/fragments/testing#configure
-    debugImplementation 'androidx.fragment:fragment-testing:1.2.5'
+    // for exclusion option have a look at https://github.com/android/android-test/issues/294#issuecomment-506994394
+    debugImplementation ('androidx.fragment:fragment-testing:1.2.5') {
+        exclude group: 'androidx.test', module : 'core'
+    }
 
     // Support Library Packages - https://developer.android.com/topic/libraries/support-library/packages
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta7'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // Material Components - https://material.io/develop/android/docs/getting-started/
-    implementation 'com.google.android.material:material:1.3.0-alpha01'
+    implementation 'com.google.android.material:material:1.3.0-alpha02'
 
     // Lifecycle - https://developer.android.com/jetpack/androidx/releases/lifecycle
     def lifecycle_version = "2.2.0"
@@ -92,7 +95,7 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
 
     // WorkManager - https://developer.android.com/jetpack/androidx/releases/work
-    implementation "androidx.work:work-runtime-ktx:2.3.4"
+    implementation "androidx.work:work-runtime-ktx:2.4.0"
 
     // ReactiveX
     //   Java - https://github.com/ReactiveX/RxJava
@@ -106,7 +109,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     // Retrofit - https://github.com/square/retrofit
-    def retrofit_version = '2.8.1'
+    def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
@@ -123,15 +126,15 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.7.1'
 
     // Android KTX - https://github.com/android/android-ktx
-    implementation 'androidx.core:core-ktx:1.3.0'
+    implementation 'androidx.core:core-ktx:1.3.1'
 
     // kotlinx.coroutines - https://github.com/Kotlin/kotlinx.coroutines
-    def coroutines_version = '1.3.6'
+    def coroutines_version = '1.3.7'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     // Dagger 2 - https://github.com/google/dagger
-    def dagger_version = '2.27'
+    def dagger_version = '2.28.3'
     implementation "com.google.dagger:dagger:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     implementation "com.google.dagger:dagger-android:$dagger_version"
@@ -147,13 +150,13 @@ dependencies {
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Hilt ViewModel extension
-    def hilt_jetpack_version = "1.0.0-alpha01"
+    def hilt_jetpack_version = "1.0.0-alpha02"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
     kaptAndroidTest "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
 
     // Paging 3 - https://developer.android.com/topic/libraries/architecture/paging/v3-overview
-    def paging_version = "3.0.0-alpha02"
+    def paging_version = "3.0.0-alpha06"
     implementation "androidx.paging:paging-runtime:$paging_version"
     // alternatively - without Android dependencies for tests
     testImplementation "androidx.paging:paging-common:$paging_version"
@@ -163,7 +166,8 @@ dependencies {
     // Timber - https://github.com/JakeWharton/timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    // Flipper - https://fbflipper.com/docs/getting-started.html
-    debugImplementation 'com.facebook.flipper:flipper:0.42.0'
+    // Flipper - https://fbflipper.com/docs/getting-started/android-native
+    debugImplementation 'com.facebook.flipper:flipper:0.56.0'
     debugImplementation 'com.facebook.soloader:soloader:0.9.0'
+    releaseImplementation 'com.facebook.flipper:flipper-noop:0.56.0'
 }
