@@ -6,6 +6,9 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
+    // This idea comes from https://qiita.com/taki4227/items/c5685ec722a195764237
+    apply from: './signingConfigs/release.gradle', to: android
+
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.example.alpacamusclemaintenance"
@@ -19,6 +22,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     buildFeatures {
