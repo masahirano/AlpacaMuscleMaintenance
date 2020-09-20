@@ -14,12 +14,7 @@ object FlipperInitializer {
     val okHttpClient: OkHttpClient
   }
 
-  // We don't need these parameters for release build, but do need for debug build.
-  @Suppress("UNUSED_PARAMETER")
-  fun initFlipperPlugins(
-    context: Context,
-    client: FlipperClient
-  ): IntializationResult {
+  fun initFlipperPlugins(context: Context): IntializationResult {
     return object : IntializationResult {
       override val okHttpClient: OkHttpClient
         get() = OkHttpClient.Builder().build()

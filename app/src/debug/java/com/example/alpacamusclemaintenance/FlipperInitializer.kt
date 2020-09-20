@@ -5,8 +5,8 @@
 package com.example.alpacamusclemaintenance
 
 import android.content.Context
+import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.android.utils.FlipperUtils
-import com.facebook.flipper.core.FlipperClient
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin
 import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
@@ -22,10 +22,7 @@ object FlipperInitializer {
     val okHttpClient: OkHttpClient
   }
 
-  fun initFlipperPlugins(
-    context: Context,
-    client: FlipperClient
-  ): IntializationResult {
+  fun initFlipperPlugins(context: Context): IntializationResult {
     // https://fbflipper.com/docs/getting-started/android-native#application-setup
     SoLoader.init(context, false)
 
@@ -34,6 +31,7 @@ object FlipperInitializer {
       val networkFlipperPlugin = NetworkFlipperPlugin()
       okHttpClientBuilder.addInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
 
+      val client = AndroidFlipperClient.getInstance(context)
       client.addPlugin(InspectorFlipperPlugin(context, DescriptorMapping.withDefaults()))
       client.addPlugin(DatabasesFlipperPlugin(context))
       client.addPlugin(networkFlipperPlugin)

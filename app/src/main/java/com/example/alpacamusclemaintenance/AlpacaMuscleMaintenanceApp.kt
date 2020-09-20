@@ -3,7 +3,6 @@
 package com.example.alpacamusclemaintenance
 
 import android.app.Application
-import com.facebook.flipper.android.AndroidFlipperClient
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -21,9 +20,6 @@ class AlpacaMuscleMaintenanceApp : Application() {
     // At this moment I simply ignore result value since I don't have NetWorkClient like
     // https://github.com/facebook/flipper/blob/6c377ade5cde3c4d2fa398f0a26328363ea8a03f/android/sample/src/main/java/com/facebook/flipper/sample/network/NetworkClient.java
     // but will add later if I need one.
-    FlipperInitializer.initFlipperPlugins(
-      context = this,
-      client = AndroidFlipperClient.getInstance(this)
-    )
+    FlipperInitializer.initFlipperPlugins(context = this)
   }
 }
