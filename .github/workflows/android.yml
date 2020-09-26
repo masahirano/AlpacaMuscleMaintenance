@@ -1,9 +1,10 @@
-name: Testing Workflow
+name: Android CI
 
 on:
+  push:
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   lint:
@@ -15,7 +16,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Run Android Linter
+      - name: Run Android linter
         run: ./gradlew lint
 
   unit_tests:
@@ -27,15 +28,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Run Android Linter
+      - name: Run unit tests
         run: ./gradlew test
 
   instrumented_unit_tests:
     runs-on: macos-latest
     steps:
-      - name: checkout
+      - name: check out
         uses: actions/checkout@v2
-      - name: run tests
+      - name: Run instrumented unit tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
