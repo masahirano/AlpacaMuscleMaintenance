@@ -1,6 +1,3 @@
-# References
-#  - https://www.coletiv.com/blog/android-github-actions-setup/
-
 name: Testing Workflow
 
 on:
@@ -9,27 +6,36 @@ on:
       - master
 
 jobs:
-  testing:
-    name: Lint Check and Testing
-
+  lint:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out
         uses: actions/checkout@v2
-
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-
       - name: Run Android Linter
         run: ./gradlew lint
 
-      - name: Run Unit Tests
+  unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Run Android Linter
         run: ./gradlew test
 
-      - name: Run Instrumented Unit Tests
+  instrumented_unit_tests:
+    runs-on: macos-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
