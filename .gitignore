@@ -1,7 +1,6 @@
 # Built application files
 *.apk
 *.ap_
-*.aab
 
 # Files for the ART/Dalvik VM
 *.dex
@@ -62,5 +61,3 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 
-# Secret config
-app/signingConfigs/release.gradle
