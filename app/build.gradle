@@ -6,6 +6,19 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
+    signingConfigs {
+        release {
+            // Store release config at `~/.gradle/gradle.properties`
+            // @see https://reactnative.dev/docs/signed-apk-android#setting-up-gradle-variables
+            // APM means Alpaca Muscle Maintenance
+            if (project.hasProperty('APM_UPLOAD_STORE_FILE')) {
+                storeFile file(APM_UPLOAD_STORE_FILE)
+                storePassword APM_UPLOAD_STORE_PASSWORD
+                keyAlias APM_UPLOAD_KEY_ALIAS
+                keyPassword APM_UPLOAD_KEY_PASSWORD
+            }
+        }
+    }
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.example.alpacamusclemaintenance"
@@ -19,6 +32,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     buildFeatures {
