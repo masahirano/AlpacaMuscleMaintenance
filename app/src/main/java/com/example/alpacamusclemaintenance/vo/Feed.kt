@@ -1,6 +1,6 @@
 package com.example.alpacamusclemaintenance.vo
 
-import java.util.*
+import java.util.Date
 
 data class Feed(
   val user: User,

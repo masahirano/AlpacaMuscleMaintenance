@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.example.alpacamusclemaintenance.db.Converters
-import java.util.*
+import java.util.Date
 
 @Entity(tableName = "push_ups")
 @TypeConverters(Converters::class)

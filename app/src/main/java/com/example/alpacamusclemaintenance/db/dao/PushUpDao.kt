@@ -17,7 +17,12 @@ interface PushUpDao {
   fun insertAll(pushUps: List<PushUp>)
 
   @Query(
-    "SELECT * FROM push_ups WHERE done_at >= DATE('now', 'start of day', '-10 days') ORDER BY done_at DESC"
+    """
+    SELECT *
+    FROM push_ups
+    WHERE done_at >= DATE('now', 'start of day', '-10 days')
+    ORDER BY done_at DESC
+    """
   )
   fun getPushUps(): Observable<List<PushUp>>
 
