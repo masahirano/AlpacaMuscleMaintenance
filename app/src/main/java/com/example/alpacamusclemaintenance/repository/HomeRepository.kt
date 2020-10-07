@@ -13,7 +13,10 @@ class HomeRepository @Inject constructor() {
     Observable
       .just(
         listOf(
-          Home("Strength does not come from the physical capacity. It comes from an indomitable will.", "Ghandi"),
+          Home(
+            "Strength does not come from the physical capacity. It comes from an indomitable will.",
+            "Ghandi"
+          ),
           Home("The best way to predict the future is to create it.", "Abraham Lincoln"),
           Home("Work hard in silence. Let success be your noise.", "Frank Ocean"),
           Home("The difference between try and triumph is a little umph.", "Marvin Phillips")

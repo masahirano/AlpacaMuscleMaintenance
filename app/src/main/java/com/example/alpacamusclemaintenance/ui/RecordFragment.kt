@@ -22,10 +22,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.fragment_record.view.*
-import org.apache.commons.lang3.time.DateFormatUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlinx.android.synthetic.main.fragment_record.view.*
+import org.apache.commons.lang3.time.DateFormatUtils
 
 @AndroidEntryPoint
 class RecordFragment : Fragment() {
