@@ -1,0 +1,4 @@
+# default settings is here: https://github.com/pinterest/ktlint/blob/master/.editorconfig
+
+[*.{kt,kts}]
+indent_size = 2
