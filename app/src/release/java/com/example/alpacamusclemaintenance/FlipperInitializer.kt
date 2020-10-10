@@ -5,7 +5,6 @@
 package com.example.alpacamusclemaintenance
 
 import android.content.Context
-import com.facebook.flipper.core.FlipperClient
 import okhttp3.OkHttpClient
 
 object FlipperInitializer {

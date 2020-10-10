@@ -11,7 +11,10 @@ import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 
-class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class SeedDatabaseWorker(context: Context, workerParams: WorkerParameters) : Worker(
+  context,
+  workerParams
+) {
   private val TAG = SeedDatabaseWorker::class.java.simpleName
 
   override fun doWork(): Result {

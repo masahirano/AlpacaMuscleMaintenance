@@ -1,3 +1,6 @@
+plugins {
+    id 'org.jlleitschuh.gradle.ktlint' version '9.4.0'
+}
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
@@ -185,4 +188,8 @@ dependencies {
     debugImplementation 'com.facebook.soloader:soloader:0.9.0'
     debugImplementation 'com.facebook.flipper:flipper-network-plugin:0.57.0'
     releaseImplementation 'com.facebook.flipper:flipper-noop:0.56.0'
+}
+
+ktlint {
+    android = true
 }

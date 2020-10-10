@@ -7,8 +7,8 @@ import androidx.paging.PagingData
 import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.api.QiitaService
 import com.example.alpacamusclemaintenance.vo.Feed
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class FeedRepository @Inject constructor(
   private val service: QiitaService,
