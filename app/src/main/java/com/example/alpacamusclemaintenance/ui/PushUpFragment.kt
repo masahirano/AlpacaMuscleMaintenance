@@ -13,37 +13,37 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PushUpFragment : Fragment() {
 
-  private lateinit var binding: FragmentPushUpBinding
-  private val viewModel: PushUpViewModel by activityViewModels()
+    private lateinit var binding: FragmentPushUpBinding
+    private val viewModel: PushUpViewModel by activityViewModels()
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentPushUpBinding.inflate(
-      inflater,
-      container,
-      false
-    )
-    return binding.root
-  }
-
-  override fun onViewCreated(
-    view: View,
-    savedInstanceState: Bundle?
-  ) {
-    super.onViewCreated(view, savedInstanceState)
-
-    viewModel.count.observe(viewLifecycleOwner) { value ->
-      binding.count = value
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentPushUpBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        return binding.root
     }
 
-    binding.onAddClicked = View.OnClickListener {
-      viewModel.add(1)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.count.observe(viewLifecycleOwner) { value ->
+            binding.count = value
+        }
+
+        binding.onAddClicked = View.OnClickListener {
+            viewModel.add(1)
+        }
+        binding.onSaveClicked = View.OnClickListener {
+            viewModel.save()
+        }
     }
-    binding.onSaveClicked = View.OnClickListener {
-      viewModel.save()
-    }
-  }
 }

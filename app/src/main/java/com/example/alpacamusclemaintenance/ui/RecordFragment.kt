@@ -19,77 +19,77 @@ import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_record.view.*
-import org.apache.commons.lang3.time.DateFormatUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import kotlinx.android.synthetic.main.fragment_record.view.*
+import org.apache.commons.lang3.time.DateFormatUtils
 
 @AndroidEntryPoint
 class RecordFragment : Fragment() {
 
-  private lateinit var binding: FragmentRecordBinding
-  private val viewModel: RecordViewModel by activityViewModels()
+    private lateinit var binding: FragmentRecordBinding
+    private val viewModel: RecordViewModel by activityViewModels()
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View {
-    binding = FragmentRecordBinding.inflate(
-      inflater,
-      container,
-      false
-    )
-    return binding.root
-  }
-
-  override fun onViewCreated(
-    view: View,
-    savedInstanceState: Bundle?
-  ) {
-    super.onViewCreated(view, savedInstanceState)
-
-    // Set current date
-    val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
-    binding.currentDate = LocalDateTime.now().format(formatter)
-
-    // Set chart
-    viewModel.pushUpsObservable.observe(viewLifecycleOwner) { pushUps ->
-      setupChart(binding.root, pushUps)
-    }
-  }
-
-  private fun setupChart(
-    rootView: View,
-    pushUps: List<PushUp>
-  ) {
-    val dataList: Map<String, Int> = pushUps
-      .sortedBy { it.doneAt }
-      .groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
-      .fold(0) { total, pushUp -> total + pushUp.count }
-    val entries: List<BarEntry> = dataList.values.mapIndexed { index, totalCount ->
-      BarEntry(index.toFloat(), totalCount.toFloat())
-    }
-    val dataSet: BarDataSet = BarDataSet(entries, "push_ups").apply {
-      valueFormatter = IValueFormatter { value, _, _, _ -> value.toInt().toString() }
-      colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
-    }
-    val chart: BarChart = rootView.chart.apply {
-      data = BarData(dataSet)
-      legend.isEnabled = false
-      setScaleEnabled(false)
-      animateY(1200, Easing.EasingOption.Linear)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentRecordBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        return binding.root
     }
 
-    chart.axisRight.apply {
-      setDrawGridLines(false)
-      setDrawLabels(false)
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Set current date
+        val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
+        binding.currentDate = LocalDateTime.now().format(formatter)
+
+        // Set chart
+        viewModel.pushUpsObservable.observe(viewLifecycleOwner) { pushUps ->
+            setupChart(binding.root, pushUps)
+        }
     }
-    chart.xAxis.apply {
-      position = XAxis.XAxisPosition.BOTTOM
-      labelCount = dataList.size
-      valueFormatter = IndexAxisValueFormatter(dataList.keys)
-      setDrawGridLines(false)
+
+    private fun setupChart(
+        rootView: View,
+        pushUps: List<PushUp>
+    ) {
+        val dataList: Map<String, Int> = pushUps
+            .sortedBy { it.doneAt }
+            .groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
+            .fold(0) { total, pushUp -> total + pushUp.count }
+        val entries: List<BarEntry> = dataList.values.mapIndexed { index, totalCount ->
+            BarEntry(index.toFloat(), totalCount.toFloat())
+        }
+        val dataSet: BarDataSet = BarDataSet(entries, "push_ups").apply {
+            valueFormatter = IValueFormatter { value, _, _, _ -> value.toInt().toString() }
+            colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
+        }
+        val chart: BarChart = rootView.chart.apply {
+            data = BarData(dataSet)
+            legend.isEnabled = false
+            setScaleEnabled(false)
+            animateY(1200, Easing.EasingOption.Linear)
+        }
+
+        chart.axisRight.apply {
+            setDrawGridLines(false)
+            setDrawLabels(false)
+        }
+        chart.xAxis.apply {
+            position = XAxis.XAxisPosition.BOTTOM
+            labelCount = dataList.size
+            valueFormatter = IndexAxisValueFormatter(dataList.keys)
+            setDrawGridLines(false)
+        }
     }
-  }
 }

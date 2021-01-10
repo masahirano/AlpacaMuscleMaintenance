@@ -11,24 +11,25 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 class FeedRepository @Inject constructor(
-  private val service: QiitaService,
-  private val context: Context
+    private val service: QiitaService,
+    private val context: Context
 ) {
 
-  fun getFeedResultStream(): Flow<PagingData<Feed>> {
-    return Pager(
-      config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
-      pagingSourceFactory = {
-        FeedPagingSource(
-          service = service,
-          query = "tag:${context.getString(R.string.qiita_tag_muscle_maintenance)}"
-        )
-      }
+    fun getFeedResultStream(): Flow<PagingData<Feed>> = Pager(
+        config = PagingConfig(
+            pageSize = NETWORK_PAGE_SIZE,
+            enablePlaceholders = false
+        ),
+        pagingSourceFactory = {
+            FeedPagingSource(
+                service = service,
+                query = "tag:${context.getString(R.string.qiita_tag_muscle_maintenance)}"
+            )
+        }
     ).flow
-  }
 
-  companion object {
-    // Set small value to check if pagination works well
-    private const val NETWORK_PAGE_SIZE = 10
-  }
+    companion object {
+        // Set small value to check if pagination works well
+        private const val NETWORK_PAGE_SIZE = 10
+    }
 }

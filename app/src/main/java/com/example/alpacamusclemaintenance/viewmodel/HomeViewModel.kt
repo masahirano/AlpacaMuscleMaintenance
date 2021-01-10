@@ -7,9 +7,9 @@ import com.example.alpacamusclemaintenance.repository.HomeRepository
 import com.example.alpacamusclemaintenance.vo.Home
 
 class HomeViewModel @ViewModelInject constructor(
-  private val repository: HomeRepository
+    private val repository: HomeRepository
 ) : ViewModel() {
 
-  val data: LiveData<Home>
-    get() = repository.getHome()
+    val data: LiveData<Home>
+        get() = repository.getHome()
 }

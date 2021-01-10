@@ -12,22 +12,22 @@ import com.example.alpacamusclemaintenance.databinding.FragmentExerciseBinding
 
 class ExerciseFragment : Fragment() {
 
-  private lateinit var binding: FragmentExerciseBinding
+    private lateinit var binding: FragmentExerciseBinding
 
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exercise, container, false)
-    binding.tab.setupWithViewPager(binding.pager)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exercise, container, false)
+        binding.tab.setupWithViewPager(binding.pager)
 
-    return binding.root
-  }
+        return binding.root
+    }
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    binding.pager.adapter = ExercisePageAdapter(childFragmentManager)
-    binding.pager.setCurrentItem(0, false)
-  }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        binding.pager.adapter = ExercisePageAdapter(childFragmentManager)
+        binding.pager.setCurrentItem(0, false)
+    }
 }

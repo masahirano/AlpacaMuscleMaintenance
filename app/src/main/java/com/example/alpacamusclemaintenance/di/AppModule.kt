@@ -24,41 +24,41 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class AppModule {
 
-  @[Provides Singleton]
-  fun provideAppDatabase(app: Application): AppDatabase =
-    AppDatabase.getInstance(app.applicationContext)
+    @[Provides Singleton]
+    fun provideAppDatabase(app: Application): AppDatabase =
+        AppDatabase.getInstance(app.applicationContext)
 
-  @[Provides Singleton]
-  fun providePushUpDao(db: AppDatabase): PushUpDao =
-    db.pushUpDao()
+    @[Provides Singleton]
+    fun providePushUpDao(db: AppDatabase): PushUpDao =
+        db.pushUpDao()
 
-  @[Provides Singleton]
-  fun provideFeedRepository(
-    service: QiitaService,
-    app: Application
-  ): FeedRepository =
-    FeedRepository(
-      service = service,
-      context = app.applicationContext
-    )
+    @[Provides Singleton]
+    fun provideFeedRepository(
+        service: QiitaService,
+        app: Application
+    ): FeedRepository =
+        FeedRepository(
+            service = service,
+            context = app.applicationContext
+        )
 
-  @[Provides Singleton]
-  fun provideQiitaService(): QiitaService {
-    val gson = GsonBuilder()
-      .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-      .create()
-    val logger = HttpLoggingInterceptor().apply {
-      level = Level.BASIC
+    @[Provides Singleton]
+    fun provideQiitaService(): QiitaService {
+        val gson = GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create()
+        val logger = HttpLoggingInterceptor().apply {
+            level = Level.BASIC
+        }
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logger)
+            .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(QiitaService.HTTPS_API_QIITA_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+
+        return retrofit.create(QiitaService::class.java)
     }
-    val client = OkHttpClient.Builder()
-      .addInterceptor(logger)
-      .build()
-    val retrofit = Retrofit.Builder()
-      .baseUrl(QiitaService.HTTPS_API_QIITA_URL)
-      .client(client)
-      .addConverterFactory(GsonConverterFactory.create(gson))
-      .build()
-
-    return retrofit.create(QiitaService::class.java)
-  }
 }

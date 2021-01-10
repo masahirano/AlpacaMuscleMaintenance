@@ -25,60 +25,60 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
 
-  private val viewModel: FeedViewModel by activityViewModels()
-  private lateinit var binding: FragmentFeedBinding
-  private val adapter = FeedAdapter(
-    openFeed = { url: String ->
-      findNavController()
-        .navigate(
-          FeedFragmentDirections.actionFeedFragmentToWebViewFragment(url = url)
-        )
-    }
-  )
-
-  private var fetchJob: Job? = null
-
-  override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
-    binding = FragmentFeedBinding.inflate(
-      inflater,
-      container,
-      false
+    private val viewModel: FeedViewModel by activityViewModels()
+    private lateinit var binding: FragmentFeedBinding
+    private val adapter = FeedAdapter(
+        openFeed = { url: String ->
+            findNavController()
+                .navigate(
+                    FeedFragmentDirections.actionFeedFragmentToWebViewFragment(url = url)
+                )
+        }
     )
-    return binding.root
-  }
 
-  override fun onViewCreated(
-    view: View,
-    savedInstanceState: Bundle?
-  ) {
-    super.onViewCreated(view, savedInstanceState)
+    private var fetchJob: Job? = null
 
-    // add dividers between RecyclerView's row items
-    val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
-    binding.feed.addItemDecoration(decoration)
-
-    initAdapter()
-    fetch()
-  }
-
-  private fun initAdapter() {
-    binding.feed.adapter = adapter.withLoadStateFooter(FeedsLoadStateAdapter())
-    adapter.addLoadStateListener { loadState ->
-      // Show loading spinner during initial load or refresh.
-      binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentFeedBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        return binding.root
     }
-  }
 
-  private fun fetch() {
-    fetchJob?.cancel()
-    fetchJob = lifecycleScope.launch {
-      viewModel.fetchFeed().collectLatest { data: PagingData<Feed> ->
-        adapter.submitData(data)
-      }
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // add dividers between RecyclerView's row items
+        val decoration = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+        binding.feed.addItemDecoration(decoration)
+
+        initAdapter()
+        fetch()
     }
-  }
+
+    private fun initAdapter() {
+        binding.feed.adapter = adapter.withLoadStateFooter(FeedsLoadStateAdapter())
+        adapter.addLoadStateListener { loadState ->
+            // Show loading spinner during initial load or refresh.
+            binding.progressBar.isVisible = loadState.refresh is LoadState.Loading
+        }
+    }
+
+    private fun fetch() {
+        fetchJob?.cancel()
+        fetchJob = lifecycleScope.launch {
+            viewModel.fetchFeed().collectLatest { data: PagingData<Feed> ->
+                adapter.submitData(data)
+            }
+        }
+    }
 }

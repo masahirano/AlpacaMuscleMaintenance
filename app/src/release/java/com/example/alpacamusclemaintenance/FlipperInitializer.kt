@@ -9,14 +9,14 @@ import okhttp3.OkHttpClient
 
 object FlipperInitializer {
 
-  interface IntializationResult {
-    val okHttpClient: OkHttpClient
-  }
-
-  fun initFlipperPlugins(context: Context): IntializationResult {
-    return object : IntializationResult {
-      override val okHttpClient: OkHttpClient
-        get() = OkHttpClient.Builder().build()
+    interface IntializationResult {
+        val okHttpClient: OkHttpClient
     }
-  }
+
+    fun initFlipperPlugins(context: Context): IntializationResult {
+        return object : IntializationResult {
+            override val okHttpClient: OkHttpClient
+                get() = OkHttpClient.Builder().build()
+        }
+    }
 }
