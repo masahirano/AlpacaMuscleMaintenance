@@ -109,18 +109,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
 
     // WorkManager - https://developer.android.com/jetpack/androidx/releases/work
     implementation "androidx.work:work-runtime-ktx:2.4.0"
-
-    // ReactiveX
-    //   Java - https://github.com/ReactiveX/RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
-    //   Android - https://github.com/ReactiveX/RxAndroid
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    //   Kotlin - https://github.com/ReactiveX/RxKotlin
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.4.0'
 
     // MPAndroidChart - https://github.com/PhilJay/MPAndroidChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
@@ -129,7 +120,6 @@ dependencies {
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.okhttp3:logging-interceptor:4.0.0"
 
     // Gson - https://github.com/google/gson
@@ -177,8 +167,6 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$paging_version"
     // alternatively - without Android dependencies for tests
     testImplementation "androidx.paging:paging-common:$paging_version"
-    // optional - RxJava2 support
-    implementation "androidx.paging:paging-rxjava2:$paging_version"
 
     // Timber - https://github.com/JakeWharton/timber
     implementation 'com.jakewharton.timber:timber:4.7.1'

@@ -10,22 +10,18 @@ import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.databinding.FragmentHomeBinding
 import com.example.alpacamusclemaintenance.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
   private val homeViewModel: HomeViewModel by activityViewModels()
   private lateinit var binding: FragmentHomeBinding
-  private val disposable = CompositeDisposable()
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
+  ): View {
     binding = FragmentHomeBinding.inflate(
       inflater,
       container,
@@ -48,17 +44,8 @@ class HomeFragment : Fragment() {
         binding.author.animation = it
       }
 
-    homeViewModel
-      .data
-      .observeOn(AndroidSchedulers.mainThread())
-      .subscribe { home ->
-        binding.home = home
-      }
-      .addTo(disposable)
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    disposable.clear()
+    homeViewModel.data.observe(viewLifecycleOwner) { home ->
+      binding.home = home
+    }
   }
 }

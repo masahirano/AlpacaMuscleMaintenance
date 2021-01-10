@@ -1,23 +1,23 @@
 package com.example.alpacamusclemaintenance.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.entity.PushUp
-import io.reactivex.subjects.BehaviorSubject
 import kotlinx.coroutines.launch
 
 class PushUpViewModel @ViewModelInject constructor(
   private val database: AppDatabase
 ) : ViewModel() {
 
-  val count: BehaviorSubject<Int> = BehaviorSubject.createDefault(DEFAULT_VALUE)
+  val count: MutableLiveData<Int> = MutableLiveData(DEFAULT_VALUE)
 
   fun add(addValue: Int) {
-    count
-      .value
-      ?.also { count.onNext(it + addValue) }
+    (count.value ?: 0).also { currentValue ->
+      count.value = currentValue + addValue
+    }
   }
 
   fun save() {
@@ -31,7 +31,7 @@ class PushUpViewModel @ViewModelInject constructor(
             count = value
           )
         )
-      count.onNext(DEFAULT_VALUE)
+      count.value = DEFAULT_VALUE
     }
   }
 

@@ -18,7 +18,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 @InstallIn(ApplicationComponent::class)
@@ -58,7 +57,6 @@ class AppModule {
       .baseUrl(QiitaService.HTTPS_API_QIITA_URL)
       .client(client)
       .addConverterFactory(GsonConverterFactory.create(gson))
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
       .build()
 
     return retrofit.create(QiitaService::class.java)
