@@ -3,9 +3,9 @@
 ## Overview
 
 An Android app using Kotlin which enables you to record the numbers of push-up (will also support squat someday).
-And show posts calling [Qiita API](https://qiita.com/api/v2/docs). It's a web site basically people post technical articles, but there is `筋トレ` (muscle maintenance) tag for some reasons.
+This shows posts calling [Qiita API](https://qiita.com/api/v2/docs). It's a website basically people post technical articles, but there is `筋トレ` (muscle maintenance) tag for some reasons.
 
-For entire design, this app tries to follow clean architecture. And for technology stack, it uses:
+For entire design, this app tries to follow clean architecture, and for technology stack it uses:
 - [Data Binding Library](https://developer.android.com/topic/libraries/data-binding)
 - [Navigation component](https://developer.android.com/guide/navigation)
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
@@ -22,7 +22,7 @@ It shows wisdom words to encourage you to do exercise. It shows several words ra
 
 ### Exercise
 
-You can record the number of push-ups. The idea is that... you push the gray big button with your chin 😂 When you push `+` button at bottom right, it saves record data using [Room Persistence Library](https://developer.android.com/topic/libraries/architecture/room). And squat tab will come someday (how can I record it?)
+You can record the number of push-ups. The idea is that... you push the gray big button with your chin 😂 When you push `+` button at bottom right, it saves record data using [Room Persistence Library](https://developer.android.com/topic/libraries/architecture/room). Squat tab will come someday (how can I record it?)
 
 <img height="320px" src="./images/exercise.png" />
 
