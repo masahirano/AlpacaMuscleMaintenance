@@ -14,15 +14,15 @@ import org.mockito.Mockito.mock
 @Module
 class TestAppModule {
 
-  @Provides
-  fun provideAppDatabase(): AppDatabase = mock(AppDatabase::class.java)
+    @Provides
+    fun provideAppDatabase(): AppDatabase = mock(AppDatabase::class.java)
 
-  @Provides
-  fun providePushUpDao(): PushUpDao = mock(PushUpDao::class.java)
+    @Provides
+    fun providePushUpDao(): PushUpDao = mock(PushUpDao::class.java)
 
-  @Provides
-  fun provideFeedRepository(): FeedRepository = mock(FeedRepository::class.java)
+    @Provides
+    fun provideFeedRepository(): FeedRepository = mock(FeedRepository::class.java)
 
-  @Provides
-  fun provideQiitaService(): QiitaService = mock(QiitaService::class.java)
+    @Provides
+    fun provideQiitaService(): QiitaService = mock(QiitaService::class.java)
 }

@@ -18,29 +18,29 @@ import okhttp3.OkHttpClient
 
 object FlipperInitializer {
 
-  interface IntializationResult {
-    val okHttpClient: OkHttpClient
-  }
-
-  fun initFlipperPlugins(context: Context): IntializationResult {
-    // https://fbflipper.com/docs/getting-started/android-native#application-setup
-    SoLoader.init(context, false)
-
-    val okHttpClientBuilder = OkHttpClient.Builder()
-    if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(context)) {
-      val networkFlipperPlugin = NetworkFlipperPlugin()
-      okHttpClientBuilder.addInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
-
-      val client = AndroidFlipperClient.getInstance(context)
-      client.addPlugin(InspectorFlipperPlugin(context, DescriptorMapping.withDefaults()))
-      client.addPlugin(DatabasesFlipperPlugin(context))
-      client.addPlugin(networkFlipperPlugin)
-      client.start()
+    interface IntializationResult {
+        val okHttpClient: OkHttpClient
     }
 
-    return object : IntializationResult {
-      override val okHttpClient: OkHttpClient
-        get() = okHttpClientBuilder.build()
+    fun initFlipperPlugins(context: Context): IntializationResult {
+        // https://fbflipper.com/docs/getting-started/android-native#application-setup
+        SoLoader.init(context, false)
+
+        val okHttpClientBuilder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG && FlipperUtils.shouldEnableFlipper(context)) {
+            val networkFlipperPlugin = NetworkFlipperPlugin()
+            okHttpClientBuilder.addInterceptor(FlipperOkhttpInterceptor(networkFlipperPlugin))
+
+            val client = AndroidFlipperClient.getInstance(context)
+            client.addPlugin(InspectorFlipperPlugin(context, DescriptorMapping.withDefaults()))
+            client.addPlugin(DatabasesFlipperPlugin(context))
+            client.addPlugin(networkFlipperPlugin)
+            client.start()
+        }
+
+        return object : IntializationResult {
+            override val okHttpClient: OkHttpClient
+                get() = okHttpClientBuilder.build()
+        }
     }
-  }
 }

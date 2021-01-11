@@ -1,42 +1,42 @@
 package com.example.alpacamusclemaintenance.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.entity.PushUp
-import io.reactivex.subjects.BehaviorSubject
 import kotlinx.coroutines.launch
 
 class PushUpViewModel @ViewModelInject constructor(
-  private val database: AppDatabase
+    private val database: AppDatabase
 ) : ViewModel() {
 
-  val count: BehaviorSubject<Int> = BehaviorSubject.createDefault(DEFAULT_VALUE)
+    val count: MutableLiveData<Int> = MutableLiveData(DEFAULT_VALUE)
 
-  fun add(addValue: Int) {
-    count
-      .value
-      ?.also { count.onNext(it + addValue) }
-  }
-
-  fun save() {
-    val value = count.value ?: return
-    viewModelScope.launch {
-      database
-        .pushUpDao()
-        .insert(
-          PushUp(
-            id = 0,
-            count = value
-          )
-        )
-      count.onNext(DEFAULT_VALUE)
+    fun add(addValue: Int) {
+        (count.value ?: 0).also { currentValue ->
+            count.value = currentValue + addValue
+        }
     }
-  }
 
-  companion object {
+    fun save() {
+        val value = count.value ?: return
+        viewModelScope.launch {
+            database
+                .pushUpDao()
+                .insert(
+                    PushUp(
+                        id = 0,
+                        count = value
+                    )
+                )
+            count.value = DEFAULT_VALUE
+        }
+    }
 
-    private const val DEFAULT_VALUE = 0
-  }
+    companion object {
+
+        private const val DEFAULT_VALUE = 0
+    }
 }

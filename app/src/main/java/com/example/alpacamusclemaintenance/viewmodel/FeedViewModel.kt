@@ -10,15 +10,15 @@ import com.example.alpacamusclemaintenance.vo.Feed
 import kotlinx.coroutines.flow.Flow
 
 class FeedViewModel @ViewModelInject constructor(
-  private val repository: FeedRepository
+    private val repository: FeedRepository
 ) : ViewModel() {
 
-  private var currentSearchResult: Flow<PagingData<Feed>>? = null
+    private var currentSearchResult: Flow<PagingData<Feed>>? = null
 
-  fun fetchFeed(): Flow<PagingData<Feed>> {
-    val newResult: Flow<PagingData<Feed>> = repository.getFeedResultStream()
-      .cachedIn(viewModelScope)
-    currentSearchResult = newResult
-    return newResult
-  }
+    fun fetchFeed(): Flow<PagingData<Feed>> {
+        val newResult: Flow<PagingData<Feed>> = repository.getFeedResultStream()
+            .cachedIn(viewModelScope)
+        currentSearchResult = newResult
+        return newResult
+    }
 }

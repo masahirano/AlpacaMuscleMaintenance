@@ -17,40 +17,40 @@ import org.junit.Test
 @HiltAndroidTest
 class PushUpFragmentTest {
 
-  @get:Rule
-  val hiltRule = HiltAndroidRule(this)
+    @get:Rule
+    val hiltRule = HiltAndroidRule(this)
 
-  @Test
-  fun givenNoArgs_whenTappedCounterOnce_thenCountOneShouldBeDisplayed() {
-    withPushUpRobot {
-      tapCounter()
-    } verifyThat {
-      countIsDisplayedAs("1")
+    @Test
+    fun givenNoArgs_whenTappedCounterOnce_thenCountOneShouldBeDisplayed() {
+        withPushUpRobot {
+            tapCounter()
+        } verifyThat {
+            countIsDisplayedAs("1")
+        }
     }
-  }
 }
 
 fun withPushUpRobot(action: PushUpRobot.() -> Unit): PushUpRobot {
-  launchFragmentInHiltContainer<PushUpFragment>()
-  return PushUpRobot().apply(action)
+    launchFragmentInHiltContainer<PushUpFragment>()
+    return PushUpRobot().apply(action)
 }
 
 class PushUpRobot {
 
-  fun tapCounter() {
-    onView(withText(R.string.push_up_initial_text))
-      .perform(click())
-  }
+    fun tapCounter() {
+        onView(withText(R.string.push_up_initial_text))
+            .perform(click())
+    }
 
-  infix fun verifyThat(verification: PushUpResultRobot.() -> Unit) {
-    verification(PushUpResultRobot())
-  }
+    infix fun verifyThat(verification: PushUpResultRobot.() -> Unit) {
+        verification(PushUpResultRobot())
+    }
 }
 
 class PushUpResultRobot {
 
-  fun countIsDisplayedAs(expectedCount: String) {
-    onView(withId(R.id.textView))
-      .check(matches(withText(expectedCount)))
-  }
+    fun countIsDisplayedAs(expectedCount: String) {
+        onView(withId(R.id.textView))
+            .check(matches(withText(expectedCount)))
+    }
 }
