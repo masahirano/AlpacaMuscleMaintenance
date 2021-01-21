@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AlpacaMuscleMaintenance.iml" filepath="$PROJECT_DIR$/AlpacaMuscleMaintenance.iml" group="AlpacaMuscleMaintenance" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AlpacaMuscleMaintenance.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AlpacaMuscleMaintenance.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="AlpacaMuscleMaintenance/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dev.AlpacaMuscleMaintenance.iml" filepath="$PROJECT_DIR$/.idea/modules/dev.AlpacaMuscleMaintenance.iml" />
     </modules>
   </component>
 </project>
