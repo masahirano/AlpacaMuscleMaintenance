@@ -1,15 +1,17 @@
 package com.example.alpacamusclemaintenance.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.alpacamusclemaintenance.repository.FeedRepository
 import com.example.alpacamusclemaintenance.vo.Feed
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class FeedViewModel @ViewModelInject constructor(
+@HiltViewModel
+class FeedViewModel @Inject constructor(
     private val repository: FeedRepository
 ) : ViewModel() {
 
