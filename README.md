@@ -10,7 +10,7 @@ For entire design, this app tries to follow clean architecture, and for technolo
 - [Navigation component](https://developer.android.com/guide/navigation)
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 - [Kotlin coroutines](https://developer.android.com/kotlin/coroutines)
-- [Dagger 2](https://github.com/google/dagger)
+- [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 
 ## Views
 
