@@ -2,57 +2,70 @@
 
 package com.example.alpacamusclemaintenance.di
 
-import android.app.Application
+import android.content.Context
 import com.example.alpacamusclemaintenance.api.QiitaService
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
 import com.example.alpacamusclemaintenance.repository.FeedRepository
 import com.google.gson.FieldNamingPolicy
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import javax.inject.Singleton
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @InstallIn(ApplicationComponent::class)
 @Module
 class AppModule {
 
     @[Provides Singleton]
-    fun provideAppDatabase(app: Application): AppDatabase =
-        AppDatabase.getInstance(app.applicationContext)
+    fun provideAppDatabase(
+        @ApplicationContext context: Context
+    ): AppDatabase = AppDatabase
+        .getInstance(context)
 
     @[Provides Singleton]
-    fun providePushUpDao(db: AppDatabase): PushUpDao =
-        db.pushUpDao()
+    fun providePushUpDao(db: AppDatabase): PushUpDao = db.pushUpDao()
 
     @[Provides Singleton]
     fun provideFeedRepository(
         service: QiitaService,
-        app: Application
-    ): FeedRepository =
-        FeedRepository(
-            service = service,
-            context = app.applicationContext
-        )
+        @ApplicationContext context: Context
+    ): FeedRepository = FeedRepository(
+        service = service,
+        context = context
+    )
+
+    @Provides
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
+        level = Level.BASIC
+    }
+
+    @Provides
+    fun provideGson(): Gson = GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create()
+
+    @Provides
+    fun provideOkHttpClient(
+        interceptor: HttpLoggingInterceptor
+    ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(interceptor)
+        .build()
 
     @[Provides Singleton]
-    fun provideQiitaService(): QiitaService {
-        val gson = GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .create()
-        val logger = HttpLoggingInterceptor().apply {
-            level = Level.BASIC
-        }
-        val client = OkHttpClient.Builder()
-            .addInterceptor(logger)
-            .build()
+    fun provideQiitaService(
+        client: OkHttpClient,
+        gson: Gson
+    ): QiitaService {
         val retrofit = Retrofit.Builder()
             .baseUrl(QiitaService.HTTPS_API_QIITA_URL)
             .client(client)
