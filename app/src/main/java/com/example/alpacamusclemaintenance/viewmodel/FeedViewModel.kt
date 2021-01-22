@@ -7,8 +7,8 @@ import androidx.paging.cachedIn
 import com.example.alpacamusclemaintenance.repository.FeedRepository
 import com.example.alpacamusclemaintenance.vo.Feed
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(

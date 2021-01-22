@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class PushUpViewModel @Inject constructor(
