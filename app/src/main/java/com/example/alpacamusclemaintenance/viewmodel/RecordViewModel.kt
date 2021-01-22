@@ -1,12 +1,14 @@
 package com.example.alpacamusclemaintenance.viewmodel
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.alpacamusclemaintenance.db.entity.PushUp
 import com.example.alpacamusclemaintenance.repository.PushUpRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RecordViewModel @ViewModelInject constructor(
+@HiltViewModel
+class RecordViewModel @Inject constructor(
     private val repository: PushUpRepository
 ) : ViewModel() {
 

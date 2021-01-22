@@ -1,5 +1,7 @@
 # Alpaca Muscle Maintenance
 
+[![Android CI](https://github.com/alpaca0984/AlpacaMuscleMaintenance/workflows/Android%20CI/badge.svg)](https://github.com/alpaca0984/AlpacaMuscleMaintenance/actions?query=workflow%3A%22Android+CI%22)
+
 ## Overview
 
 An Android app using Kotlin which enables you to record the numbers of push-up (will also support squat someday).
@@ -10,7 +12,7 @@ For entire design, this app tries to follow clean architecture, and for technolo
 - [Navigation component](https://developer.android.com/guide/navigation)
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 - [Kotlin coroutines](https://developer.android.com/kotlin/coroutines)
-- [Dagger 2](https://github.com/google/dagger)
+- [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 
 ## Views
 
