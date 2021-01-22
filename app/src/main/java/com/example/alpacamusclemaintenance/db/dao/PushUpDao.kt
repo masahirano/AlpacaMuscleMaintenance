@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.alpacamusclemaintenance.db.entity.PushUpEntity
+import com.example.alpacamusclemaintenance.vo.PushUp
 
 @Dao
 interface PushUpDao {
@@ -29,3 +30,13 @@ interface PushUpDao {
     @Query("DELETE FROM push_ups")
     fun deleteAll()
 }
+
+fun PushUpEntity.toPushUp(): PushUp = PushUp(
+    id = id,
+    count = count,
+    doneAt = doneAt,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)
+
+fun List<PushUpEntity>.toPushUps(): List<PushUp> = map { it.toPushUp() }
