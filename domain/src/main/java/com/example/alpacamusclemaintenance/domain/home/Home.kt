@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.vo
+package com.example.alpacamusclemaintenance.domain.home
 
 data class Home(
     val wordOfWisdom: String,
