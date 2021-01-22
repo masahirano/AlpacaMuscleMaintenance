@@ -5,16 +5,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.alpacamusclemaintenance.db.entity.PushUp
+import com.example.alpacamusclemaintenance.db.entity.PushUpEntity
 
 @Dao
 interface PushUpDao {
 
     @Insert
-    suspend fun insert(pushUp: PushUp)
+    suspend fun insert(pushUpEntity: PushUpEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(pushUps: List<PushUp>)
+    fun insertAll(pushUpEntities: List<PushUpEntity>)
 
     @Query(
         """
@@ -24,7 +24,7 @@ interface PushUpDao {
     ORDER BY done_at DESC
     """
     )
-    fun getPushUps(): LiveData<List<PushUp>>
+    fun getPushUps(): LiveData<List<PushUpEntity>>
 
     @Query("DELETE FROM push_ups")
     fun deleteAll()

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
-import com.example.alpacamusclemaintenance.db.entity.PushUp
+import com.example.alpacamusclemaintenance.db.entity.PushUpEntity
 import com.example.alpacamusclemaintenance.viewmodel.RecordViewModel
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
@@ -54,16 +54,16 @@ class RecordFragment : Fragment() {
         binding.currentDate = LocalDateTime.now().format(formatter)
 
         // Set chart
-        viewModel.pushUpsObservable.observe(viewLifecycleOwner) { pushUps ->
+        viewModel.pushUpsObservableEntity.observe(viewLifecycleOwner) { pushUps ->
             setupChart(binding.root, pushUps)
         }
     }
 
     private fun setupChart(
         rootView: View,
-        pushUps: List<PushUp>
+        pushUpEntities: List<PushUpEntity>
     ) {
-        val dataList: Map<String, Int> = pushUps
+        val dataList: Map<String, Int> = pushUpEntities
             .sortedBy { it.doneAt }
             .groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
             .fold(0) { total, pushUp -> total + pushUp.count }

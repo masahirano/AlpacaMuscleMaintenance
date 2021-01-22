@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alpacamusclemaintenance.db.AppDatabase
-import com.example.alpacamusclemaintenance.db.entity.PushUp
+import com.example.alpacamusclemaintenance.db.entity.PushUpEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
@@ -28,7 +28,7 @@ class PushUpViewModel @Inject constructor(
             database
                 .pushUpDao()
                 .insert(
-                    PushUp(
+                    PushUpEntity(
                         id = 0,
                         count = value
                     )
