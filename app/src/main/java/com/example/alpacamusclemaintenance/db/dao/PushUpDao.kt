@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.alpacamusclemaintenance.db.entity.PushUpEntity
-import com.example.alpacamusclemaintenance.vo.PushUp
+import com.example.alpacamusclemaintenance.domain.pushup.PushUp
 
 @Dao
 interface PushUpDao {
@@ -40,3 +40,11 @@ fun PushUpEntity.toPushUp(): PushUp = PushUp(
 )
 
 fun List<PushUpEntity>.toPushUps(): List<PushUp> = map { it.toPushUp() }
+
+fun PushUp.toPushUpEntity() = PushUpEntity(
+    id = id,
+    count = count,
+    doneAt = doneAt,
+    createdAt = createdAt,
+    updatedAt = updatedAt
+)

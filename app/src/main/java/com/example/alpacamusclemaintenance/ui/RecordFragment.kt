@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.databinding.FragmentRecordBinding
+import com.example.alpacamusclemaintenance.domain.pushup.PushUp
 import com.example.alpacamusclemaintenance.viewmodel.RecordViewModel
-import com.example.alpacamusclemaintenance.vo.PushUp
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis

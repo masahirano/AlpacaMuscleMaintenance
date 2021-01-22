@@ -2,8 +2,8 @@ package com.example.alpacamusclemaintenance.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.alpacamusclemaintenance.repository.PushUpRepository
-import com.example.alpacamusclemaintenance.vo.PushUp
+import com.example.alpacamusclemaintenance.data.pushup.PushUpRepository
+import com.example.alpacamusclemaintenance.domain.pushup.PushUp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
