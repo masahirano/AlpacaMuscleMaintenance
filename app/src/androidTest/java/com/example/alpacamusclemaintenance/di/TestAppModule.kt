@@ -1,6 +1,6 @@
 package com.example.alpacamusclemaintenance.di
 
-import com.example.alpacamusclemaintenance.api.QiitaService
+import com.example.alpacamusclemaintenance.api.QiitaApi
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
 import com.example.alpacamusclemaintenance.repository.FeedRepository
@@ -24,5 +24,5 @@ class TestAppModule {
     fun provideFeedRepository(): FeedRepository = mock(FeedRepository::class.java)
 
     @Provides
-    fun provideQiitaService(): QiitaService = mock(QiitaService::class.java)
+    fun provideQiitaService(): QiitaApi = mock(QiitaApi::class.java)
 }

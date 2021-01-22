@@ -17,8 +17,8 @@ class FeedViewModel @Inject constructor(
 
     private var currentSearchResult: Flow<PagingData<Feed>>? = null
 
-    fun fetchFeed(): Flow<PagingData<Feed>> {
-        val newResult: Flow<PagingData<Feed>> = repository.getFeedResultStream()
+    fun fetchFeed(query: String): Flow<PagingData<Feed>> {
+        val newResult: Flow<PagingData<Feed>> = repository.getFeedResultStream(query)
             .cachedIn(viewModelScope)
         currentSearchResult = newResult
         return newResult

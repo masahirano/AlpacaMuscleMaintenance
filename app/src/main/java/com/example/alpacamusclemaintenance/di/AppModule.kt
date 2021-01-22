@@ -3,7 +3,7 @@
 package com.example.alpacamusclemaintenance.di
 
 import android.content.Context
-import com.example.alpacamusclemaintenance.api.QiitaService
+import com.example.alpacamusclemaintenance.api.QiitaApi
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
 import com.example.alpacamusclemaintenance.repository.FeedRepository
@@ -37,11 +37,9 @@ class AppModule {
 
     @[Provides Singleton]
     fun provideFeedRepository(
-        service: QiitaService,
-        @ApplicationContext context: Context
+        service: QiitaApi
     ): FeedRepository = FeedRepository(
-        service = service,
-        context = context
+        service = service
     )
 
     @Provides
@@ -65,13 +63,13 @@ class AppModule {
     fun provideQiitaService(
         client: OkHttpClient,
         gson: Gson
-    ): QiitaService {
+    ): QiitaApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl(QiitaService.HTTPS_API_QIITA_URL)
+            .baseUrl(QiitaApi.HTTPS_API_QIITA_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
-        return retrofit.create(QiitaService::class.java)
+        return retrofit.create(QiitaApi::class.java)
     }
 }

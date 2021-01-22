@@ -1,13 +1,13 @@
 package com.example.alpacamusclemaintenance.repository
 
 import androidx.paging.PagingSource
-import com.example.alpacamusclemaintenance.api.QiitaService
+import com.example.alpacamusclemaintenance.api.QiitaApi
 import com.example.alpacamusclemaintenance.vo.Feed
 
 private const val QIITA_STARTING_PAGE_INDEX = 1
 
 class FeedPagingSource(
-    private val service: QiitaService,
+    private val service: QiitaApi,
     private val query: String
 ) : PagingSource<Int, Feed>() {
 
