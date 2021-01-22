@@ -8,6 +8,8 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'dagger.hilt.android.plugin'
 
+def config = rootProject.ext
+
 android {
     signingConfigs {
         release {
@@ -22,14 +24,14 @@ android {
             }
         }
     }
-    compileSdkVersion 30
+    compileSdkVersion config.targetSdkVersion
     defaultConfig {
         applicationId "com.example.alpacamusclemaintenance"
-        minSdkVersion 26
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "com.example.alpacamusclemaintenance.AlpacaMuscleMaintenanceTestRunner"
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner config.testInstrumentationRunner
     }
     buildTypes {
         release {
