@@ -16,8 +16,8 @@ import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.adapter.FeedAdapter
 import com.example.alpacamusclemaintenance.adapter.FeedsLoadStateAdapter
 import com.example.alpacamusclemaintenance.databinding.FragmentFeedBinding
+import com.example.alpacamusclemaintenance.domain.feed.Feed
 import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
-import com.example.alpacamusclemaintenance.vo.Feed
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

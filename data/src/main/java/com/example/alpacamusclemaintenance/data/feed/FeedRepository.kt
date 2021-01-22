@@ -1,12 +1,11 @@
-package com.example.alpacamusclemaintenance.repository
+package com.example.alpacamusclemaintenance.data.feed
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.alpacamusclemaintenance.api.QiitaApi
-import com.example.alpacamusclemaintenance.vo.Feed
-import javax.inject.Inject
+import com.example.alpacamusclemaintenance.domain.feed.Feed
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 class FeedRepository @Inject constructor(
     private val service: QiitaApi

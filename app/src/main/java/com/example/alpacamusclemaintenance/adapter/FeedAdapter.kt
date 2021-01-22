@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.alpacamusclemaintenance.databinding.ListItemFeedBinding
-import com.example.alpacamusclemaintenance.vo.Feed
+import com.example.alpacamusclemaintenance.domain.feed.Feed
 
 class FeedAdapter(
     private val openFeed: FeedOpenNavigation

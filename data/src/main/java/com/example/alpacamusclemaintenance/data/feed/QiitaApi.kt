@@ -1,6 +1,6 @@
-package com.example.alpacamusclemaintenance.api
+package com.example.alpacamusclemaintenance.data.feed
 
-import com.example.alpacamusclemaintenance.vo.Feed
+import com.example.alpacamusclemaintenance.domain.feed.Feed
 import retrofit2.http.GET
 import retrofit2.http.Query
 

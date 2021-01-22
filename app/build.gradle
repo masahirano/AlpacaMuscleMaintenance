@@ -24,15 +24,22 @@ android {
             }
         }
     }
+
     compileSdkVersion config.targetSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
     defaultConfig {
         applicationId "com.example.alpacamusclemaintenance"
+
         minSdkVersion config.minSdkVersion
         targetSdkVersion config.targetSdkVersion
         versionCode config.versionCode
         versionName config.versionName
+
         testInstrumentationRunner config.testInstrumentationRunner
+        consumerProguardFiles "consumer-rules.pro"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -40,14 +47,17 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
     buildFeatures {
         dataBinding true
     }
+
     compileOptions {
         // @see https://developer.android.com/studio/write/java8-support#library-desugaring
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
         freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
@@ -56,6 +66,9 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation project(':data')
+    implementation project(':domain')
 
     // unit tests - https://developer.android.com/training/testing/unit-testing/local-unit-tests
     testImplementation 'junit:junit:4.13.1'

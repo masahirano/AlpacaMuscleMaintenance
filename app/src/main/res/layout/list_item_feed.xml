@@ -10,7 +10,7 @@
 
     <variable
       name="feed"
-      type="com.example.alpacamusclemaintenance.vo.Feed" />
+      type="com.example.alpacamusclemaintenance.domain.feed.Feed" />
 
     <variable
       name="onClicked"
