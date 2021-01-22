@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.ui
+package com.example.alpacamusclemaintenance.presentation.excercise
 
 import android.os.Bundle
 import android.view.LayoutInflater

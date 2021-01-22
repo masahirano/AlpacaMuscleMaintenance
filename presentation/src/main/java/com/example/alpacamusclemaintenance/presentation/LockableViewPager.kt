@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.ui
+package com.example.alpacamusclemaintenance.presentation
 
 import android.content.Context
 import android.util.AttributeSet

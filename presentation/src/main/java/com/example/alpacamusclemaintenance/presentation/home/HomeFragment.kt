@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.ui
+package com.example.alpacamusclemaintenance.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.presentation.databinding.FragmentHomeBinding
-import com.example.alpacamusclemaintenance.presentation.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,9 +1,8 @@
-package com.example.alpacamusclemaintenance.presentation.adapter
+package com.example.alpacamusclemaintenance.presentation.feed
 
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import com.example.alpacamusclemaintenance.presentation.ui.FeedsLoadStateViewHolder
 
 class FeedsLoadStateAdapter : LoadStateAdapter<FeedsLoadStateViewHolder>() {
 

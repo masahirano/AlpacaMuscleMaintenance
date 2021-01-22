@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.viewmodel
+package com.example.alpacamusclemaintenance.presentation.feed
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

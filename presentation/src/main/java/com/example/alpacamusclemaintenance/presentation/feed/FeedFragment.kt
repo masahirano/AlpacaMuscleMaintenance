@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.ui
+package com.example.alpacamusclemaintenance.presentation.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,10 +14,7 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.alpacamusclemaintenance.domain.feed.Feed
 import com.example.alpacamusclemaintenance.presentation.R
-import com.example.alpacamusclemaintenance.presentation.adapter.FeedAdapter
-import com.example.alpacamusclemaintenance.presentation.adapter.FeedsLoadStateAdapter
 import com.example.alpacamusclemaintenance.presentation.databinding.FragmentFeedBinding
-import com.example.alpacamusclemaintenance.presentation.viewmodel.FeedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

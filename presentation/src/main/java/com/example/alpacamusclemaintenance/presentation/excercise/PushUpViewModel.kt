@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.viewmodel
+package com.example.alpacamusclemaintenance.presentation.excercise
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.ui
+package com.example.alpacamusclemaintenance.presentation
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import com.example.alpacamusclemaintenance.presentation.R
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 class WebViewFragment : Fragment() {

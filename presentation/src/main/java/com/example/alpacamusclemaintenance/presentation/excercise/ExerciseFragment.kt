@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.ui
+package com.example.alpacamusclemaintenance.presentation.excercise
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.alpacamusclemaintenance.presentation.R
-import com.example.alpacamusclemaintenance.presentation.adapter.ExercisePageAdapter
 import com.example.alpacamusclemaintenance.presentation.databinding.FragmentExerciseBinding
 
 class ExerciseFragment : Fragment() {

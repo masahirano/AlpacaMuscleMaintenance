@@ -1,4 +1,4 @@
-package com.example.alpacamusclemaintenance.presentation.ui
+package com.example.alpacamusclemaintenance.presentation.feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
