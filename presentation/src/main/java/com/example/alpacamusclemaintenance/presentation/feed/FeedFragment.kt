@@ -48,10 +48,7 @@ class FeedFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         // add dividers between RecyclerView's row items
@@ -73,10 +70,10 @@ class FeedFragment : Fragment() {
     private fun fetch() {
         fetchJob?.cancel()
         fetchJob = lifecycleScope.launch {
-            viewModel.fetchFeed(requireContext().getString(R.string.qiita_tag_muscle_maintenance))
-                .collectLatest { data: PagingData<Feed> ->
-                    adapter.submitData(data)
-                }
+            val query = requireContext().getString(R.string.qiita_tag_muscle_maintenance)
+            viewModel.fetchFeed(query).collectLatest { data: PagingData<Feed> ->
+                adapter.submitData(data)
+            }
         }
     }
 }
