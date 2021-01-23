@@ -1,7 +1,5 @@
 package com.example.alpacamusclemaintenance.di
 
-import com.example.alpacamusclemaintenance.data.feed.QiitaApi
-import com.example.alpacamusclemaintenance.data.pushup.PushUpRepository
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
 import dagger.Module
