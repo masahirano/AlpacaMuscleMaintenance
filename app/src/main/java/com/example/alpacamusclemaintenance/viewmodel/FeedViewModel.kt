@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.alpacamusclemaintenance.repository.FeedRepository
-import com.example.alpacamusclemaintenance.vo.Feed
+import com.example.alpacamusclemaintenance.data.feed.FeedRepository
+import com.example.alpacamusclemaintenance.domain.feed.Feed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
@@ -17,8 +17,8 @@ class FeedViewModel @Inject constructor(
 
     private var currentSearchResult: Flow<PagingData<Feed>>? = null
 
-    fun fetchFeed(): Flow<PagingData<Feed>> {
-        val newResult: Flow<PagingData<Feed>> = repository.getFeedResultStream()
+    fun fetchFeed(query: String): Flow<PagingData<Feed>> {
+        val newResult: Flow<PagingData<Feed>> = repository.getFeedResultStream(query)
             .cachedIn(viewModelScope)
         currentSearchResult = newResult
         return newResult

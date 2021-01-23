@@ -3,6 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="11">
       <module name="AlpacaMuscleMaintenance.app" target="1.8" />
+      <module name="AlpacaMuscleMaintenance.data" target="1.8" />
+      <module name="AlpacaMuscleMaintenance.domain" target="1.8" />
+      <module name="AlpacaMuscleMaintenance.presentation" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

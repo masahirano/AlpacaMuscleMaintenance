@@ -1,15 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.4.21'
-    ext.nav_version = '2.3.2'
-    ext.hilt_version = '2.31.1-alpha'
+    ext {
+        kotlin_version = '1.4.21'
+        nav_version = '2.3.2'
+        hilt_version = '2.31.1-alpha'
+    }
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
@@ -19,12 +21,22 @@ buildscript {
     }
 }
 
+ext {
+    minSdkVersion = 26
+    buildToolsVersion = "30.0.3"
+    targetSdkVersion = 30
+    versionCode = 1
+    versionName = "1.0"
+    testInstrumentationRunner = "com.example.alpacamusclemaintenance.AlpacaMuscleMaintenanceTestRunner"
+    consumerProguardFiles = "consumer-rules.pro"
+}
+
 allprojects {
     repositories {
         google()
         jcenter()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven { url "https://jitpack.io" }
     }
 }
 

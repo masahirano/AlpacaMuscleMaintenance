@@ -12,11 +12,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.alpacamusclemaintenance.R
 import com.example.alpacamusclemaintenance.adapter.FeedAdapter
 import com.example.alpacamusclemaintenance.adapter.FeedsLoadStateAdapter
 import com.example.alpacamusclemaintenance.databinding.FragmentFeedBinding
+import com.example.alpacamusclemaintenance.domain.feed.Feed
 import com.example.alpacamusclemaintenance.viewmodel.FeedViewModel
-import com.example.alpacamusclemaintenance.vo.Feed
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -76,9 +77,10 @@ class FeedFragment : Fragment() {
     private fun fetch() {
         fetchJob?.cancel()
         fetchJob = lifecycleScope.launch {
-            viewModel.fetchFeed().collectLatest { data: PagingData<Feed> ->
-                adapter.submitData(data)
-            }
+            viewModel.fetchFeed(requireContext().getString(R.string.qiita_tag_muscle_maintenance))
+                .collectLatest { data: PagingData<Feed> ->
+                    adapter.submitData(data)
+                }
         }
     }
 }

@@ -1,10 +1,10 @@
-package com.example.alpacamusclemaintenance.api
+package com.example.alpacamusclemaintenance.data.feed
 
-import com.example.alpacamusclemaintenance.vo.Feed
+import com.example.alpacamusclemaintenance.domain.feed.Feed
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface QiitaService {
+interface QiitaApi {
 
     // @see https://qiita.com/api/v2/docs#get-apiv2items
     @GET("api/v2/items")

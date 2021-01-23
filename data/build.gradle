@@ -1,9 +1,8 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
-    id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
     id 'org.jlleitschuh.gradle.ktlint' version '9.4.1'
 }
@@ -11,26 +10,10 @@ plugins {
 def config = rootProject.ext
 
 android {
-    signingConfigs {
-        release {
-            // Store release config at `~/.gradle/gradle.properties`
-            // @see https://reactnative.dev/docs/signed-apk-android#setting-up-gradle-variables
-            // APM means Alpaca Muscle Maintenance
-            if (project.hasProperty('APM_UPLOAD_STORE_FILE')) {
-                storeFile file(APM_UPLOAD_STORE_FILE)
-                storePassword APM_UPLOAD_STORE_PASSWORD
-                keyAlias APM_UPLOAD_KEY_ALIAS
-                keyPassword APM_UPLOAD_KEY_PASSWORD
-            }
-        }
-    }
-
     compileSdkVersion config.targetSdkVersion
     buildToolsVersion config.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.example.alpacamusclemaintenance"
-
         minSdkVersion config.minSdkVersion
         targetSdkVersion config.targetSdkVersion
         versionCode config.versionCode
@@ -43,31 +26,23 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
-    buildFeatures {
-        dataBinding true
-    }
-
     compileOptions {
-        // @see https://developer.android.com/studio/write/java8-support#library-desugaring
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
-        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+        jvmTarget = '1.8'
     }
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation project(':data')
     implementation project(':domain')
 
     // unit tests - https://developer.android.com/training/testing/unit-testing/local-unit-tests
