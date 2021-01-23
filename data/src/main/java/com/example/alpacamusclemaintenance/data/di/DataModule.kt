@@ -9,22 +9,20 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
 class DataModule {
 
-    @[Provides Singleton]
+    @[Singleton Provides]
     fun provideFeedRepository(
         service: QiitaApi
-    ): FeedRepository = FeedRepository(
-        service = service
-    )
+    ): FeedRepository = FeedRepository(service = service)
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {
@@ -43,7 +41,7 @@ class DataModule {
         .addInterceptor(interceptor)
         .build()
 
-    @[Provides Singleton]
+    @[Singleton Provides]
     fun provideQiitaApi(
         client: OkHttpClient,
         gson: Gson

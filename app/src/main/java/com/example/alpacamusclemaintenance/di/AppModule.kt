@@ -15,21 +15,18 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+@Module
 @InstallIn(SingletonComponent::class)
-@Module(includes = [DataModule::class])
 class AppModule {
 
-    @[Provides Singleton]
+    @Singleton
+    @Provides
     fun provideAppDatabase(
         @ApplicationContext context: Context
     ): AppDatabase = AppDatabase
         .getInstance(context)
 
-    @[Provides Singleton]
+    @Singleton
+    @Provides
     fun providePushUpDao(db: AppDatabase): PushUpDao = db.pushUpDao()
-
-    @[Provides Singleton]
-    fun providePushUpRepository(pushUpDao: PushUpDao): PushUpRepository = PushUpRepositoryImpl(
-        pushUpDao = pushUpDao
-    )
 }
