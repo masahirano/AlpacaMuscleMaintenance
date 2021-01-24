@@ -2,7 +2,6 @@ package com.example.alpacamusclemaintenance.data.pushup
 
 import androidx.lifecycle.LiveData
 import com.example.alpacamusclemaintenance.domain.pushup.PushUp
-import javax.inject.Inject
 
 interface PushUpRepository {
 
