@@ -9,12 +9,12 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
-import com.example.alpacamusclemaintenance.db.entity.PushUp
+import com.example.alpacamusclemaintenance.db.entity.PushUpEntity
 import com.example.alpacamusclemaintenance.util.DATABASE_NAME
 import com.example.alpacamusclemaintenance.worker.SeedDatabaseWorker
 
 @Database(
-    entities = [PushUp::class],
+    entities = [PushUpEntity::class],
     version = 2,
     exportSchema = false
 )

@@ -2,8 +2,8 @@ package com.example.alpacamusclemaintenance.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.alpacamusclemaintenance.db.entity.PushUp
-import com.example.alpacamusclemaintenance.repository.PushUpRepository
+import com.example.alpacamusclemaintenance.data.pushup.PushUpRepository
+import com.example.alpacamusclemaintenance.domain.pushup.PushUp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -12,6 +12,6 @@ class RecordViewModel @Inject constructor(
     private val repository: PushUpRepository
 ) : ViewModel() {
 
-    val pushUpsObservable: LiveData<List<PushUp>>
+    val pushUpsObservableEntity: LiveData<List<PushUp>>
         get() = repository.getPushUps()
 }

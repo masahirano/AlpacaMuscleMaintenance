@@ -4,8 +4,10 @@ package com.example.alpacamusclemaintenance.di
 
 import android.content.Context
 import com.example.alpacamusclemaintenance.data.di.DataModule
+import com.example.alpacamusclemaintenance.data.pushup.PushUpRepository
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
+import com.example.alpacamusclemaintenance.db.repository.PushUpRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,4 +27,9 @@ class AppModule {
 
     @[Provides Singleton]
     fun providePushUpDao(db: AppDatabase): PushUpDao = db.pushUpDao()
+
+    @[Provides Singleton]
+    fun providePushUpRepository(pushUpDao: PushUpDao): PushUpRepository = PushUpRepositoryImpl(
+        pushUpDao = pushUpDao
+    )
 }

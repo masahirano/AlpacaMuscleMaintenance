@@ -1,5 +1,6 @@
 package com.example.alpacamusclemaintenance.di
 
+import com.example.alpacamusclemaintenance.data.pushup.PushUpRepository
 import com.example.alpacamusclemaintenance.db.AppDatabase
 import com.example.alpacamusclemaintenance.db.dao.PushUpDao
 import dagger.Module
@@ -17,4 +18,7 @@ class TestAppModule {
 
     @Provides
     fun providePushUpDao(): PushUpDao = mock(PushUpDao::class.java)
+
+    @Provides
+    fun providePushUpRepository(): PushUpRepository = mock(PushUpRepository::class.java)
 }

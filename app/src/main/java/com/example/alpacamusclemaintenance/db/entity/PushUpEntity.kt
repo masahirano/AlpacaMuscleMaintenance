@@ -10,7 +10,7 @@ import java.util.Date
 
 @Entity(tableName = "push_ups")
 @TypeConverters(Converters::class)
-data class PushUp(
+data class PushUpEntity(
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
