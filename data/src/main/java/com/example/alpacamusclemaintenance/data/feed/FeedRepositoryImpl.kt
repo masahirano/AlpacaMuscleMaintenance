@@ -4,14 +4,15 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.alpacamusclemaintenance.domain.feed.Feed
+import com.example.alpacamusclemaintenance.domain.feed.FeedRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
-class FeedRepository @Inject constructor(
+class FeedRepositoryImpl @Inject constructor(
     private val service: QiitaApi
-) {
+) : FeedRepository {
 
-    fun getFeedResultStream(query: String): Flow<PagingData<Feed>> = Pager(
+    override fun getFeedResultStream(query: String): Flow<PagingData<Feed>> = Pager(
         config = PagingConfig(
             pageSize = NETWORK_PAGE_SIZE,
             enablePlaceholders = false

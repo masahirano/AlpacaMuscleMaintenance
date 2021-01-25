@@ -3,8 +3,8 @@ package com.example.alpacamusclemaintenance.presentation.excercise
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.alpacamusclemaintenance.data.pushup.PushUpRepository
 import com.example.alpacamusclemaintenance.domain.pushup.PushUp
+import com.example.alpacamusclemaintenance.domain.pushup.PushUpRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
 import javax.inject.Inject

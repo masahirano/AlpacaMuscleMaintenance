@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.alpacamusclemaintenance.data.feed.FeedRepository
 import com.example.alpacamusclemaintenance.domain.feed.Feed
+import com.example.alpacamusclemaintenance.domain.feed.FeedRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow

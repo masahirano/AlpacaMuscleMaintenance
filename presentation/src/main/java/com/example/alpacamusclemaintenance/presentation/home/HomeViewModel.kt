@@ -2,8 +2,8 @@ package com.example.alpacamusclemaintenance.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.example.alpacamusclemaintenance.data.home.HomeRepository
 import com.example.alpacamusclemaintenance.domain.home.Home
+import com.example.alpacamusclemaintenance.domain.home.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
