@@ -1,8 +1,8 @@
-package com.example.alpacamusclemaintenance.repository
+package com.example.alpacamusclemaintenance.data.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.alpacamusclemaintenance.vo.Home
+import com.example.alpacamusclemaintenance.domain.home.Home
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor() {
