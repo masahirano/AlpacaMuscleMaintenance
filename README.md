@@ -7,12 +7,13 @@
 An Android app using Kotlin which enables you to record the numbers of push-up (will also support squat someday).
 This shows posts calling [Qiita API](https://qiita.com/api/v2/docs). It's a website basically people post technical articles, but there is `筋トレ` (muscle maintenance) tag for some reasons.
 
-For entire design, this app tries to follow clean architecture, and for technology stack it uses:
-- [Data Binding Library](https://developer.android.com/topic/libraries/data-binding)
-- [Navigation component](https://developer.android.com/guide/navigation)
+For entire design, this app tries to follow Multi-Module Clean Architecture (presentation, data, domain). For technology stack it uses:
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 - [Kotlin coroutines](https://developer.android.com/kotlin/coroutines)
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
+- [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
+- [Data Binding](https://developer.android.com/topic/libraries/data-binding)
+- [Navigation component](https://developer.android.com/guide/navigation)
 
 ## Views
 
