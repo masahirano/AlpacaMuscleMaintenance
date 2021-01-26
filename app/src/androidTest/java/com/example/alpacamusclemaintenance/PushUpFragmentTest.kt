@@ -6,7 +6,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.alpacamusclemaintenance.di.AppModule
-import com.example.alpacamusclemaintenance.ui.PushUpFragment
+import com.example.alpacamusclemaintenance.presentation.excercise.PushUpFragment
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
