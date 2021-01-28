@@ -5,6 +5,7 @@ buildscript {
         kotlin_version = '1.4.21'
         nav_version = '2.3.2'
         hilt_version = '2.31.1-alpha'
+        okhttp_version = '4.9.0'
     }
     repositories {
         google()
