@@ -43,6 +43,7 @@ apply from: '../dependencies-all.gradle'
 
 dependencies {
     core()
+    testing()
 }
 
 ktlint {

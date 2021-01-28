@@ -2,8 +2,8 @@ package com.example.alpacamusclemaintenance.data.feed
 
 import androidx.paging.PagingSource
 import com.example.alpacamusclemaintenance.domain.feed.Feed
-import retrofit2.HttpException
 import java.io.IOException
+import retrofit2.HttpException
 
 // References:
 //  - https://developer.android.com/reference/kotlin/androidx/paging/PagingSource
