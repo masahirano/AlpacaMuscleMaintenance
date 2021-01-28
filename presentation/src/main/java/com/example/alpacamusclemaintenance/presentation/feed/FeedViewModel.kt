@@ -17,10 +17,7 @@ class FeedViewModel @Inject constructor(
 
     private var currentSearchResult: Flow<PagingData<Feed>>? = null
 
-    fun fetchFeed(query: String): Flow<PagingData<Feed>> {
-        val newResult: Flow<PagingData<Feed>> = fetchFeedResultUseCase(query)
-            .cachedIn(viewModelScope)
-        currentSearchResult = newResult
-        return newResult
-    }
+    fun fetchFeed(query: String): Flow<PagingData<Feed>> = fetchFeedResultUseCase(query)
+        .cachedIn(viewModelScope)
+        .also { currentSearchResult = it }
 }
