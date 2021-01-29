@@ -3,11 +3,12 @@ package com.example.alpacamusclemaintenance.data.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.alpacamusclemaintenance.domain.home.Home
+import com.example.alpacamusclemaintenance.domain.home.HomeRepository
 import javax.inject.Inject
 
-class HomeRepository @Inject constructor() {
+class HomeRepositoryImpl @Inject constructor() : HomeRepository {
 
-    fun getHome(): LiveData<Home> {
+    override fun getHome(): LiveData<Home> {
         // TODO: They should be stored DB and queried with Room
         val words = listOf(
             Home(

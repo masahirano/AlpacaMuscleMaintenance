@@ -1,6 +1,5 @@
 package com.example.alpacamusclemaintenance.data.di
 
-import com.example.alpacamusclemaintenance.data.feed.FeedRepository
 import com.example.alpacamusclemaintenance.data.feed.QiitaApi
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -18,11 +17,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 class DataModule {
-
-    @[Singleton Provides]
-    fun provideFeedRepository(
-        service: QiitaApi
-    ): FeedRepository = FeedRepository(service = service)
 
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor = HttpLoggingInterceptor().apply {

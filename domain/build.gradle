@@ -43,6 +43,8 @@ apply from: '../dependencies-all.gradle'
 
 dependencies {
     core()
+    dagger2()
+    paging()
     testing()
 }
 
