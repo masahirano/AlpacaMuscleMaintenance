@@ -69,6 +69,7 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
     implementation project(':presentation')
+    androidTestImplementation project(':testing')
 
     commonLang()
     core()
@@ -77,6 +78,8 @@ dependencies {
     hilt()
     lifecycle()
     okhttpLoggingInterceptor()
+
+    androidTesting()
     testing()
 
     // Room - https://developer.android.com/jetpack/androidx/releases/room
@@ -99,9 +102,6 @@ dependencies {
     debugImplementation ('androidx.fragment:fragment-testing:1.2.5') {
         exclude group: 'androidx.test', module : 'core'
     }
-
-    // Espresso dependencies
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 
 ktlint {
