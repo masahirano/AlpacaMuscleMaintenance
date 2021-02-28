@@ -20,8 +20,7 @@ class AppModule {
     @Provides
     fun provideAppDatabase(
         @ApplicationContext context: Context
-    ): AppDatabase = AppDatabase
-        .getInstance(context)
+    ): AppDatabase = AppDatabase.getInstance(context)
 
     @Singleton
     @Provides
