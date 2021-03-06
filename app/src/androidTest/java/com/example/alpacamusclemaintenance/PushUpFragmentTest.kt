@@ -7,6 +7,8 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import com.example.alpacamusclemaintenance.di.AppModule
 import com.example.alpacamusclemaintenance.presentation.excercise.PushUpFragment
+import com.example.alpacamusclemaintenance.testing.ResultRobot
+import com.example.alpacamusclemaintenance.testing.Robot
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -35,19 +37,19 @@ fun withPushUpRobot(action: PushUpRobot.() -> Unit): PushUpRobot {
     return PushUpRobot().apply(action)
 }
 
-class PushUpRobot {
+class PushUpRobot : Robot<PushUpResultRobot> {
 
     fun tapCounter() {
         onView(withText(R.string.push_up_initial_text))
             .perform(click())
     }
 
-    infix fun verifyThat(verification: PushUpResultRobot.() -> Unit) {
+    override infix fun verifyThat(verification: PushUpResultRobot.() -> Unit) {
         verification(PushUpResultRobot())
     }
 }
 
-class PushUpResultRobot {
+class PushUpResultRobot : ResultRobot {
 
     fun countIsDisplayedAs(expectedCount: String) {
         onView(withId(R.id.textView))

@@ -59,6 +59,8 @@ dependencies {
     paging()
     testing()
 
+    // Core - https://developer.android.com/jetpack/androidx/releases/core
+    implementation 'androidx.core:core-ktx:1.3.2'
     // Appcompat - https://developer.android.com/jetpack/androidx/releases/appcompat
     implementation 'androidx.appcompat:appcompat:1.2.0'
     // Constraintlayout - https://developer.android.com/jetpack/androidx/releases/constraintlayout
