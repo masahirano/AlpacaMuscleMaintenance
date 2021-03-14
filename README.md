@@ -7,13 +7,24 @@
 An Android app using Kotlin which enables you to record the numbers of push-up (will also support squat someday).
 This shows posts calling [Qiita API](https://qiita.com/api/v2/docs). It's a website basically people post technical articles, but there is `筋トレ` (muscle maintenance) tag for some reasons.
 
-For entire design, this app tries to follow Multi-Module Clean Architecture (presentation, data, domain). For technology stack it uses:
+Technology stack:
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata)
 - [Kotlin coroutines](https://developer.android.com/kotlin/coroutines)
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
 - [Data Binding](https://developer.android.com/topic/libraries/data-binding)
 - [Navigation component](https://developer.android.com/guide/navigation)
+
+## Architecture
+
+This app follows Multi-Module Clean Architecture. It separates layers into presentation, data and domain.
+
+<img height="680px" src="./docs/images/architecture.jpeg" />
+
+These posts helped me to understand what the clean architecture is and why it is good:
+- [Android-CleanArchitecture](https://github.com/android10/Android-CleanArchitecture)
+- [Clean Architecture in Android — A Beginner Approach](https://medium.com/swlh/clean-architecture-in-android-a-beginner-approach-be0ce00d806b)
+- [Why you need Use Cases/Interactors](https://proandroiddev.com/why-you-need-use-cases-interactors-142e8a6fe576)
 
 ## Views
 
