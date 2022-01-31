@@ -19,8 +19,7 @@
   <fragment
     android:id="@+id/recordFragment"
     android:name="com.example.alpacamusclemaintenance.presentation.record.RecordFragment"
-    android:label="@string/title_record"
-    tools:layout="@layout/fragment_record" />
+    android:label="@string/title_record" />
 
   <fragment
     android:id="@+id/feedFragment"

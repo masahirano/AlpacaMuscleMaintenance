@@ -4,10 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.domain.pushup.PushUp
-import com.example.alpacamusclemaintenance.presentation.databinding.FragmentRecordBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -18,50 +27,53 @@ import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import dagger.hilt.android.AndroidEntryPoint
+import org.apache.commons.lang3.time.DateFormatUtils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import kotlinx.android.synthetic.main.fragment_record.view.*
-import org.apache.commons.lang3.time.DateFormatUtils
 
 @AndroidEntryPoint
 class RecordFragment : Fragment() {
 
-    private lateinit var binding: FragmentRecordBinding
     private val viewModel: RecordViewModel by activityViewModels()
+    private val formatter: DateTimeFormatter by lazy { DateTimeFormatter.ofPattern("E dd MMM yyyy") }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentRecordBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-        return binding.root
-    }
+    ): View = ComposeView(requireContext()).apply {
+        setContent {
+            MaterialTheme {
+                val pushUpEntities by viewModel.pushUpsEntities.observeAsState(emptyList())
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
-        super.onViewCreated(view, savedInstanceState)
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = LocalDateTime.now().format(formatter))
 
-        // Set current date
-        val formatter = DateTimeFormatter.ofPattern("E dd MMM yyyy")
-        binding.currentDate = LocalDateTime.now().format(formatter)
-
-        // Set chart
-        viewModel.pushUpsObservableEntity.observe(viewLifecycleOwner) { pushUps ->
-            setupChart(binding.root, pushUps)
+                    Spacer(modifier = Modifier.height(32.dp))
+                    AndroidView(
+                        factory = { context ->
+                            BarChart(context)
+                        },
+                        modifier = Modifier.fillMaxSize(),
+                        update = { barChart ->
+                            setupChart(barChart, pushUpEntities)
+                        }
+                    )
+                }
+            }
         }
     }
 
     private fun setupChart(
-        rootView: View,
+        chart: BarChart,
         pushUpEntities: List<PushUp>
-    ) {
+    ): BarChart {
         val dataList: Map<String, Int> = pushUpEntities
             .sortedBy { it.doneAt }
             .groupingBy { DateFormatUtils.format(it.doneAt, "MM/dd") }
@@ -73,22 +85,24 @@ class RecordFragment : Fragment() {
             valueFormatter = IValueFormatter { value, _, _, _ -> value.toInt().toString() }
             colors = ColorTemplate.MATERIAL_COLORS.slice(0 until stackSize)
         }
-        val chart: BarChart = rootView.chart.apply {
+
+        return chart.apply {
             data = BarData(dataSet)
             legend.isEnabled = false
             setScaleEnabled(false)
-            animateY(1200, Easing.EasingOption.Linear)
-        }
+            animateY(1_200, Easing.EasingOption.Linear)
 
-        chart.axisRight.apply {
-            setDrawGridLines(false)
-            setDrawLabels(false)
-        }
-        chart.xAxis.apply {
-            position = XAxis.XAxisPosition.BOTTOM
-            labelCount = dataList.size
-            valueFormatter = IndexAxisValueFormatter(dataList.keys)
-            setDrawGridLines(false)
+            axisRight.apply {
+                setDrawGridLines(false)
+                setDrawLabels(false)
+            }
+
+            xAxis.apply {
+                position = XAxis.XAxisPosition.BOTTOM
+                labelCount = dataList.size
+                valueFormatter = IndexAxisValueFormatter(dataList.keys)
+                setDrawGridLines(false)
+            }
         }
     }
 }
