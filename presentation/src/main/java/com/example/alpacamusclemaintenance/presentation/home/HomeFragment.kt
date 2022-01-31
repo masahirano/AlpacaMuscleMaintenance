@@ -4,47 +4,78 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import com.example.alpacamusclemaintenance.presentation.databinding.FragmentHomeBinding
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.alpacamusclemaintenance.domain.home.Home
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalAnimationApi
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-
-    private val homeViewModel: HomeViewModel by activityViewModels()
-    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(
-            inflater,
-            container,
-            false
-        )
-        return binding.root
+    ): View = ComposeView(requireContext()).apply {
+        setContent {
+            MaterialTheme {
+                HomeView()
+            }
+        }
     }
 
-    override fun onViewCreated(
-        view: View,
-        savedInstanceState: Bundle?
-    ) {
-        super.onViewCreated(view, savedInstanceState)
+    @Composable
+    private fun HomeView(viewModel: HomeViewModel = viewModel()) {
+        val defaultState = Home(wordOfWisdom = "", author = "")
+        val uiState: Home by viewModel.data.observeAsState(defaultState)
 
-        AnimationUtils
-            .loadAnimation(context, android.R.anim.fade_in)
-            .apply { duration = 2_000 }
-            .also {
-                binding.wordOfWisdom.animation = it
-                binding.author.animation = it
+        AnimatedVisibility(
+            visible = true,
+            enter = fadeIn(
+                initialAlpha = 0.3f,
+                animationSpec = tween(durationMillis = 2_000)
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 32.dp),
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = uiState.wordOfWisdom,
+                    style = MaterialTheme.typography.h5
+                )
+
+                Spacer(Modifier.height(64.dp))
+                Text(
+                    text = uiState.author,
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.End,
+                    style = MaterialTheme.typography.body1
+                )
             }
-
-        homeViewModel.data.observe(viewLifecycleOwner) { home ->
-            binding.home = home
         }
     }
 }
