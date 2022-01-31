@@ -7,8 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.LinearLayout
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.zIndex
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 class WebViewFragment : Fragment() {
 
@@ -23,30 +35,40 @@ class WebViewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(
-            R.layout.fragment_web_view,
-            container,
-            false
-        )
-        rootView
-            .webView
-            .apply {
-                webViewClient = object : WebViewClient() {
-                    override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                        super.onPageStarted(view, url, favicon)
-                        rootView.progressBar.visibility = View.VISIBLE
-                    }
+    ): View = ComposeView(requireContext()).apply {
+        setContent {
+            var isLoading by remember { mutableStateOf(true) }
 
-                    override fun onPageFinished(view: WebView?, url: String?) {
-                        super.onPageFinished(view, url)
-                        rootView.progressBar.visibility = View.GONE
-                    }
+            if (isLoading) {
+                Box(modifier = Modifier.fillMaxSize().zIndex(1f)) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
             }
-            .also { it.loadUrl(url) }
 
-        return rootView
+            AndroidView(
+                factory = {
+                    WebView(requireContext()).apply {
+                        layoutParams = LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT
+                        )
+                        webViewClient = object : WebViewClient() {
+                            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                                super.onPageStarted(view, url, favicon)
+                                isLoading = true
+                            }
+
+                            override fun onPageFinished(view: WebView?, url: String?) {
+                                super.onPageFinished(view, url)
+                                isLoading = false
+                            }
+                        }
+
+                        loadUrl(this@WebViewFragment.url)
+                    }
+                }
+            )
+        }
     }
 
     companion object {
