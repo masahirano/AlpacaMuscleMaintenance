@@ -30,6 +30,7 @@ ext {
     versionName = "1.0"
     testInstrumentationRunner = "com.example.alpacamusclemaintenance.AlpacaMuscleMaintenanceTestRunner"
     consumerProguardFiles = "consumer-rules.pro"
+    ktlintVersion = "10.2.1"
 }
 
 allprojects {

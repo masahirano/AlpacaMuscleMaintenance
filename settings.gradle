@@ -1,3 +1,10 @@
+// @see https://docs.gradle.org/current/userguide/plugins.html#sec:plugin_version_management
+pluginManagement {
+    plugins {
+        id 'org.jlleitschuh.gradle.ktlint' version "10.2.1"
+    }
+}
+
 include ':testing'
 include ':data'
 include ':domain'
