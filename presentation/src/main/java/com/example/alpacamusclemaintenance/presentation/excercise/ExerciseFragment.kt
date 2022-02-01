@@ -4,9 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.alpacamusclemaintenance.presentation.R
 import com.example.alpacamusclemaintenance.presentation.databinding.FragmentExerciseBinding
 
 class ExerciseFragment : Fragment() {
@@ -17,8 +15,8 @@ class ExerciseFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_exercise, container, false)
+    ): View {
+        binding = FragmentExerciseBinding.inflate(inflater, container, false)
         binding.tab.setupWithViewPager(binding.pager)
 
         return binding.root
