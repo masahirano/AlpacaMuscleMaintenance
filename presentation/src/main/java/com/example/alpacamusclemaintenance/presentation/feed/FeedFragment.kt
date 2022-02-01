@@ -109,10 +109,11 @@ fun FeedList(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            val postedAt = DateFormatUtils.format(feed.createdAt, "yyyy/MM/dd HH:mm")
+                            val postedAt = DateFormatUtils
+                                .format(feed.createdAt, "yyyy/MM/dd HH:mm")
                             Text(
                                 // TODO: Move this to strings.xml
-                                text = "${feed.user.id} が ${postedAt} に投稿",
+                                text = "${feed.user.id} が $postedAt に投稿",
                                 fontSize = 12.sp
                             )
 
