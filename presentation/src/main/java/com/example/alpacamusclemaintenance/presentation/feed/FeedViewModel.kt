@@ -7,17 +7,14 @@ import androidx.paging.cachedIn
 import com.example.alpacamusclemaintenance.domain.feed.Feed
 import com.example.alpacamusclemaintenance.domain.feed.FetchFeedResultUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(
     private val fetchFeedResultUseCase: FetchFeedResultUseCase
 ) : ViewModel() {
 
-    private var currentSearchResult: Flow<PagingData<Feed>>? = null
-
     fun fetchFeed(query: String): Flow<PagingData<Feed>> = fetchFeedResultUseCase(query)
         .cachedIn(viewModelScope)
-        .also { currentSearchResult = it }
 }

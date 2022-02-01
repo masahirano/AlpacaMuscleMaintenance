@@ -1,0 +1,3 @@
+[*.{kt,kts}]
+# Android Studio does not let me optimize imports in lexicographic order
+disabled_rules=import-ordering
