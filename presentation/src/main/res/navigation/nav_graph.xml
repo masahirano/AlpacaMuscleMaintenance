@@ -35,8 +35,7 @@
   <fragment
     android:id="@+id/webViewFragment"
     android:name="com.example.alpacamusclemaintenance.presentation.WebViewFragment"
-    android:label="WebViewFragment"
-    tools:layout="@layout/fragment_web_view">
+    android:label="WebViewFragment">
 
     <argument android:name="url" />
   </fragment>
@@ -44,8 +43,7 @@
   <fragment
     android:id="@+id/bugReportFragment"
     android:name="com.example.alpacamusclemaintenance.presentation.WebViewFragment"
-    android:label="WebViewFragment"
-    tools:layout="@layout/fragment_web_view">
+    android:label="WebViewFragment">
 
     <argument
       android:name="url"
