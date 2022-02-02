@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.LinearLayout
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.CircularProgressIndicator
@@ -40,7 +39,11 @@ class WebViewFragment : Fragment() {
             var isLoading by remember { mutableStateOf(true) }
 
             if (isLoading) {
-                Box(modifier = Modifier.fillMaxSize().zIndex(1f)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .zIndex(1f)
+                ) {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
             }
@@ -48,10 +51,6 @@ class WebViewFragment : Fragment() {
             AndroidView(
                 factory = {
                     WebView(requireContext()).apply {
-                        layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.MATCH_PARENT
-                        )
                         webViewClient = object : WebViewClient() {
                             override fun onPageStarted(
                                 view: WebView?,
