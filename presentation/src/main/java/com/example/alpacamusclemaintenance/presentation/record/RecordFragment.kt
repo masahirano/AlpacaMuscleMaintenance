@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.getValue
@@ -17,6 +22,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.alpacamusclemaintenance.domain.pushup.PushUp
+import com.example.alpacamusclemaintenance.presentation.R
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -35,7 +41,9 @@ import java.time.format.DateTimeFormatter
 class RecordFragment : Fragment() {
 
     private val viewModel: RecordViewModel by activityViewModels()
-    private val formatter: DateTimeFormatter by lazy { DateTimeFormatter.ofPattern("E dd MMM yyyy") }
+    private val formatter: DateTimeFormatter by lazy {
+        DateTimeFormatter.ofPattern(getString(R.string.current_date_format))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
