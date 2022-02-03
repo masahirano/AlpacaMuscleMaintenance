@@ -12,6 +12,6 @@ class RecordViewModel @Inject constructor(
     private val getPushUpUseCase: GetPushUpUseCase
 ) : ViewModel() {
 
-    val pushUpsObservableEntity: LiveData<List<PushUp>>
+    val pushUpsEntities: LiveData<List<PushUp>>
         get() = getPushUpUseCase()
 }
