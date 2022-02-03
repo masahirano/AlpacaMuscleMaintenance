@@ -12,10 +12,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PushUpFragment : Fragment() {
 
-    private var _binding: FragmentPushUpBinding? = null
-    // This property is only valid between onCreateView and onDestroyView.
-    private val binding get() = _binding!!
-
+    private lateinit var binding: FragmentPushUpBinding
     private val viewModel: PushUpViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -23,11 +20,7 @@ class PushUpFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPushUpBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        binding = FragmentPushUpBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -46,10 +39,5 @@ class PushUpFragment : Fragment() {
         binding.finishButton.setOnClickListener {
             viewModel.save()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
