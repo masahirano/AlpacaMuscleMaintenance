@@ -12,8 +12,8 @@ Technology stack:
 - [Kotlin coroutines](https://developer.android.com/kotlin/coroutines)
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
 - [Paging 3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview)
-- [Data Binding](https://developer.android.com/topic/libraries/data-binding)
 - [Navigation component](https://developer.android.com/guide/navigation)
+- [Jetpack Compose](https://developer.android.com/jetpack/compose)
 
 ## Architecture
 

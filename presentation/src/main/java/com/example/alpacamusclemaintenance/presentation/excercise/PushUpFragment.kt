@@ -20,11 +20,7 @@ class PushUpFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPushUpBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        binding = FragmentPushUpBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,13 +31,12 @@ class PushUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.count.observe(viewLifecycleOwner) { value ->
-            binding.count = value
+            binding.textView.text = value.toString()
         }
-
-        binding.onAddClicked = View.OnClickListener {
+        binding.button.setOnClickListener {
             viewModel.add(1)
         }
-        binding.onSaveClicked = View.OnClickListener {
+        binding.finishButton.setOnClickListener {
             viewModel.save()
         }
     }

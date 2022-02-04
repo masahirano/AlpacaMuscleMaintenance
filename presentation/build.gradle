@@ -2,7 +2,6 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
     id 'dagger.hilt.android.plugin'
     id 'org.jlleitschuh.gradle.ktlint'
@@ -32,7 +31,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding true
+        viewBinding true
         compose true
     }
 
@@ -46,7 +45,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion '1.0.5'
+        kotlinCompilerExtensionVersion compose_version
     }
 }
 
@@ -88,23 +87,23 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
     // -- Jetpack compose
-    implementation 'androidx.compose.ui:ui:1.0.5'
+    implementation "androidx.compose.ui:ui:$compose_version"
     // Tooling support (Previews, etc.)
-    implementation 'androidx.compose.ui:ui-tooling:1.0.5'
+    implementation "androidx.compose.ui:ui-tooling:$compose_version"
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation 'androidx.compose.foundation:foundation:1.0.5'
+    implementation "androidx.compose.foundation:foundation:$compose_version"
     // Material Design
-    implementation 'androidx.compose.material:material:1.0.5'
+    implementation "androidx.compose.material:material:$compose_version"
     // Animations
-    implementation 'androidx.compose.animation:animation:1.0.5'
+    implementation "androidx.compose.animation:animation:$compose_version"
     // Integration with Activities
     implementation 'androidx.activity:activity-compose:1.4.0'
     // Integration with ViewModels
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.5.0-alpha01'
     // Integration with observables
-    implementation 'androidx.compose.runtime:runtime-livedata:1.0.5'
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     // Paging
     implementation "androidx.paging:paging-compose:1.0.0-alpha14"
 
