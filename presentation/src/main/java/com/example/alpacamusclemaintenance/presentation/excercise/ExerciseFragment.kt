@@ -24,9 +24,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.alpacamusclemaintenance.presentation.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -91,7 +93,10 @@ private fun PushUp(viewModel: PushUpViewModel = viewModel()) {
                 .size(300.dp),
             shape = CircleShape
         ) {
-            Text(text = pushUpCount.takeIf { it > 0 }?.toString() ?: "Go!!")
+            Text(
+                text = pushUpCount.takeIf { it > 0 }?.toString()
+                    ?: stringResource(R.string.push_up_initial_text)
+            )
         }
 
         FloatingActionButton(
