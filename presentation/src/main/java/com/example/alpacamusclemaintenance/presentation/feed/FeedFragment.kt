@@ -34,7 +34,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -43,8 +45,11 @@ import androidx.paging.compose.items
 import coil.compose.rememberImagePainter
 import com.example.alpacamusclemaintenance.domain.feed.Feed
 import com.example.alpacamusclemaintenance.presentation.R
+import com.example.alpacamusclemaintenance.presentation.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import org.apache.commons.lang3.time.DateFormatUtils
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @AndroidEntryPoint
 class FeedFragment : Fragment() {
@@ -57,16 +62,16 @@ class FeedFragment : Fragment() {
         setContent {
             MaterialTheme {
                 Surface {
-                    FeedList(
-                        // Reference about the navigation:
-                        //   https://developer.android.com/jetpack/compose/navigation#navigate-from-Compose
-                        onNavigate = { feed ->
-                            findNavController().navigate(
-                                FeedFragmentDirections
-                                    .actionFeedFragmentToWebViewFragment(url = feed.url)
-                            )
-                        }
-                    )
+//                    FeedView(
+//                        // Reference about the navigation:
+//                        //   https://developer.android.com/jetpack/compose/navigation#navigate-from-Compose
+//                        onNavigate = { feed ->
+//                            findNavController().navigate(
+//                                FeedFragmentDirections
+//                                    .actionFeedFragmentToWebViewFragment(url = feed.url)
+//                            )
+//                        }
+//                    )
                 }
             }
         }
@@ -74,9 +79,9 @@ class FeedFragment : Fragment() {
 }
 
 @Composable
-fun FeedList(
-    viewModel: FeedViewModel = viewModel(),
-    onNavigate: (Feed) -> Unit
+fun FeedView(
+    navController: NavController,
+    viewModel: FeedViewModel = hiltViewModel()
 ) {
     val query = stringResource(R.string.qiita_tag_muscle_maintenance)
     val lazyFeedItems: LazyPagingItems<Feed> = viewModel.fetchFeed(query).collectAsLazyPagingItems()
@@ -88,10 +93,11 @@ fun FeedList(
                     modifier = Modifier
                         .padding(8.dp)
                         .clickable {
-                            // TODO: When coming back to this view from anywhere else, this LazyColumn
-                            //   is initialized every time. Need to figure out how to persist state
-                            //   between navigation.
-                            onNavigate(feed)
+                            val encodedUrl = URLEncoder.encode(
+                                feed.url,
+                                StandardCharsets.UTF_8.toString()
+                            )
+                            navController.navigate("${Screen.WebView.route}/$encodedUrl")
                         }
                 ) {
                     Image(

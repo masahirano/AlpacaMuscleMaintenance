@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.alpacamusclemaintenance.presentation.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -46,33 +46,39 @@ class ExerciseFragment : Fragment() {
     ): View = ComposeView(requireContext()).apply {
         setContent {
             MaterialTheme {
-                Box {
-                    val pagerState = rememberPagerState()
-
-                    HorizontalPager(
-                        count = 2,
-                        state = pagerState
-                    ) { page ->
-                        when (page) {
-                            0 -> PushUp()
-                            1 -> Squat()
-                        }
-                    }
-
-                    HorizontalPagerIndicator(
-                        pagerState = pagerState,
-                        modifier = Modifier
-                            .align(Alignment.BottomCenter)
-                            .padding(16.dp)
-                    )
-                }
+                ExerciseView()
             }
         }
     }
 }
 
+@ExperimentalPagerApi
 @Composable
-private fun PushUp(viewModel: PushUpViewModel = viewModel()) {
+fun ExerciseView() {
+    Box {
+        val pagerState = rememberPagerState()
+
+        HorizontalPager(
+            count = 2,
+            state = pagerState
+        ) { page ->
+            when (page) {
+                0 -> PushUp()
+                1 -> Squat()
+            }
+        }
+
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(16.dp)
+        )
+    }
+}
+
+@Composable
+private fun PushUp(viewModel: PushUpViewModel = hiltViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxSize()

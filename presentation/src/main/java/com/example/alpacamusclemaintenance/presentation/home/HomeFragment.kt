@@ -25,11 +25,12 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.alpacamusclemaintenance.domain.home.Home
 import dagger.hilt.android.AndroidEntryPoint
 
-@ExperimentalAnimationApi
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -44,38 +45,40 @@ class HomeFragment : Fragment() {
             }
         }
     }
+}
 
-    @Composable
-    private fun HomeView(viewModel: HomeViewModel = viewModel()) {
-        val defaultState = Home(wordOfWisdom = "", author = "")
-        val uiState: Home by viewModel.data.observeAsState(defaultState)
+@Composable
+fun HomeView(
+    viewModel: HomeViewModel = hiltViewModel()
+) {
+    val defaultState = Home(wordOfWisdom = "", author = "")
+    val uiState: Home by viewModel.data.observeAsState(defaultState)
 
-        AnimatedVisibility(
-            visible = true,
-            enter = fadeIn(
-                initialAlpha = 0.3f,
-                animationSpec = tween(durationMillis = 2_000)
-            )
+    AnimatedVisibility(
+        visible = true,
+        enter = fadeIn(
+            initialAlpha = 0.3f,
+            animationSpec = tween(durationMillis = 2_000)
+        )
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 32.dp),
+            verticalArrangement = Arrangement.Center
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 32.dp),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = uiState.wordOfWisdom,
-                    style = MaterialTheme.typography.h5
-                )
+            Text(
+                text = uiState.wordOfWisdom,
+                style = MaterialTheme.typography.h5
+            )
 
-                Spacer(Modifier.height(64.dp))
-                Text(
-                    text = uiState.author,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.End,
-                    style = MaterialTheme.typography.body1
-                )
-            }
+            Spacer(Modifier.height(64.dp))
+            Text(
+                text = uiState.author,
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.End,
+                style = MaterialTheme.typography.body1
+            )
         }
     }
 }
