@@ -35,17 +35,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.alpacamusclemaintenance.domain.feed.Feed
 import com.example.alpacamusclemaintenance.presentation.R
-import com.example.alpacamusclemaintenance.presentation.Screen
+import com.example.alpacamusclemaintenance.presentation.WEB_VIEW_ROUTE
 import dagger.hilt.android.AndroidEntryPoint
 import org.apache.commons.lang3.time.DateFormatUtils
 import java.net.URLEncoder
@@ -78,6 +77,7 @@ class FeedFragment : Fragment() {
     }
 }
 
+@ExperimentalCoilApi
 @Composable
 fun FeedView(
     navController: NavController,
@@ -97,7 +97,7 @@ fun FeedView(
                                 feed.url,
                                 StandardCharsets.UTF_8.toString()
                             )
-                            navController.navigate("${Screen.WebView.route}/$encodedUrl")
+                            navController.navigate("${WEB_VIEW_ROUTE}/$encodedUrl")
                         }
                 ) {
                     Image(

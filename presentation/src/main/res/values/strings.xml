@@ -1,12 +1,11 @@
 <resources>
   <string name="app_name">AlpacaMuscleMaintenance</string>
 
-  <string name="title_activity_main">MainActivity</string>
   <string name="title_home">Home</string>
   <string name="title_exercise">Exercise</string>
   <string name="title_record">Record</string>
   <string name="title_feed">Feed</string>
-  <string name="title_bug_report">BugReport</string>
+  <string name="title_bug_report">Report</string>
   <string name="action_favorite">favorite</string>
   <string name="action_settings">settings</string>
 
