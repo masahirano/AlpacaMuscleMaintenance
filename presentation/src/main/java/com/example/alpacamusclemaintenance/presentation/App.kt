@@ -38,7 +38,7 @@ import java.nio.charset.StandardCharsets
 @ExperimentalCoilApi
 @ExperimentalPagerApi
 @Composable
-internal fun AlpacaMuscleMaintenanceApp() {
+internal fun App() {
     val navController = rememberNavController()
     @StringRes var titleId by remember { mutableStateOf(Screen.Home.titleId) }
 
