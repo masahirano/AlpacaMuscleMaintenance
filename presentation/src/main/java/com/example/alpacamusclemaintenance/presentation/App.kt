@@ -1,6 +1,5 @@
 package com.example.alpacamusclemaintenance.presentation
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -21,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -39,94 +39,125 @@ import java.nio.charset.StandardCharsets
 @ExperimentalPagerApi
 @Composable
 internal fun App() {
-    val navController = rememberNavController()
-    @StringRes var titleId by remember { mutableStateOf(Screen.Home.titleId) }
+    val navController: NavHostController = rememberNavController()
+    val startScreen: Screen = Screen.Home
+    var currentScreen: Screen by remember { mutableStateOf(startScreen) }
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(titleId)) },
-                actions = {
-                    IconButton(
-                        onClick = { Timber.d("Menu is clicked") }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Menu,
-                            contentDescription = null
-                        )
-                    }
+        topBar = { TopBar(title = stringResource(currentScreen.titleId)) },
+        bottomBar = {
+            BottomBar(
+                navController = navController,
+                onClick = { screen ->
+                    currentScreen = screen
                 }
             )
-        },
-        bottomBar = {
-            BottomNavigation {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentDestination = navBackStackEntry?.destination
-                val items = listOf(
-                    Screen.Home,
-                    Screen.Exercice,
-                    Screen.Record,
-                    Screen.Feed,
-                    Screen.BugReport
-                )
-                items.forEach { screen ->
-                    BottomNavigationItem(
-                        icon = {
-                            Icon(
-                                painter = painterResource(screen.iconId),
-                                contentDescription = null
-                            )
-                        },
-                        label = { Text(stringResource(screen.titleId)) },
-                        selected = currentDestination
-                            ?.hierarchy
-                            ?.any { it.route == screen.route } == true,
-                        onClick = {
-                            navController.navigate(screen.route) {
-                                // @see https://developer.android.com/jetpack/compose/navigation#bottom-nav
-                                //
-                                // Pop up to the start destination of the graph to
-                                // avoid building up a large stack of destinations
-                                // on the back stack as users select items
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
-                                }
-                                // Avoid multiple copies of the same destination when
-                                // reselecting the same item
-                                launchSingleTop = true
-                                // Restore state when reselecting a previously selected item
-                                restoreState = true
-                            }
-                            titleId = screen.titleId
-                        }
-                    )
-                }
-            }
         }
     ) { innerPadding ->
-        NavHost(
+        Navigation(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startScreen = startScreen,
             modifier = Modifier.padding(innerPadding)
-        ) {
-            composable(Screen.Home.route) {
-                HomeView()
+        )
+    }
+}
+
+@Composable
+private fun TopBar(title: String) {
+    TopAppBar(
+        title = { Text(title) },
+        actions = {
+            IconButton(
+                onClick = { Timber.d("Menu is clicked") }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = null
+                )
             }
-            composable(Screen.Exercice.route) {
-                ExerciseView()
-            }
-            composable(Screen.Record.route) {
-                RecordView()
-            }
-            composable(Screen.Feed.route) {
-                FeedView(navController)
-            }
-            composable("${WEB_VIEW_ROUTE}/{encodedUrl}") { backStackEntry ->
-                val encodedUrl = backStackEntry.arguments?.getString("encodedUrl").orEmpty()
-                val url = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8.toString())
-                WebViewView(url = url)
-            }
+        }
+    )
+}
+
+@Composable
+private fun BottomBar(
+    navController: NavHostController,
+    onClick: (Screen) -> Unit
+) {
+    BottomNavigation {
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentDestination = navBackStackEntry?.destination
+        val items = listOf(
+            Screen.Home,
+            Screen.Exercice,
+            Screen.Record,
+            Screen.Feed,
+            Screen.BugReport
+        )
+        items.forEach { screen ->
+            BottomNavigationItem(
+                icon = {
+                    Icon(
+                        painter = painterResource(screen.iconId),
+                        contentDescription = null
+                    )
+                },
+                label = { Text(stringResource(screen.titleId)) },
+                selected = currentDestination
+                    ?.hierarchy
+                    ?.any { it.route == screen.route } == true,
+                onClick = {
+                    navController.navigate(screen.route) {
+                        // @see https://developer.android.com/jetpack/compose/navigation#bottom-nav
+                        //
+                        // Pop up to the start destination of the graph to
+                        // avoid building up a large stack of destinations
+                        // on the back stack as users select items
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        // Avoid multiple copies of the same destination when
+                        // reselecting the same item
+                        launchSingleTop = true
+                        // Restore state when reselecting a previously selected item
+                        restoreState = true
+                    }
+                    onClick(screen)
+                }
+            )
         }
     }
 }
 
+@ExperimentalCoilApi
+@ExperimentalPagerApi
+@Composable
+private fun Navigation(
+    navController: NavHostController,
+    startScreen: Screen,
+    modifier: Modifier = Modifier
+) {
+    NavHost(
+        navController = navController,
+        startDestination = startScreen.route,
+        modifier = modifier
+    ) {
+        composable(Screen.Home.route) {
+            HomeView()
+        }
+        composable(Screen.Exercice.route) {
+            ExerciseView()
+        }
+        composable(Screen.Record.route) {
+            RecordView()
+        }
+        composable(Screen.Feed.route) {
+            FeedView(navController)
+        }
+        composable("${WEB_VIEW_ROUTE}/{encodedUrl}") { backStackEntry ->
+            val encodedUrl = backStackEntry.arguments?.getString("encodedUrl").orEmpty()
+            val url = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8.toString())
+            WebViewView(url = url)
+        }
+    }
+}
