@@ -6,7 +6,7 @@ import com.example.alpacamusclemaintenance.domain.pushup.InsertPushUpUseCase
 import com.example.alpacamusclemaintenance.domain.pushup.PushUp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
