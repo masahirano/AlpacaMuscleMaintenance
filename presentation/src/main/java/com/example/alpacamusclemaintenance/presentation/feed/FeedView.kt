@@ -36,10 +36,8 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.alpacamusclemaintenance.domain.feed.Feed
 import com.example.alpacamusclemaintenance.presentation.R
-import com.example.alpacamusclemaintenance.presentation.WEB_VIEW_ROUTE
+import com.example.alpacamusclemaintenance.presentation.linkToWebView
 import org.apache.commons.lang3.time.DateFormatUtils
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
 
 @ExperimentalCoilApi
 @Composable
@@ -56,13 +54,7 @@ fun FeedView(
                 Row(
                     modifier = Modifier
                         .padding(8.dp)
-                        .clickable {
-                            val encodedUrl = URLEncoder.encode(
-                                feed.url,
-                                StandardCharsets.UTF_8.toString()
-                            )
-                            navController.navigate("${WEB_VIEW_ROUTE}/$encodedUrl")
-                        }
+                        .clickable { navController.navigate(linkToWebView(feed.url)) }
                 ) {
                     Image(
                         painter = rememberImagePainter(feed.user.profileImageUrl),

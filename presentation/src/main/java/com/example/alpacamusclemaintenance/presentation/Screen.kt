@@ -7,11 +7,9 @@ import java.nio.charset.StandardCharsets
 
 internal const val WEB_VIEW_ROUTE = "webview"
 
-private val bugReportEncodedUrl by lazy {
-    URLEncoder.encode(
-        "https://github.com/alpaca0984/AlpacaMuscleMaintenance",
-        StandardCharsets.UTF_8.toString()
-    )
+internal fun linkToWebView(url: String): String {
+    val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
+    return "${WEB_VIEW_ROUTE}/$encodedUrl"
 }
 
 internal sealed class Screen(
@@ -45,7 +43,7 @@ internal sealed class Screen(
     )
 
     object BugReport : Screen(
-        route = "$WEB_VIEW_ROUTE/$bugReportEncodedUrl",
+        route = linkToWebView("https://github.com/alpaca0984/AlpacaMuscleMaintenance"),
         iconId = R.drawable.ic_bug_report_white_24dp,
         titleId = R.string.title_bug_report
     )
