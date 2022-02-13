@@ -35,4 +35,3 @@ internal fun ExerciseView() {
         )
     }
 }
-

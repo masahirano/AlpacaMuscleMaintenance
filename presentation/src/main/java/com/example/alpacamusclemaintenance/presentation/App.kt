@@ -33,7 +33,6 @@ import com.example.alpacamusclemaintenance.presentation.record.RecordView
 import com.google.accompanist.pager.ExperimentalPagerApi
 import timber.log.Timber
 import java.net.URLDecoder
-import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
 @ExperimentalCoilApi
@@ -155,7 +154,7 @@ private fun Navigation(
         composable(Screen.Feed.route) {
             FeedView(navController)
         }
-        composable("${WEB_VIEW_ROUTE}/{encodedUrl}") { backStackEntry ->
+        composable("$WEB_VIEW_ROUTE/{encodedUrl}") { backStackEntry ->
             val encodedUrl = backStackEntry.arguments?.getString("encodedUrl").orEmpty()
             val url = URLDecoder.decode(encodedUrl, StandardCharsets.UTF_8.toString())
             WebViewView(url = url)

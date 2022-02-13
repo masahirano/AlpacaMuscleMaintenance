@@ -9,7 +9,7 @@ internal const val WEB_VIEW_ROUTE = "webview"
 
 internal fun linkToWebView(url: String): String {
     val encodedUrl = URLEncoder.encode(url, StandardCharsets.UTF_8.toString())
-    return "${WEB_VIEW_ROUTE}/$encodedUrl"
+    return "$WEB_VIEW_ROUTE/$encodedUrl"
 }
 
 internal sealed class Screen(
